@@ -21,45 +21,7 @@ using namespace std;
 
 
 
-float getBtagEfficiency(bool isData, bool passCSV, float pt, float eta, TH2F ** Btagg_TT){
-    
-    
-    if ( isData) return 1;
-    
-    
-    
-    int ptBIN;
-    if ( pt < 50 ) ptBIN=1;
-    if (pt >= 50 && pt < 70 ) ptBIN=2;
-    if (pt >= 70 && pt < 100 ) ptBIN=3;
-    if (pt >= 100 && pt < 140) ptBIN=4;
-    if (pt >= 140 && pt < 200) ptBIN=5;
-    if (pt >= 200 && pt < 300) ptBIN=6;
-    if (pt >= 300 && pt < 600) ptBIN=7;
-    if (pt >= 600 ) ptBIN=8;
-    
-    int etaBIN;
-    if (eta >= 0 && eta < 0.8 ) etaBIN=1;
-    if (eta >= 0.8 && eta < 1.5 ) etaBIN=2;
-    if (eta >= 1.5 ) etaBIN=3;
-    
-    
-    
-    TH2F * TTSF0_btagged=Btagg_TT[0];
-    TH2F * TTSF0_total=Btagg_TT[1];
-    TH2F * TTSF5_btagged=Btagg_TT[2];
-    TH2F * TTSF5_total=Btagg_TT[3];
-    
-    //    cout << "Btag efficiency is = "<< pt << " ptBIN " <<ptBIN << "   "<<eta << " etaBIN " << etaBIN <<"  ratio=  " <<TTSF0_btagged->GetBinContent(ptBIN,etaBIN) << "    "<<TTSF0_total->GetBinContent(ptBIN,etaBIN) <<"\n";
-    
-    
-    if (passCSV)
-        return  TTSF5_btagged->GetBinContent(ptBIN,etaBIN)*1.0/TTSF5_total->GetBinContent(ptBIN,etaBIN);
-    else
-        return  TTSF0_btagged->GetBinContent(ptBIN,etaBIN)*1.0/TTSF0_total->GetBinContent(ptBIN,etaBIN);
-    
-    
-}
+
 
 
 

@@ -35,11 +35,19 @@ import os
 ROOT.gROOT.SetBatch(True)
 #ROOT.gROOT.ProcessLine('.x rootlogon.C')
 
-#SubRootDir = 'NewOutFiles_Preselection_FirstCheck/'
-#SubRootDir = 'NewOutFiles_Preselection_Check3/'
-#SubRootDir = 'NewOutFiles_Preselection__Check4_vertex/'
-#SubRootDir = 'NewOutFiles_Preselection_RemoveBTag/'
-SubRootDir = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FirstCheck/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Check3/'
+#InputFilesLocation = 'NewOutFiles_Preselection__Check4_vertex/'
+#InputFilesLocation = 'NewOutFiles_Preselection_RemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection_noPUReweighting/'
+#InputFilesLocation = 'NewOutFiles_Preselection__NewJEC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
+InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
 
 verbos_ = False
 RB_=1
@@ -57,10 +65,10 @@ category = [""]
 ############################################################################################################
 def _FileReturn(Name, channel,cat,HistoName):
 
-    if not os.path.exists(SubRootDir):
-        os.makedirs(SubRootDir)
-    myfile = TFile(SubRootDir + Name + '.root')
-    if verbos_: print "##### --->>>>>>> File name is ", SubRootDir + Name + '.root'  "   and histo is -->  ", channel+HistoName + cat
+    if not os.path.exists(InputFilesLocation):
+        os.makedirs(InputFilesLocation)
+    myfile = TFile(InputFilesLocation +'/'+ Name + '.root')
+    if verbos_: print "##### --->>>>>>> File name is ", InputFilesLocation + Name + '.root'  "   and histo is -->  ", channel+HistoName + cat
     Histo =  myfile.Get(channel+HistoName + cat)
     if not os.path.exists("Extra"):
         os.makedirs("Extra")
@@ -75,7 +83,7 @@ def _FileReturn(Name, channel,cat,HistoName):
 ####################################################
 def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
     
-    OutFile = TFile(SubRootDir+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
+    OutFile = TFile(InputFilesLocation+'/'+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 #    OutFile = TFile("TotalRootForLimit_Jet50_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 
     for NameCat in category:
@@ -321,11 +329,11 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
 
 if __name__ == "__main__":
     
-    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_dEta_Mu_Jet","_METPhi"]
+    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_dEta_Mu_Jet","_METPhi","_nVtx","_nVtx_NoPU"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_dR_Mu_Jet","_dEta_Mu_Jet"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet"]
 #    PlotName=["_nVtx","_nVtx_NoPU"]
-#    PlotName=["_nVtx_NoPU"]
+#    PlotName=["_LQMass"]
 #    PlotName=["_jetCHF","_jetNHF","_jetCEF","_jetNEF"]
 
 

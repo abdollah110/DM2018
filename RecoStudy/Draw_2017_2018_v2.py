@@ -142,6 +142,10 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     W2016.SetLineWidth(2)
     
     
+    
+#    W2016.Scale(1./W2016.Integral())
+#    W2017.Scale(1./W2017.Integral())
+
 #    W2017.SetLineColor(ROOT.kBlack)
 
     
@@ -190,9 +194,11 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     pad1.SetFrameBorderSize(10)
 
     W2016.GetXaxis().SetLabelSize(0)
-    if isLOG: W2016.SetMaximum(W2016.GetMaximum()*10000)
+#    W2016.SetMaximum(50)
+#    W2017.SetMaximum(100)
+    if isLOG: W2016.SetMaximum(W2016.GetMaximum()*1000)
     else:  W2016.SetMaximum(W2016.GetMaximum()*3)
-    W2016.SetMinimum(yMin)
+#    W2016.SetMinimum(yMin)
     W2016.Draw("e")
     W2017.Draw("esame")
 
@@ -221,16 +227,16 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     categ.SetTextColor(    1 )
 #    categ.SetTextFont (   41 )
     #       if i==1 or i==3:
-    if MTLegend=='_NoMT': categ.AddText("M_{T}(#mu,j) > 0 GeV")
-    elif MTLegend=='_HighMT': categ.AddText("M_{T}(#mu,j) > 100 GeV")
-    elif MTLegend=='_MT300': categ.AddText("M_{T}(#mu,j) > 300 GeV")
-    elif MTLegend=='_MT500': categ.AddText("M_{T}(#mu,j) > 500 GeV")
+    if MTLegend=='_NoMT': categ.AddText("M_{T}(#mu,MET) > 0 GeV")
+    elif MTLegend=='_HighMT': categ.AddText("M_{T}(#mu,MET) > 100 GeV")
+    elif MTLegend=='_MT300': categ.AddText("M_{T}(#mu,MET) > 300 GeV")
+    elif MTLegend=='_MT500': categ.AddText("M_{T}(#mu,MET) > 500 GeV")
 #    categ.AddText("lumiWeight+PUWeight+MuCorr")
 
     if isData: categ.AddText("        Norm Ratio=%.2f"%(W2017.Integral()/W2016.Integral()))
     else: categ.AddText("%s        Norm Ratio=%.2f"%(SSS.replace('WJets_',''),W2017.Integral()/W2016.Integral()))
     
-#    categ.AddText("Jet Pt < 200 GeV")
+    categ.AddText("\t\t%s"%ttbarCR)
 #    categ.AddText(ttbarCR)
 #    categ.AddText('50 <Jet p_{T} < 200 GeV')
 #    categ.AddText("M_{LQ} > 1100 GeV")
@@ -314,25 +320,37 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
 FileNamesInfo=[
 #               ["_tmass_JetMet","M_{T}(jet,MET) (GeV)","",5,1],
-#               ["_tmass_LQMet","M_{T}(LQ,MET)  (GeV)","",10,1],
-#               ["_LepPt","lepton p_{T} (GeV)","",50,1],
-#               ["_LepEta","lepton #eta ","",5,10],
-#               ["_JetPt","jet p_{T} (GeV)","",50,1],
-#               ["_JetEta","jet #eta ","",5,10],
-##               ["_nVtx","# of vertex","",2,10],
-##               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
-#               ["_MET","MET  (GeV)","",5,1],
-#               ["_LQMass","M_{LQ}   (GeV)","",5,1],
-#               ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",5,1],
-#               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",5,1],
-#               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",5,1],
-#               ["_dPhi_Mu_Met","#Delta#phi (#mu,MET)","",5,1],
+               ["_tmass_LQMet","M_{T}(LQ,MET)  (GeV)","",10,1],
+               ["_LepPt","lepton p_{T} (GeV)","",50,1],
+               ["_LepEta","lepton #eta ","",5,10],
+               ["_JetPt","jet p_{T} (GeV)","",50,1],
+               ["_JetEta","jet #eta ","",5,10],
+#               ["_nVtx","# of vertex","",2,10],
+#               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
+               ["_MET","MET  (GeV)","",5,1],
+               ["_LQMass","M_{LQ}   (GeV)","",5,1],
+               ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",5,1],
+               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",5,1],
+               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",5,1],
+               ["_dPhi_Mu_Met","#Delta#phi (#mu,MET)","",5,1],
                ["_METPhi","MET #phi","",10,10],
-#               ["_LepPhi","#mu #phi","",10,10],
-#               ["_Cos_dPhi_Mu_Met","1- cos(#Delta#phi_{#mu,MET})","",10,10],
+               ["_LepPhi","#mu #phi","",10,10],
+               ["_Cos_dPhi_Mu_Met","1- cos(#Delta#phi_{#mu,MET})","",10,10],
                
-#               ["_NumJet","Jet multiplicity","",1,1],
-#               ["_NumBJet","BJet multiplicity","",1,1],
+               ["_NumJet","Jet multiplicity","",1,1],
+               ["_NumBJet","BJet multiplicity","",1,1],
+               
+#               ["_tmass_MuMet_LowPU","M_{T}(jet,MET) (GeV) numVtx < 20","",5,.000001],
+#               ["_tmass_MuMet_MedPU","M_{T}(jet,MET) (GeV) 20<numVtx < 35","",5,.000001],
+#               ["_tmass_MuMet_HighPU","M_{T}(jet,MET) (GeV) numVtx > 35","",5,.000001],
+#               
+#               ["_dPhi_Mu_Met_LowPU","#Delta#phi (#mu,MET)numVtx < 20","",5,.001],
+#               ["_dPhi_Mu_Met_MedPU","#Delta#phi (#mu,MET)20<numVtx < 35","",5,.001],
+#               ["_dPhi_Mu_Met_HighPU","#Delta#phi (#mu,MET) numVtx > 35","",5,.001],
+               
+                              
+               
+               
                ]
 
 
@@ -343,7 +361,7 @@ FileNamesInfo=[
 
 
 
-isData=0
+isData=1
 
 
 #    Isolation=["_Iso", "_AntiIso","_Total"]
@@ -362,12 +380,12 @@ JPT=[ "_HighDPhi"]
 
 #lqEta= ["_Barrel", "_Endcap","_TotEta"]
 lqEta= [""]
+#region = ["_LowPU", "_MedPU","_HighPU"];
 region= [""]
-#region= ["","_ttbarCRDiLep","_ttbarCRSingleLep"]
 #region= ["_ttbarCRDiLep","_ttbarCRSingleLep"]
 
-logStat=[0]
-#logStat=[1]
+#logStat=[0]
+logStat=[1]
 
 
 
@@ -394,8 +412,8 @@ for SSS in samples:
                         for reg in region:
                             for isLOG in logStat:
                         
-                                FileName="TotalRootForLimit_"+SSS+"_MuJet"+NormMC+mt+jpt+etalq+reg+iso+".root"
-                                Info=NormMC+mt+jpt+etalq+reg+iso
+                                FileName="TotalRootForLimit_"+SSS+"_MuJet"+NormMC+reg+mt+jpt+etalq+iso+".root"
+                                Info=NormMC+reg+mt+jpt+etalq+iso
                                 print "---->", FileName
                                 MakePlot(FileName,"MuJet","",axisName,Info,Bin,"",yMin,isLOG,reg,mt,SSS,isData)
 

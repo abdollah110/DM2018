@@ -71,15 +71,22 @@ def returnSF_W(FileName,TTSF):
 #MTRange=["_NoMT","_HighMT","_MT50To150","_MT150to200","_MT200to250","_MT250to300","_MT300to350","_MT200","_MT300","_MT400"]
 MTRange=["_NoMT","_HighMT","_MT50To150","_MT500"]
 
-#InputRootFiles='FILESNEEDEDFORTT_W_SF/'
-#InputRootFiles='NewOutFiles_CodexAnalyzer_Preselection_MuEta2p1/'
-#InputRootFiles='NewOutFiles_Preselection_/'
-#InputRootFiles='NewOutFiles_Preselection_newCheckAddTkMu50/'
-#InputRootFiles='NewOutFiles_Preselection_fixIsoBug/'
-#InputRootFiles='NewOutFiles_Preselection_IncludeIsoBug/'
-#InputRootFiles = 'NewOutFiles_Preselection_Check3/'
-InputRootFiles = 'NewOutFiles_Preselection_RemoveBTag/'
-
+#InputFilesLocation='FILESNEEDEDFORTT_W_SF/'
+#InputFilesLocation='NewOutFiles_CodexAnalyzer_Preselection_MuEta2p1/'
+#InputFilesLocation='NewOutFiles_Preselection_/'
+#InputFilesLocation='NewOutFiles_Preselection_newCheckAddTkMu50/'
+#InputFilesLocation='NewOutFiles_Preselection_fixIsoBug/'
+#InputFilesLocation='NewOutFiles_Preselection_IncludeIsoBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Check3/'
+#InputFilesLocation = 'NewOutFiles_Preselection_RemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection__NewJEC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
+InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
 
 
 def SF_TT(Name):
@@ -88,13 +95,13 @@ def SF_TT(Name):
 
 print "\n\n\n\n\n\n######### TT Scale factor  DiLepton #########"
 for mt in MTRange:
-    NameTT=InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRDiLep_Iso.root'%mt
+    NameTT=InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRDiLep_Iso.root'%mt
     print "######### ",mt, " #########"
     SF_TT(NameTT)
 
 print "\n\n\n\n\n\n######### TT Scale factor  SingleLepton #########"
 for mt in MTRange:
-    NameTT=InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRSingleLep_Iso.root'%mt
+    NameTT=InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRSingleLep_Iso.root'%mt
     print "######### ",mt, " #########"
     SF_TT(NameTT)
 
@@ -102,34 +109,34 @@ for mt in MTRange:
 
 print "\n\n\n\n\n\n######### W Scale factor  DiLepton #########"
 for mt in MTRange:
-    NameW= InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_Iso.root'%mt
-    NameTT=InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRDiLep_Iso.root'%mt
+    NameW= InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_Iso.root'%mt
+    NameTT=InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRDiLep_Iso.root'%mt
     print "######### ",mt, " #########"
     returnSF_W(NameW,SF_TT(NameTT))
 
 
 print "\n\n\n\n\n\n######### W Scale factor  SingleLepton #########"
 for mt in MTRange:
-    NameW= InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_Iso.root'%mt
-    NameTT=InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRSingleLep_Iso.root'%mt
+    NameW= InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_Iso.root'%mt
+    NameTT=InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass%s_HighDPhi_ttbarCRSingleLep_Iso.root'%mt
     print "######### ",mt, " #########"
     returnSF_W(NameW,SF_TT(NameTT))
 
 
 
 def SF_TT_SingleLep():
-    return returnSF_TT(InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass_HighMT_HighDPhi_ttbarCRSingleLep_Iso.root')
+    return returnSF_TT(InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass_HighMT_HighDPhi_ttbarCRSingleLep_Iso.root')
 
 
 def SF_TT_DiLep():
-    return returnSF_TT(InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass_HighMT_HighDPhi_ttbarCRDiLep_Iso.root')
+    return returnSF_TT(InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass_HighMT_HighDPhi_ttbarCRDiLep_Iso.root')
 
 
 def SF_W_SingleLep():
-    return returnSF_W(InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass_MT50To150_HighDPhi_Iso.root',SF_TT_SingleLep())
+    return returnSF_W(InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass_MT50To150_HighDPhi_Iso.root',SF_TT_SingleLep())
 
 
 def SF_W_DiLep():
-    return returnSF_W(InputRootFiles+'TotalRootForLimit_PreSelection_MuJet_LQMass_MT50To150_HighDPhi_Iso.root',SF_TT_DiLep())
+    return returnSF_W(InputFilesLocation+'TotalRootForLimit_PreSelection_MuJet_LQMass_MT50To150_HighDPhi_Iso.root',SF_TT_DiLep())
 
 

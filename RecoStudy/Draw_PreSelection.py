@@ -15,7 +15,15 @@ from Step5_TT_W_ScaleFactor import *
 #InputFilesLocation = 'NewOutFiles_Preselection_Check3/'
 #InputFilesLocation = 'NewOutFiles_Preselection__Check4_vertex/'
 #InputFilesLocation = 'NewOutFiles_Preselection_RemoveBTag/'
-InputFilesLocation = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
+#InputFilesLocation = 'NewOutFiles_Preselection_noPUReweighting/'
+#InputFilesLocation = 'NewOutFiles_Preselection__NewJEC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
+#InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
+InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
 
 #................................................................................................................................
 #................................................................................................................................
@@ -218,7 +226,9 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
         print "##################################\n", FileName
         for i in range(Data.GetNbinsX()):
 #            if i > 15 : Data.SetBinContent(i+1,0)
-            if i > 9 : Data.SetBinContent(i+1,0)
+            if i > 9 :
+                Data.SetBinContent(i+1,0)
+                Data.SetBinError(i+1,0)
 #
 #    if FileName.find("MET") > 0 :
 #        print "##################################\n", FileName
@@ -400,8 +410,8 @@ FileNamesInfo=[
                ["_LepEta","lepton #eta ","",5,10],
                ["_JetPt","jet p_{T} (GeV)","",100,1],
                ["_JetEta","jet #eta ","",5,10],
-#               ["_nVtx","# of vertex","",2,10],
-#               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
+               ["_nVtx","# of vertex","",2,10],
+               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
                ["_MET","MET  (GeV)","",10,1],
                ["_LQMass","M_{LQ}   (GeV)","",10,1],
                ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",10,1],
@@ -457,10 +467,10 @@ FileNamesInfo=[
 
 Isolation=["_Iso"]
 #MT=["_HighMT"]
-MT=["_MT500"]
+#MT=["_MT500"]
 #MT= ["_NoMT","_HighMT","_MT300","_MT500"]
 #MT= ["_NoMT"]
-#MT= ["_NoMT","_HighMT","_MT300","_MT500"]
+MT= ["_NoMT","_HighMT","_MT300","_MT500"]
 #MT= ["_MT100","_MT150"]
 #MT_legend= [" 50 < M_{T} < 100","100 < M_{T} < 150"]
 #MT= ["_NoMT","_HighMT"]
@@ -469,8 +479,8 @@ JPT=[ "_HighDPhi"]
 
 #lqEta= ["_Barrel", "_Endcap","_TotEta"]
 lqEta= [""]
-region= [""]
-#region= ["","_ttbarCRDiLep","_ttbarCRSingleLep"]
+#region= [""]
+region= ["","_ttbarCRDiLep","_ttbarCRSingleLep"]
 #region= ["_ttbarCRDiLep","_ttbarCRSingleLep"]
 
 #logStat=[0]

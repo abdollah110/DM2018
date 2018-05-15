@@ -353,28 +353,6 @@ TH2F * FuncHistEleMVAId(std::string type){
 
 
 
-//########################################
-// Btagging scale factor and uncertainties
-//########################################
-
-TH2F **  FuncHistBTagSF(){
-    TFile * TTEff= TFile::Open(("../interface/OutFiles_BTagSF/TTJets.root"));
-    TH2F * TTSF0_btagged= (TH2F *) TTEff->Get("BSF_FLV0_Btagged");
-    TH2F * TTSF0_total= (TH2F *) TTEff->Get("BSF_FLV0_Total");
-    TH2F * TTSF5_btagged= (TH2F *) TTEff->Get("BSF_FLV5_Btagged");
-    TH2F * TTSF5_total= (TH2F*) TTEff->Get("BSF_FLV5_Total");
-    
-    static TH2F * Btagg_TT[4]={TTSF0_btagged,TTSF0_total,TTSF5_btagged,TTSF5_total};
-    
-    return Btagg_TT;
-}
-
-//        TFile * DataEff= TFile::Open(("OutFiles_BTagSF/Data.root"));
-//        TH2F * DataSF0_btagged= (TH2F *) DataEff->Get("BSF_FLV0_Btagged");
-//        TH2F * DataSF0_total= (TH2F *) DataEff->Get("BSF_FLV0_Total");
-//        TH2F * DataSF5_btagged= (TH2F *) DataEff->Get("BSF_FLV5_Btagged");
-//        TH2F * DataSF5_total= (TH2F *) DataEff->Get("BSF_FLV5_Total");
-
 
 
 
@@ -560,18 +538,73 @@ vector<float>  GeneratorInfo(){
 }
 
 
+//########################################
+// Btagging scale factor This part is the outcome of the CodexAnalyzer_BTagEff.cc
+//########################################
+
+TH2F **  FuncHistBTagSF(){
+    TFile * TTEff= TFile::Open(("../interface/OutFiles_BTagSF/TTJets.root"));
+    TH2F * TTSF0_btagged= (TH2F *) TTEff->Get("BSF_FLV0_Btagged");
+    TH2F * TTSF0_total= (TH2F *) TTEff->Get("BSF_FLV0_Total");
+    TH2F * TTSF5_btagged= (TH2F *) TTEff->Get("BSF_FLV5_Btagged");
+    TH2F * TTSF5_total= (TH2F*) TTEff->Get("BSF_FLV5_Total");
+    
+    static TH2F * Btagg_TT[4]={TTSF0_btagged,TTSF0_total,TTSF5_btagged,TTSF5_total};
+    
+    return Btagg_TT;
+}
+
+//        TFile * DataEff= TFile::Open(("OutFiles_BTagSF/Data.root"));
+//        TH2F * DataSF0_btagged= (TH2F *) DataEff->Get("BSF_FLV0_Btagged");
+//        TH2F * DataSF0_total= (TH2F *) DataEff->Get("BSF_FLV0_Total");
+//        TH2F * DataSF5_btagged= (TH2F *) DataEff->Get("BSF_FLV5_Btagged");
+//        TH2F * DataSF5_total= (TH2F *) DataEff->Get("BSF_FLV5_Total");
 
 
+//###########       getBtagEfficiency using TTbar samples from CodexAnalyzer_BTagEff.cc   ###########################################################
 
+float getBtagEfficiency(bool isData, bool passCSV, float pt, float eta, TH2F ** Btagg_TT){
+    
+    
+    if ( isData) return 1;
+    
+    
+    
+    int ptBIN;
+    if ( pt < 50 ) ptBIN=1;
+    if (pt >= 50 && pt < 70 ) ptBIN=2;
+    if (pt >= 70 && pt < 100 ) ptBIN=3;
+    if (pt >= 100 && pt < 140) ptBIN=4;
+    if (pt >= 140 && pt < 200) ptBIN=5;
+    if (pt >= 200 && pt < 300) ptBIN=6;
+    if (pt >= 300 && pt < 600) ptBIN=7;
+    if (pt >= 600 ) ptBIN=8;
+    
+    int etaBIN;
+    if (eta >= 0 && eta < 0.8 ) etaBIN=1;
+    if (eta >= 0.8 && eta < 1.5 ) etaBIN=2;
+    if (eta >= 1.5 ) etaBIN=3;
+    
+    
+    
+    TH2F * TTSF0_btagged=Btagg_TT[0];
+    TH2F * TTSF0_total=Btagg_TT[1];
+    TH2F * TTSF5_btagged=Btagg_TT[2];
+    TH2F * TTSF5_total=Btagg_TT[3];
+    
+    //    cout << "Btag efficiency is = "<< pt << " ptBIN " <<ptBIN << "   "<<eta << " etaBIN " << etaBIN <<"  ratio=  " <<TTSF0_btagged->GetBinContent(ptBIN,etaBIN) << "    "<<TTSF0_total->GetBinContent(ptBIN,etaBIN) <<"\n";
+    
+    
+    if (passCSV)
+        return  TTSF5_btagged->GetBinContent(ptBIN,etaBIN)*1.0/TTSF5_total->GetBinContent(ptBIN,etaBIN);
+    else
+        return  TTSF0_btagged->GetBinContent(ptBIN,etaBIN)*1.0/TTSF0_total->GetBinContent(ptBIN,etaBIN);
+    
+    
+}
 //###########       bJet Veto   ###########################################################
 
-float BJetPtCut=30;
-float SimpleJetPtCut=30;
-float ElectronPtCut_=15;
-float CSVCut=   0.9535   ;                  //  https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation80XReReco
-
-
-float FuncFinalBTagSF(bool isData, TH2F ** Btagg_TT){
+float FuncFinalBTagSF(bool isData, TH2F ** Btagg_TT, float BJetPtCut, float CSVCut){
     
     
     float EffJet =1;
@@ -611,8 +644,8 @@ float FuncFinalBTagSF(bool isData, TH2F ** Btagg_TT){
 
 
 
-
-int numBJets(){
+//###########       bJet multiplicity   ###########################################################
+int numBJets( float BJetPtCut, float CSVCut){
     int numBJet=0;
     for (int ijet= 0 ; ijet < nJet ; ijet++){
         if (jetPFLooseId->at(ijet) > 0.5 && jetPt->at(ijet) > BJetPtCut && fabs(jetEta->at(ijet)) < 2.4  && jetCSV2BJetTags->at(ijet) >  CSVCut)
@@ -621,8 +654,8 @@ int numBJets(){
     return numBJet;
 }
 
-
-int numJets(){
+//###########       Jet multiplicity   ###########################################################
+int numJets( float SimpleJetPtCut){
     int numJet=0;
     for (int ijet= 0 ; ijet < nJet ; ijet++){
         if (jetPFLooseId->at(ijet) > 0.5 && jetPt->at(ijet) > SimpleJetPtCut && fabs(jetEta->at(ijet)) < 2.4 )
