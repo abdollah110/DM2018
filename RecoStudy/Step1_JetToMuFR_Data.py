@@ -33,12 +33,12 @@ import os
 
 
 ROOT.gROOT.SetBatch(True)
-SubRootDir = 'OutFiles_QCD/'
+#SubRootDir = 'OutFiles_QCD/'
 #SubRootDir = 'OutFiles_QCD_NoTrgMC/'
 #SubRootDir = 'OutFiles_QCD_40GeVMeT/'
 #SubRootDir = 'OutFiles_QCD_MET40_noOverLapJet/'
 #SubRootDir = 'OutFiles_QCD_Org/'
-
+SubRootDir = 'NewOutFiles_QCDEstim_Data_QCD/'
 
 verbos_ = False
 
@@ -174,9 +174,9 @@ def MakeTheHistogram(channel,NormQCD,ShapeQCD,Binning,doBinning,HistoType):
             
             
             
-            if verbos_:print "\n ----> Data before subtraction is = ", DataSampleQCDNormHist.Integral()
+            print "\n ----> Data before subtraction is = ", DataSampleQCDNormHist.Integral()
             QCDEstimation= (DataSampleQCDNormHist.Integral()- (TT_qcd+ZTT_qcd+W_qcd+SingleT_qcd+VV_qcd))
-            if verbos_:print "\n ---->  Data aftre ____ subtraction is = ", QCDEstimation , "  which should be =", DataSampleQCDShapeHist.Integral()
+            print "\n ---->  Data aftre ____ subtraction is = ", QCDEstimation , "  which should be =", DataSampleQCDShapeHist.Integral()
             
             
             #            NameOut= "QCD"+str(TauScaleOut[tscale])
@@ -281,9 +281,9 @@ def Make_Mu_FakeRate(channelName,Parametrization):
     HistoNum=ShapeNum.Get("HISTO")
     
     
-    if verbos_:print "\n---------------------------------------------------------------------------\n"
-    if verbos_:print "overal FR = ",  HistoNum.Integral(), "/",  HistoDeNum.Integral(), "  =  ", HistoNum.Integral()/ HistoDeNum.Integral(), "\n"
-    if verbos_:print "---------------------------------------------------------------------------\n\n"
+    print "\n---------------------------------------------------------------------------\n"
+    print "overal FR = ",  HistoNum.Integral(), "/",  HistoDeNum.Integral(), "  =  ", HistoNum.Integral()/ HistoDeNum.Integral(), "\n"
+    print "---------------------------------------------------------------------------\n\n"
     HistoNum.Divide(HistoDeNum)
     
     
@@ -339,9 +339,9 @@ def Make_Mu_FakeRate(channelName,Parametrization):
 
 #        theFit.SetParameter(4, 96.6)
 
-#    HistoNum.SetPrintLevel(0)
+    
     theFit.Print("Quiet")
-    HistoNum.Fit("theFit", "R0Q")
+    HistoNum.Fit("theFit", "R0")
     HistoNum.Draw("E1")
     theFit.SetLineWidth(3)
     theFit.SetLineColor(3)

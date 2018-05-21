@@ -269,10 +269,14 @@ float GetBJetSF(bool isData, float x, float jetEta, float jetHadFlvr){
     
     if (isData) return 1;
     else {
-        if (jetHadFlvr ==0 )
+        if (jetHadFlvr ==0 ){
+//            cout <<"GetBJetSF jetHadFlvr-->0  pt is"<<x<< " SF= "<<0.943355+8.95816/(x*x)+0.000240703*x<<"\n";
             return 0.943355+8.95816/(x*x)+0.000240703*x;
-        else if (jetHadFlvr ==4 || jetHadFlvr ==5 )
+        }
+        else if (jetHadFlvr ==4 || jetHadFlvr ==5 ){
+//            cout <<"GetBJetSF jetHadFlvr-->4/5  pt is"<<x<< " SF= "<<0.91423*((1.+(0.00958053*x))/(1.+(0.010132*x)))<<"\n";
             return 0.91423*((1.+(0.00958053*x))/(1.+(0.010132*x)));
+        }
         else
             return 1;
     }

@@ -204,13 +204,31 @@ TTree *  Xttree( TFile * f_Double){
     Run_Tree->SetBranchAddress("jetJECUnc",&jetJECUnc);
     Run_Tree->SetBranchAddress("jetRawEn",&jetRawEn);
     Run_Tree->SetBranchAddress("jetHadFlvr",&jetHadFlvr);
+    Run_Tree->SetBranchAddress("jetP4Smear",&jetP4Smear);
+    Run_Tree->SetBranchAddress("jetP4SmearUp",&jetP4SmearUp);
+    Run_Tree->SetBranchAddress("jetP4SmearDo",&jetP4SmearDo);
+    
+    
     
     //########################################   MET Info
     Run_Tree->SetBranchAddress("pfMET",&pfMET);
+    Run_Tree->SetBranchAddress("pfMET_T1UESUp",&pfMET_T1UESUp);
+    Run_Tree->SetBranchAddress("pfMET_T1UESDo",&pfMET_T1UESDo);
+    Run_Tree->SetBranchAddress("pfMET_T1JESUp",&pfMET_T1JESUp);
+    Run_Tree->SetBranchAddress("pfMET_T1JESDo",&pfMET_T1JESDo);
+    
     Run_Tree->SetBranchAddress("pfMETPhi",&pfMETPhi);
+    Run_Tree->SetBranchAddress("pfMETPhi_T1UESUp",&pfMETPhi_T1UESUp);
+    Run_Tree->SetBranchAddress("pfMETPhi_T1UESDo",&pfMETPhi_T1UESDo);
+    Run_Tree->SetBranchAddress("pfMETPhi_T1JESUp",&pfMETPhi_T1JESUp);
+    Run_Tree->SetBranchAddress("pfMETPhi_T1JESDo",&pfMETPhi_T1JESDo);
+    
     Run_Tree->SetBranchAddress("metFilters",&metFilters);
     Run_Tree->SetBranchAddress("genHT",&genHT);
-    Run_Tree->SetBranchAddress("genNumJet",&genNumJet);
+    
+    Run_Tree->SetBranchAddress("pdfSystWeight",&pdfSystWeight);
+    Run_Tree->SetBranchAddress("pdfSystWeightId",&pdfSystWeightId);
+    Run_Tree->SetBranchAddress("pdfWeight",&pdfWeight);
     
     
     return Run_Tree;
@@ -365,21 +383,66 @@ TH1F* HistkfactorW= (TH1F*) kfactorW->Get("KFcator");
 float kf_W_1=HistkfactorW->GetBinContent(1);
 float kf_W_2=HistkfactorW->GetBinContent(2);
 
+
+TFile * kfactorWUp=TFile::Open("../interface/kfactor_monoJet_WUp.root");
+TH1F* HistkfactorWUp= (TH1F*) kfactorWUp->Get("KFcator");
+float kf_W_1Up=HistkfactorWUp->GetBinContent(1);
+float kf_W_2Up=HistkfactorWUp->GetBinContent(2);
+
+TFile * kfactorWDown=TFile::Open("../interface/kfactor_monoJet_WDown.root");
+TH1F* HistkfactorWDown= (TH1F*) kfactorWDown->Get("KFcator");
+float kf_W_1Down=HistkfactorWDown->GetBinContent(1);
+float kf_W_2Down=HistkfactorWDown->GetBinContent(2);
+
+
+
 TFile * kfactorZ=TFile::Open("../interface/kfactor_Z.root");
 TH1F* HistkfactorZ= (TH1F*) kfactorZ->Get("KFcator");
 float kf_Z_1=HistkfactorZ->GetBinContent(1);
 float kf_Z_2=HistkfactorZ->GetBinContent(2);
 
+
+TFile * kfactorZUp=TFile::Open("../interface/kfactor_monoJet_ZUp.root");
+TH1F* HistkfactorZUp= (TH1F*) kfactorZUp->Get("KFcator");
+float kf_Z_1Up=HistkfactorZUp->GetBinContent(1);
+float kf_Z_2Up=HistkfactorZUp->GetBinContent(2);
+
+TFile * kfactorZDown=TFile::Open("../interface/kfactor_monoJet_ZDown.root");
+TH1F* HistkfactorZDown= (TH1F*) kfactorZDown->Get("KFcator");
+float kf_Z_1Down=HistkfactorZDown->GetBinContent(1);
+float kf_Z_2Down=HistkfactorZDown->GetBinContent(2);
+
+
+
 float FuncBosonKFactor(std::string X){
     
-    if (X.find("W1") != string::npos)
+    if (X.find("W1Cen") != string::npos)
         return kf_W_1;
-    else if (X.find("W2") != string::npos)
+    else if (X.find("W2Cen") != string::npos)
         return kf_W_2;
-    else if (X.find("Z1") != string::npos)
+    else if (X.find("W1Up") != string::npos)
+        return kf_W_1Up;
+    else if (X.find("W2Up") != string::npos)
+        return kf_W_2Up;
+    else if (X.find("W1Down") != string::npos)
+        return kf_W_1Down;
+    else if (X.find("W2Down") != string::npos)
+        return kf_W_2Down;
+    
+    else if (X.find("Z1Cen") != string::npos)
         return kf_Z_1;
-    else if (X.find("Z2") != string::npos)
+    else if (X.find("Z2Cen") != string::npos)
         return kf_Z_2;
+    else if (X.find("Z1Up") != string::npos)
+        return kf_Z_1Up;
+    else if (X.find("Z2Up") != string::npos)
+        return kf_Z_2Up;
+    else if (X.find("Z1Down") != string::npos)
+        return kf_Z_1Down;
+    else if (X.find("Z2Down") != string::npos)
+        return kf_Z_2Down;
+    
+    
     else
         return 0;
 }
@@ -633,10 +696,10 @@ float FuncFinalBTagSF(bool isData, TH2F ** Btagg_TT, float BJetPtCut, float CSVC
                 P_Data_P_mc=(1-SF*EffJet)/(1-EffJet);
                 
             }
-            
+        FinalBTagSF *=P_Data_P_mc;
         }
         
-        FinalBTagSF *=P_Data_P_mc;
+//        FinalBTagSF *=P_Data_P_mc; //  Seemd to ve a BUGGGGGGG  May16
     }
     return FinalBTagSF;
 }

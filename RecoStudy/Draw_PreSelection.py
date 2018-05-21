@@ -23,7 +23,8 @@ from Step5_TT_W_ScaleFactor import *
 #InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
-InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
+InputFilesLocation = 'NewOutFiles_Preselection_FigBSF/'
 
 #................................................................................................................................
 #................................................................................................................................
@@ -39,7 +40,7 @@ def add_lumi():
     lumi.SetTextColor(    1 )
     lumi.SetTextSize(0.06)
     lumi.SetTextFont (   42 )
-    lumi.AddText("41.4 fb^{-1} (13 TeV)[2017]")
+    lumi.AddText("41.5 fb^{-1} (13 TeV)[2017]")
     return lumi
 
 def add_CMS():
@@ -98,10 +99,10 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     
     
     QCD=file.Get(categoriy).Get("QCD")
-    if not QCD:
-        QCD=file.Get(categoriy).Get("VV")
-        QCD.Scale(.0001)
-        print "\n\n\n\nn\######################### whatch out VV  instead of QCD\n\n\n\n"
+#    if not QCD:
+#        QCD=file.Get(categoriy).Get("VV")
+#        QCD.Scale(.0001)
+#        print "\n\n\n\nn\######################### whatch out VV  instead of QCD\n\n\n\n"
     QCD.Rebin(RB_)
     
 
@@ -111,7 +112,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
     W=file.Get(categoriy).Get("W")
     W.Rebin(RB_)
-    W.Scale(1)
+#    W.Scale(1)
     if ttbarCR=="" :  W.Scale(SF_W_SingleLep())
     if ttbarCR=="_ttbarCRSingleLep" :  W.Scale(SF_W_SingleLep())
     if ttbarCR=="_ttbarCRDiLep" :  W.Scale(SF_W_DiLep())
@@ -122,12 +123,12 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
 
     TT=file.Get(categoriy).Get("TT")
-    if not TT:
-        TT=file.Get(categoriy).Get("VV")
-        TT.Scale(.0001)
-        print "\n\n\n\nn\######################### whatch out VV  instead of TT\n\n\n\n"
+#    if not TT:
+#        TT=file.Get(categoriy).Get("VV")
+#        TT.Scale(.0001)
+#        print "\n\n\n\nn\######################### whatch out VV  instead of TT\n\n\n\n"
     TT.Rebin(RB_)
-    TT.Scale(1)
+#    TT.Scale(1)
     if ttbarCR=="" :  TT.Scale(SF_TT_SingleLep())
     if ttbarCR=="_ttbarCRSingleLep" :  TT.Scale(SF_TT_SingleLep())
     if ttbarCR=="_ttbarCRDiLep" :  TT.Scale(SF_TT_DiLep())
@@ -137,10 +138,10 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
 
     SingleT=file.Get(categoriy).Get("SingleTop")
-    if not SingleT:
-        SingleT=file.Get(categoriy).Get("VV")
-        SingleT.Scale(.0001)
-        print "\n\n\n\nn\######################### whatch out VV  instead of SingleT\n\n\n\n"
+#    if not SingleT:
+#        SingleT=file.Get(categoriy).Get("VV")
+#        SingleT.Scale(.0001)
+#        print "\n\n\n\nn\######################### whatch out VV  instead of SingleT\n\n\n\n"
     SingleT.Rebin(RB_)
 
 
@@ -156,10 +157,10 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
 
     DYS=file.Get(categoriy).Get("ZTT")
-    if not DYS:
-        DYS=file.Get(categoriy).Get("VV")
-        DYS.Scale(.0001)
-        print "\n\n\n\nn\######################### whatch out VV  instead of DYS\n\n\n\n"
+#    if not DYS:
+#        DYS=file.Get(categoriy).Get("VV")
+#        DYS.Scale(.0001)
+#        print "\n\n\n\nn\######################### whatch out VV  instead of DYS\n\n\n\n"
     DYS.Rebin(RB_)
 
     Data.GetXaxis().SetTitle("")
@@ -325,6 +326,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     if MTLegend=='_HighMT': categ.AddText("M_{T}(#mu,MET) > 100 GeV")
     if MTLegend=='_MT300': categ.AddText("M_{T}(#mu,MET) > 300 GeV")
     if MTLegend=='_MT500': categ.AddText("M_{T}(#mu,MET) > 500 GeV")
+    if MTLegend=='_MT50To150': categ.AddText("50 GeV <M_{T}(#mu,MET) < 150 GeV")
 #    categ.AddText("1100<M_{LQ}<1400 GeV")
 #    categ.AddText("Jet Pt < 200 GeV")
 #    categ.AddText(ttbarCR)
@@ -421,6 +423,7 @@ FileNamesInfo=[
                ["_METPhi","MET #phi ","",10,10],
                ["_NumJet","Jet multiplicity","",1,1],
                ["_NumBJet","BJet multiplicity","",1,1],
+              ["_recoHT","Jet HT  (GeV)","",10,1],
                ]
 
 
@@ -469,8 +472,8 @@ Isolation=["_Iso"]
 #MT=["_HighMT"]
 #MT=["_MT500"]
 #MT= ["_NoMT","_HighMT","_MT300","_MT500"]
-#MT= ["_NoMT"]
-MT= ["_NoMT","_HighMT","_MT300","_MT500"]
+MT= ["_MT50To150"]
+#MT= ["_NoMT","_HighMT","_MT500"]
 #MT= ["_MT100","_MT150"]
 #MT_legend= [" 50 < M_{T} < 100","100 < M_{T} < 150"]
 #MT= ["_NoMT","_HighMT"]

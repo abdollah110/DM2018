@@ -47,7 +47,8 @@ ROOT.gROOT.SetBatch(True)
 #InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
-InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
+InputFilesLocation = 'NewOutFiles_Preselection_FigBSF/'
 
 verbos_ = False
 RB_=1
@@ -333,7 +334,7 @@ if __name__ == "__main__":
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_dR_Mu_Jet","_dEta_Mu_Jet"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet"]
 #    PlotName=["_nVtx","_nVtx_NoPU"]
-#    PlotName=["_LQMass"]
+#    PlotName=["_recoHT"]
 #    PlotName=["_jetCHF","_jetNHF","_jetCEF","_jetNEF"]
 
 
