@@ -48,7 +48,7 @@ ROOT.gROOT.SetBatch(True)
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
-InputFilesLocation = 'NewOutFiles_Preselection_FigBSF/'
+InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
 
 verbos_ = False
 RB_=1

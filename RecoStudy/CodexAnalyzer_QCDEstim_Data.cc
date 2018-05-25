@@ -65,11 +65,11 @@ int main(int argc, char** argv) {
     float LeptonPtCut_=60;
     float TauPtCut_=20;
     float JetPtCut=100;
-    float BJetPtCut=30;
+    float BJetPtCut=20;
     float SimpleJetPtCut=30;
     float ElectronPtCut_=15;
     //    float CSVCut=   0.9535   ;                  //  https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation80XReReco
-    float CSVCut=   0.9693   ;                  //  https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation94X
+    float CSVCut=   0.8838   ;                  //  https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation94X
     float LeptonIsoCut=0.15;
     
     //########################################################################################################################################################

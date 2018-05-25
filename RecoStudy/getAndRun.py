@@ -18,7 +18,9 @@ with open(filename) as fl:
     for line in fl:
         TF=TFile(line.replace('\n',''),"r")
 
-        Hist=TF.Get('MuJet_LQMass_MT500_HighDPhi_Iso')
+#        Hist=TF.Get('MuJet_LQMass_MT500_HighDPhi_Iso')
+#        Hist=TF.Get('MuJet_tmass_MuMet_HighMT_LowDPhi_TotEta_Iso')
+        Hist=TF.Get('MuJet_tmass_MuMet_HighMT_LowDPhi_TotEta_Total')
         if Hist: print line.replace('\n',''), 'HighMT  Entry',Hist.GetEntries(), ' Integral', Hist.Integral()
 
 #        Hist2=TF.Get('MuJet_LQMass_MT500_HighDPhi_Iso')

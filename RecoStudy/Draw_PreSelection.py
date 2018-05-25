@@ -24,7 +24,7 @@ from Step5_TT_W_ScaleFactor import *
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
-InputFilesLocation = 'NewOutFiles_Preselection_FigBSF/'
+InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
 
 #................................................................................................................................
 #................................................................................................................................
