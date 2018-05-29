@@ -91,6 +91,7 @@ TTree *  Xttree( TFile * f_Double){
     Run_Tree->SetBranchAddress("mcMass", &mcMass );
     Run_Tree->SetBranchAddress("mcMomPID", &mcMomPID );
     Run_Tree->SetBranchAddress("mcGMomPID", &mcGMomPID );
+    Run_Tree->SetBranchAddress("mcStatusFlag",&mcStatusFlag);
     
     //########################################   Tau Info
     Run_Tree->SetBranchAddress("nTau", &nTau);
@@ -556,9 +557,12 @@ vector<float>  GeneratorInfo(){
     
     for (int igen=0;igen < nMC; igen++){
         
+        // Status 62 means: isLastCopy=1 and fromHardProcess=1
+        
         //Top Pt
         if (mcPID->at(igen) == 6 && mcStatus->at(igen) ==62) GenTopPt=mcPt->at(igen) ;
         if (mcPID->at(igen) == -6 && mcStatus->at(igen) ==62) GenAntiTopPt=mcPt->at(igen);
+        
         
         
         //W Pt

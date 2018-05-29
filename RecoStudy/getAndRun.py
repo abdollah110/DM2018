@@ -25,3 +25,26 @@ with open(filename) as fl:
 
 #        Hist2=TF.Get('MuJet_LQMass_MT500_HighDPhi_Iso')
 #        print line.replace('\n',''), 'MT500  Entry',Hist2.GetEntries(), ' Integral', Hist2.Integral()
+
+
+
+
+config.General.requestName = "WToTauNu_M-1000_"
+config.Data.inputDataset = "/WToTauNu_M-1000_TuneCP5_13TeV-pythia8-tauola/RunIIFall17MiniAOD-PU2017_94X_mc2017_realistic_v11-v1/MINIAODSIM"
+submit(config)
+
+config.General.requestName = "WToTauNu_M-100_"
+config.Data.inputDataset = "/WToTauNu_M-100_TuneCP5_13TeV-pythia8-tauola/RunIIFall17MiniAOD-PU2017_94X_mc2017_realistic_v11-v1/MINIAODSIM"
+submit(config)
+
+config.General.requestName = "WToTauNu_M-2000_"
+config.Data.inputDataset = "/WToTauNu_M-2000_TuneCP5_13TeV-pythia8-tauola/RunIIFall17MiniAOD-PU2017_94X_mc2017_realistic_v11-v1/MINIAODSIM"
+submit(config)
+
+config.General.requestName = "WToTauNu_M-200_"
+config.Data.inputDataset = "/WToTauNu_M-200_TuneCP5_13TeV-pythia8-tauola/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM"
+submit(config)
+
+config.General.requestName = "WToTauNu_M-4000_"
+config.Data.inputDataset = "/WToTauNu_M-4000_TuneCP5_13TeV-pythia8-tauola/RunIIFall17MiniAOD-PU2017_94X_mc2017_realistic_v11-v1/MINIAODSIM"
+submit(config)

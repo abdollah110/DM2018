@@ -220,7 +220,8 @@ int main(int argc, char** argv) {
             //            PUWeight=1;
             //############################################################################################
             
-            float TotalWeight = LumiWeight * GetGenWeight * PUWeight * TopPtReweighting * WBosonKFactor * ZBosonKFactor ;
+//            float TotalWeight = LumiWeight * GetGenWeight * PUWeight * TopPtReweighting * WBosonKFactor * ZBosonKFactor ; //For QCD Estim remove Top Pt reweighting
+            float TotalWeight = LumiWeight * GetGenWeight * PUWeight * WBosonKFactor * ZBosonKFactor ;
             
             
             
