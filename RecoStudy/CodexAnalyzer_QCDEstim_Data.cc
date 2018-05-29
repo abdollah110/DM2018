@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
     //########################################
     // W and DY K-factor files  (Bin-based K-factor)
     //########################################
-    std::string ROOTLocHT= "/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/";
+    std::string ROOTLocHT= "../../ROOT/";
     vector<float> W_HTBinROOTFiles = W_HTBin(ROOTLocHT);
     vector<float> W_MassBinROOTFiles = W_MassBin(ROOTLocHT);
     //    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT); NOTMC
