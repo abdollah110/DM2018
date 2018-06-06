@@ -50,8 +50,8 @@ int main(int argc, char** argv) {
     //########################################
     std::string ROOTLocHT= "/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/";
     vector<float> W_HTBinROOTFiles = W_HTBin(ROOTLocHT);
-    vector<float> W_MassBinROOTFiles = W_MassBin(ROOTLocHT);
-//    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT); NOTMC
+    vector<float> WMuNu_MassBinROOTFiles = WMuNu_MassBin(ROOTLocHT);
+    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT);
     TFile * MassDepKFactor=TFile::Open("../interface/k_fakNNLO_use.root");
     TH1F* HistMassDepKFactor= (TH1F*) MassDepKFactor->Get("k_fak_mean");
     
@@ -194,12 +194,9 @@ int main(int argc, char** argv) {
             if (!isData){
                 
                 //######################## Lumi Weight
-//                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
-                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT,W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles, genNumJet);
-//                cout << InputROOT <<"  weight=" <<LumiWeight <<"\n";
+                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, WMuNu_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
                 //######################## Gen Weight
                 GetGenWeight=genWeight;
-                
                 //######################## PileUp Weight
 //                int puNUmmc=int(puTrue->at(0)*10);
                 int puNUmmc=int(puTrue->at(0)*5);
@@ -211,7 +208,6 @@ int main(int argc, char** argv) {
                 else
                     PUWeight= PUData_/PUMC_;
                 if  (puNUmmc==1 || puNUmmc==0) continue;
-//                cout<<"puTrue->at(0)= "<<puTrue->at(0)<< "       puNUmmc= "<<puNUmmc << "   puNUmdata= "<<puNUmdata<<" PUWeight===="<<PUWeight<<  " PUData_"<<   PUData_<<  " PUMC_ "<< PUMC_  <<"\n";
                 
             }
             
@@ -219,15 +215,13 @@ int main(int argc, char** argv) {
             //############################################################################################
             //   Final Total Weight
             //############################################################################################
-            //  FIXME   No PU reweighting
+//              FIXME   No PU reweighting
 //            PUWeight=1;
             //############################################################################################
             
             float TotalWeight_withTopPtRW = LumiWeight * GetGenWeight * PUWeight * TopPtReweighting * WBosonKFactor * ZBosonKFactor ;
             float TotalWeight_NoTopPtRW = LumiWeight * GetGenWeight * PUWeight * WBosonKFactor * ZBosonKFactor ;
             
-            
-//            cout <<"  LumiWeight * GetGenWeight * PUWeight * TopPtReweighting * WBosonKFactor * ZBosonKFactor  "  <<  LumiWeight <<"   "<< GetGenWeight <<"   "<< PUWeight <<"   "<< TopPtReweighting <<"   "<< WBosonKFactor <<"   "<<  ZBosonKFactor<<"\n";
             //###########       numTau   ###########################################################
             int numTau= getNumTau();
             
@@ -309,7 +303,6 @@ int main(int argc, char** argv) {
                 float IsoMu=muPFChIso->at(imu)/muPt->at(imu);
                 if ( (muPFNeuIso->at(imu) + muPFPhoIso->at(imu) - 0.5* muPFPUIso->at(imu) )  > 0.0)
                     IsoMu= ( muPFChIso->at(imu) + muPFNeuIso->at(imu) + muPFPhoIso->at(imu) - 0.5* muPFPUIso->at(imu))/muPt->at(imu);
-//                    IsoMu= ( muPFChIso->at(imu)/muPt->at(imu) + muPFNeuIso->at(imu) + muPFPhoIso->at(imu) - 0.5* muPFPUIso->at(imu))/muPt->at(imu); BUG at APril2018
                 
                 bool MuPtCut = muPt->at(imu) > LeptonPtCut_ && fabs(muEta->at(imu)) < 2.4 ;
                 bool MuIdIso=( (muIDbit->at(imu) >> 2 & 1)  && fabs(muD0->at(imu)) < 0.045 && fabs(muDz->at(imu)) < 0.2); //Tight Muon Id
@@ -332,14 +325,12 @@ int main(int argc, char** argv) {
                         recoHT += jetPt->at(ijet);
                 }
                 float ST=recoHT+muPt->at(imu);
-                
+//                cout <<"\n\n\n";
                 //###########    loop over  Jet    ###########################################################
                 for (int ijet= 0 ; ijet < nJet ; ijet++){
                     
                     
-                    
-                    
-                    
+//                    cout<< event<<"  Jetpt= "<<jetPt->at(ijet) << "  Jeteta= "<<jetEta->at(ijet) <<"\n";
                     Jet4Momentum.SetPtEtaPhiE(jetPt->at(ijet),jetEta->at(ijet),jetPhi->at(ijet),jetEn->at(ijet));
                     
                     
@@ -393,12 +384,9 @@ int main(int argc, char** argv) {
                     //###############################################################################################
                     const int size_CR = 3;
                     
-                    bool signalRegion = numTau+numZboson + numElectron  < 1  && numBJet < 1;
-                    
-                    
-//                    bool signalRegion = numTau+numZboson + numElectron  < 1 ;
-//                    if (signalRegion) FinalBTagSF=1;
-                    
+                    bool signalRegion = numTau+numZboson + numElectron  + numBJet < 1;
+//                    bool signalRegion = 1;
+                                        
                     bool TTcontrolRegion_DiLep = (numTau <1 && numZboson < 1 && numElectron > 0 );
                     if (TTcontrolRegion_DiLep) FinalBTagSF=1;
                     
@@ -406,9 +394,6 @@ int main(int argc, char** argv) {
                     
                     bool region_category[size_CR] = {signalRegion,TTcontrolRegion_DiLep,TTcontrolRegion_SingleLep};
                     std::string region_Cat[size_CR] = {"", "_ttbarCRDiLep","_ttbarCRSingleLep"};
-                    
-//                    cout<<"ele,jet,bjet= "<<numElectron<<numJet<<numBJet<<"   sf= "<<FinalBTagSF<<"\n";
-                    
                     
                     //###############################################################################################
                     //  Top Pt Reweighting Cat: The SF is meant to correct only the shape of the pt(top) distribution- not the amount of generated events ( you have to consider that the average weight is not 1 ! ) So we define two category for ttbar events
@@ -453,13 +438,13 @@ int main(int argc, char** argv) {
                                                         if (!( std::find(HistNamesFilled.begin(), HistNamesFilled.end(), FullStringName) != HistNamesFilled.end())){
                                                             HistNamesFilled.push_back(FullStringName);
                                                             
-                                                            //                                                            if (LQ4Momentum.M() > 1100 && LQ4Momentum.M() < 1400){
                                                             if (1){
                                                                 //##################
                                                                 
                                                                 
                                                                 
-//                                                                plotFill(CHL+"_ElectronEffVeto"+FullStringName,ElectronEffVeto,300,0,3);
+                                                                
+                                                                
                                                                 plotFill(CHL+"_tmass_MuMet"+FullStringName,tmass_MuMet,200,0,2000,FullWeight);
                                                                 plotFill(CHL+"_MET"+FullStringName,pfMET,200,0,2000,FullWeight);
                                                                 plotFill(CHL+"_METPhi"+FullStringName,pfMETPhi,400,-4,4,FullWeight);
@@ -469,7 +454,6 @@ int main(int argc, char** argv) {
                                                                 plotFill(CHL+"_LepEta"+FullStringName,muEta->at(imu),100,-2.5,2.5,FullWeight);
                                                                 plotFill(CHL+"_tmass_LQMet"+FullStringName,tmass_LQMet,200,0,2000,FullWeight);
                                                                 plotFill(CHL+"_LQMass"+FullStringName,LQ4Momentum.M(),200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_LQEta"+FullStringName,LQ4Momentum.Eta(),500,-5,5,FullWeight);
                                                                 plotFill(CHL+"_dPhi_Jet_Met"+FullStringName,deltaPhi(Jet4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
                                                                 plotFill(CHL+"_dPhi_Mu_Met"+FullStringName,deltaPhi(Mu4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
                                                                 plotFill(CHL+"_dPhi_Mu_Jet"+FullStringName,deltaPhi(Mu4Momentum.Phi(),Jet4Momentum.Phi()),160,0,3.2,FullWeight);
@@ -483,21 +467,18 @@ int main(int argc, char** argv) {
                                                                 plotFill(CHL+"_recoHT"+FullStringName,recoHT,300,0,3000,FullWeight);
                                                                 plotFill(CHL+"_ST"+FullStringName,recoHT+muPt->at(imu),300,0,3000,FullWeight);
                                                                 plotFill(CHL+"_dR_Mu_Jet"+FullStringName,Jet4Momentum.DeltaR(Mu4Momentum),500,0,5,FullWeight);
-                                                                plotFill(CHL+"_dEta_Mu_Jet"+FullStringName,Jet4Momentum.Eta() - Mu4Momentum.Eta(),1000,-5,5,FullWeight);
-                                                                plotFill(CHL+"_nVtx"+FullStringName,nVtx,100,0,100,FullWeight);
-                                                             if (PUWeight!=0)   plotFill(CHL+"_nVtx_NoPU"+FullStringName,nVtx,100,0,100,FullWeight/ PUWeight);
-                                                                plotFill(CHL+"_Cos_dPhi_Mu_Met"+FullStringName,(1-cos(deltaPhi(Mu4Momentum.Phi(),pfMETPhi))),200,0,2,FullWeight);
                                                                 plotFill(CHL+"_LepPhi"+FullStringName,muPhi->at(imu),400,-4,4,FullWeight);
+                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
                                                                 
-                                                                    plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
-//                                                                    plotFill("Weight_Mu"+FullStringName, MuonCor,200,0,2);
+                                                                plotFill(CHL+"_nVtx"+FullStringName,nVtx,100,0,100,FullWeight);
+                                                                if (PUWeight!=0)   plotFill(CHL+"_nVtx_NoPU"+FullStringName,nVtx,100,0,100,FullWeight/ PUWeight);
+                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
+                                                                
                                                                 
                                                                 
                                                             }
-                                                            
                                                         }
                                                     }
-                                                    
                                                 }
                                             }
                                         }

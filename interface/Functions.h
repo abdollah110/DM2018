@@ -64,7 +64,7 @@ float dR_(float ieta, float iphi, float jeta, float jphi){
 
 TTree *  Xttree( TFile * f_Double){
     
-    //        TTree *Run_Tree = (TTree*) f_Double->Get("ggNtuplizer/EventTree");
+//            TTree *Run_Tree = (TTree*) f_Double->Get("ggNtuplizer/EventTree");
     TTree *Run_Tree = (TTree*) f_Double->Get("EventTree");
     
     cout.setf(ios::fixed, ios::floatfield);
@@ -730,6 +730,36 @@ int numJets( float SimpleJetPtCut){
     }
     return numJet;
 }
+
+
+//###########       W PDF + alpha s   ###########################################################
+
+
+float W_PDFAlphaS(float wMass, float sign){
+    
+    if (wMass < 400) return (1+sign/100.*1.734);
+    if (wMass < 600) return (1+sign/100.*1.906);
+    if (wMass < 800) return (1+sign/100.*2.279);
+    if (wMass < 1000) return (1+sign/100.*2.679);
+    if (wMass < 1200) return (1+sign/100.*3.284);
+    if (wMass < 1400) return (1+sign/100.* 3.669);
+    if (wMass < 1600) return (1+sign/100.* 4.046);
+    if (wMass < 1800) return (1+sign/100.* 4.801);
+    if (wMass < 2000) return (1+sign/100.* 5.088);
+    if (wMass < 2200) return (1+sign/100.* 5.562);
+    if (wMass < 2400) return (1+sign/100.* 5.825);
+    if (wMass < 2600) return (1+sign/100.* 6.238);
+    if (wMass < 2800) return (1+sign/100.* 6.684);
+    if (wMass < 3000) return (1+sign/100.* 7.268);
+    if (wMass < 3200) return (1+sign/100.* 7.743);
+    if (wMass < 3400) return (1+sign/100.* 8.547);
+    if (wMass < 3600) return (1+sign/100.* 9.326);
+    if (wMass < 3800) return (1+sign/100.* 10.05);
+    if (wMass < 4000) return (1+sign/100.* 9.782);
+    else return (1+sign/100.* 10.00);
+    
+}
+
 
 
 

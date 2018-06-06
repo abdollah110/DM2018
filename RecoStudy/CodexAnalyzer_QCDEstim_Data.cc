@@ -47,8 +47,8 @@ int main(int argc, char** argv) {
     //########################################
     std::string ROOTLocHT= "../../ROOT/";
     vector<float> W_HTBinROOTFiles = W_HTBin(ROOTLocHT);
-    vector<float> W_MassBinROOTFiles = W_MassBin(ROOTLocHT);
-    //    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT); NOTMC
+    vector<float> WMuNu_MassBinROOTFiles = WMuNu_MassBin(ROOTLocHT);
+    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT);
     TFile * MassDepKFactor=TFile::Open("../interface/k_fakNNLO_use.root");
     TH1F* HistMassDepKFactor= (TH1F*) MassDepKFactor->Get("k_fak_mean");
     
@@ -157,7 +157,6 @@ int main(int argc, char** argv) {
             size_t isWJetsToLNu_Inc = InputROOT.find("WJetsToLNu_Inc");
             //            size_t isWJets = InputROOT.find("WJets");
             size_t isWJets = InputROOT.find("JetsToLNu");
-            //            size_t isWToMuTauNu = (InputROOT.find("WToMuNu") || InputROOT.find("WToTauNu"));  size_t in NOT BOOLEAN!!!!!!
             size_t isWToMuNu = (InputROOT.find("WToMuNu") );
             size_t isWToTauNu = (InputROOT.find("WToTauNu") );
             
@@ -191,12 +190,9 @@ int main(int argc, char** argv) {
             if (!isData){
                 
                 //######################## Lumi Weight
-                //                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
-                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT,W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles, genNumJet);
-                //                cout << InputROOT <<"  weight=" <<LumiWeight <<"\n";
+                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, WMuNu_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
                 //######################## Gen Weight
                 GetGenWeight=genWeight;
-                
                 //######################## PileUp Weight
                 //                int puNUmmc=int(puTrue->at(0)*10);
                 int puNUmmc=int(puTrue->at(0)*5);
@@ -476,6 +472,9 @@ int main(int argc, char** argv) {
 //                                                                plotFill(CHL+"_nVtx_NoPU"+FullStringName,nVtx,50,0,50,TotalWeight * MuonCor / PUWeight);
                                                                 
                                                                 plotFill(CHL+"_MET"+FullStringName,pfMET,200,0,2000,FullWeight);
+                                                                plotFill(CHL+"_NumBJet"+FullStringName,numBJet,5,0,5,FullWeight);
+                                                                plotFill(CHL+"_FinalBTagSF"+FullStringName,FinalBTagSF,500,0,5,FullWeight);
+                                                                
 //                                                                plotFill(CHL+"_LQMass"+FullStringName,LQ4Momentum.M(),200,0,2000,FullWeight);
 //                                                                plotFill(CHL+"_LQEta"+FullStringName,LQ4Momentum.Eta(),300,-3,3,FullWeight);
 //                                                                plotFill(CHL+"_LQPt"+FullStringName,LQ4Momentum.Pt(),200,0,2000,FullWeight);

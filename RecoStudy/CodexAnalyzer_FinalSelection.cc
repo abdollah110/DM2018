@@ -52,8 +52,8 @@ int main(int argc, char** argv) {
     //########################################
     std::string ROOTLocHT= "/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/";
     vector<float> W_HTBinROOTFiles = W_HTBin(ROOTLocHT);
-    vector<float> W_MassBinROOTFiles = W_MassBin(ROOTLocHT);
-    //    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT);
+    vector<float> WMuNu_MassBinROOTFiles = WMuNu_MassBin(ROOTLocHT);
+    vector<float> WTauNu_MassBinROOTFiles = WTauNu_MassBin(ROOTLocHT);
     
     TFile * MassDepKFactor=TFile::Open("../interface/k_fakNNLO_use.root");
     TH1F* HistMassDepKFactor= (TH1F*) MassDepKFactor->Get("k_fak_mean");
@@ -253,11 +253,7 @@ int main(int argc, char** argv) {
             if (!isData){
                 
                 //######################## Lumi Weight
-                //                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT,WBosonPt, W_Events, DY_Events,W_EventsNLO);
-                //                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
-                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT,W_HTBinROOTFiles, WBosonMass, W_MassBinROOTFiles, genNumJet);
-                
-                
+                if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT,genHT, W_HTBinROOTFiles, WBosonMass, WMuNu_MassBinROOTFiles,WTauNu_MassBinROOTFiles);
                 //######################## Gen Weight
                 GetGenWeight=genWeight;
                 
@@ -628,6 +624,18 @@ int main(int argc, char** argv) {
                                                                     plotFill(CHL+"_LQMassTopPtRWUp"+FullStringName,LQ.M(),nBin,binMin,binMax,FullWeight * TopPtReweighting);
                                                                     plotFill(CHL+"_LQMassTopPtRWDown"+FullStringName,LQ.M(),nBin,binMin,binMax,FullWeight / TopPtReweighting);
                                                                     }
+                                                                    
+                                                                    
+                                                                    
+                                                                    //###########################################################################################
+                                                                    ////////   Systematic on W PDF + alpha_S
+                                                                    //###########################################################################################
+                                                                    if (isWJets!= string::npos || isWToMuNu!= string::npos || isWToTauNu!= string::npos) {
+                                                                        
+                                                                        plotFill(CHL+"_LQMass_W_PDF_AlphaS_Up"+FullStringName,LQ.M(),nBin,binMin,binMax,FullWeight*W_PDFAlphaS(WBosonMass,1) );
+                                                                        plotFill(CHL+"_LQMass_W_PDF_AlphaS_Down"+FullStringName,LQ.M(),nBin,binMin,binMax,FullWeight*W_PDFAlphaS(WBosonMass,-1));
+                                                                    }
+                                                                    
                                                                     
                                                                     //##############################################################################
                                                                     //  QCD Scale Uncertainty (alpha_s) for TTbar and W+Jets

@@ -48,7 +48,9 @@ ROOT.gROOT.SetBatch(True)
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
-InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
+InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V2_NoPUWeighting/'
 
 verbos_ = False
 RB_=1
@@ -84,7 +86,7 @@ def _FileReturn(Name, channel,cat,HistoName):
 ####################################################
 def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
     
-    OutFile = TFile(InputFilesLocation+'/'+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
+    OutFile = TFile(InputFilesLocation+'/'+"___ToPPTRW/TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 #    OutFile = TFile("TotalRootForLimit_Jet50_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 
     for NameCat in category:
@@ -330,12 +332,12 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
 
 if __name__ == "__main__":
     
-    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_dEta_Mu_Jet","_METPhi","_nVtx","_nVtx_NoPU"]
+#    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_METPhi","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_LepPhi","_nVtx","_nVtx_NoPU"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_dR_Mu_Jet","_dEta_Mu_Jet"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet"]
 #    PlotName=["_nVtx","_nVtx_NoPU"]
 #    PlotName=["_recoHT"]
-#    PlotName=["_jetCHF","_jetNHF","_jetCEF","_jetNEF"]
+    PlotName=["_JetPt","_LQMass"]
 
 
 #    Isolation=["_Iso", "_AntiIso","_Total"]
@@ -367,5 +369,6 @@ if __name__ == "__main__":
                         NormQCD="_LepPt"+mt+jpt+reg+"_AntiIso"
                         ShapeQCD=Norm+mt+jpt+reg+"_AntiIso"
                         NormTTbar=Norm+"_NoTopRW"+mt+jpt+reg+iso
-                        
+#                        NormTTbar=NormMC
+
                         MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar)

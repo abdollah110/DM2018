@@ -45,8 +45,8 @@ if args.sample=='SingleMu':
 if args.sample=='SingleEle':
     SampleLoc='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/SampleLQ1/'
 
-if args.sample=='Mu50':
-    SampleLoc='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/lqsamples2_jetPt50_MT200/'
+#if args.sample=='Mu50':
+#    SampleLoc='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/lqsamples2_jetPt50_MT200/'
 
 CodexSignal='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/PrivateSample/'
 
@@ -58,7 +58,7 @@ if not os.path.exists(dirName):
 InputBKg=[
             ['DYJetsToLL.root','DYJetsToLL_M-50_HT*.root'],
             ['WJetsToLNu.root','*JetsToLNu*.root','WTo*root'],
-            ['TTJets.root','TTJets.root'],
+            ['TTJets.root','TTJets*.root'],
             ['VV.root','ZZ*.root','WZ*.root','WW*.root'],
             ['SingleTop.root','ST_*.root'],
             ['Data.root','Data.root'],

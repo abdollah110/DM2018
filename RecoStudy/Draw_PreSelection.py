@@ -24,7 +24,9 @@ from Step5_TT_W_ScaleFactor import *
 #InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
-InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
+#InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
+InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
+
 
 #................................................................................................................................
 #................................................................................................................................
@@ -222,14 +224,14 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     Data.SetLineWidth(2)
 
 
-    #Making the plot blind
-    if FileName.find("LQMass") > 0 :
-        print "##################################\n", FileName
-        for i in range(Data.GetNbinsX()):
-#            if i > 15 : Data.SetBinContent(i+1,0)
-            if i > 9 :
-                Data.SetBinContent(i+1,0)
-                Data.SetBinError(i+1,0)
+#    #Making the plot blind
+#    if FileName.find("LQMass") > 0 :
+#        print "##################################\n", FileName
+#        for i in range(Data.GetNbinsX()):
+##            if i > 15 : Data.SetBinContent(i+1,0)
+#            if i > 9 :
+#                Data.SetBinContent(i+1,0)
+#                Data.SetBinError(i+1,0)
 #
 #    if FileName.find("MET") > 0 :
 #        print "##################################\n", FileName
@@ -407,84 +409,30 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
 
 FileNamesInfo=[
 #               ["_tmass_JetMet","M_{T}(jet,MET) (GeV)","",5,1],
-               ["_tmass_LQMet","M_{T}(LQ,MET)  (GeV)","",10,1],
-               ["_LepPt","lepton p_{T} (GeV)","",100,1],
-               ["_LepEta","lepton #eta ","",5,10],
-               ["_JetPt","jet p_{T} (GeV)","",100,1],
-               ["_JetEta","jet #eta ","",5,10],
-               ["_nVtx","# of vertex","",2,10],
-               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
-               ["_MET","MET  (GeV)","",10,1],
-               ["_LQMass","M_{LQ}   (GeV)","",10,1],
-               ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",10,1],
-               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",5,1],
-               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",5,1],
-               ["_dPhi_Mu_MET","#Delta#phi (#mu,MET)","",10,1],
-               ["_METPhi","MET #phi ","",10,10],
-               ["_NumJet","Jet multiplicity","",1,1],
-               ["_NumBJet","BJet multiplicity","",1,1],
-              ["_recoHT","Jet HT  (GeV)","",10,1],
-               ]
-
-
-
-
-
-#FileNamesInfo=[
-#               ["_JetPhi","jet #phi","",20,1],
-#               ["_LepPhi","lepton #phi","",20,1],
-#               ["_METPhi","MET #phi","",20,1],
-
-
-            
-
-               
-#               ##               ["_tmass_JetMet","M_{T}(jet,MET) (GeV)","",5,1],
 #               ["_tmass_LQMet","M_{T}(LQ,MET)  (GeV)","",10,1],
 #               ["_LepPt","lepton p_{T} (GeV)","",100,1],
-#               ["_LepEta","lepton #eta ","",10,.1],
-#               ["_JetPt","jet p_{T} (GeV)","",50,.1],
-#               ["_JetEta","jet #eta ","",10,1],
-#               ##               ["_nVtx","# of vertex","",1,10],
-#               ##               ["_nVtx_NoPU","# of vertex before PU reweighting","",1,10],
-#               ["_MET","MET  (GeV)","",10,.1],
+#               ["_LepEta","lepton #eta ","",5,10],
+               ["_JetPt","jet p_{T} (GeV)","",100,1],
+#               ["_JetEta","jet #eta ","",5,10],
+#               ["_nVtx","# of vertex","",2,10],
+#               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
+#               ["_MET","MET  (GeV)","",10,1],
 #               ["_LQMass","M_{LQ}   (GeV)","",10,1],
 #               ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",10,1],
-#               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",10,1],
-#               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",10,1],
+#               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",5,1],
+#               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",5,1],
 #               ["_dPhi_Mu_MET","#Delta#phi (#mu,MET)","",10,1],
-#               ##               ["_LQEta","#eta_{LQ}","",10,10],
+#               ["_METPhi","MET #phi ","",10,10],
 #               ["_NumJet","Jet multiplicity","",1,1],
 #               ["_NumBJet","BJet multiplicity","",1,1],
-#               ["_recoHT","Jet HT  (GeV)","",10,1],
-#               ["_ST"," ST  (GeV)","",10,.1],
-#               ["_dR_Mu_Jet","#DeltaR (#mu,jet)","",20,1],
-#               ["_dEta_Mu_Jet","#Delta#eta (#mu,jet)","",50,1],
-#               ]
-
-
-
-
-
-#    Isolation=["_Iso", "_AntiIso","_Total"]
+#              ["_recoHT","Jet HT  (GeV)","",10,1],
+               ]
 
 Isolation=["_Iso"]
-#MT=["_HighMT"]
-#MT=["_MT500"]
-#MT= ["_NoMT","_HighMT","_MT300","_MT500"]
-MT= ["_MT50To150"]
-#MT= ["_NoMT","_HighMT","_MT500"]
-#MT= ["_MT100","_MT150"]
-#MT_legend= [" 50 < M_{T} < 100","100 < M_{T} < 150"]
-#MT= ["_NoMT","_HighMT"]
-#    JPT=["_LowDPhi", "_HighDPhi"];
+MT= ["_NoMT","_HighMT","_MT50To150","_MT300","_MT500"]
 JPT=[ "_HighDPhi"]
-
-#lqEta= ["_Barrel", "_Endcap","_TotEta"]
 lqEta= [""]
-#region= [""]
 region= ["","_ttbarCRDiLep","_ttbarCRSingleLep"]
-#region= ["_ttbarCRDiLep","_ttbarCRSingleLep"]
 
 #logStat=[0]
 logStat=[1]
@@ -514,17 +462,3 @@ for i in range(0,len(FileNamesInfo)):
 
 
 
-#MakeTheHistogram("MuJet",NormMC+mt+jpt+dr+iso,NormMC+mt+jpt+dr+iso,"",1)
-#
-#
-#
-#
-#
-#for ch in channelDirectory:
-#    for cat in Category:
-#        for i in range(0,len(FileNamesInfo)):
-#
-##            FileName="TotalRootForLimit_PreSelection_"+ch+FileNamesInfo[i][0]+"_OS.root"
-#            FileName="TotalRootForLimit_PreSelection_"+ch+FileNamesInfo[i][0]+".root"
-#            MakePlot(FileName,ch+cat,FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][2],FileNamesInfo[i][3],ch+cat)
-#

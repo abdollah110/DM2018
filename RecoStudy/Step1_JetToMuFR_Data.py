@@ -39,7 +39,8 @@ ROOT.gROOT.SetBatch(True)
 #SubRootDir = 'NewOutFiles_QCDEstim_Data_lowerJetPt/'
 #SubRootDir = 'NewOutFiles_QCDEstim_Data_QCD/'
 #SubRootDir = 'NewOutFiles_QCDEstim_Data_noMETCut/'
-SubRootDir = 'NewOutFiles_QCDEstim_Data_MediumBTag/'
+#SubRootDir = 'NewOutFiles_QCDEstim_Data_MediumBTag/'
+SubRootDir = 'NewOutFiles_QCDEstim_Data_RemoveTopPtRW/'
 
 verbos_ = False
 
