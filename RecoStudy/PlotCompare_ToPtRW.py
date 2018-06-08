@@ -49,6 +49,7 @@ def MakeCompare(r1,hist1,r2,hist2,name,RB_,XTit,name2):
 
 
     Xname1= r1.replace('NewOutFiles_Preselection_Approval_V1/','').replace('.root','').replace('_HighDPhi_Iso','')
+#    Xname1= r1.replace('NewOutFiles_Preselection_Approval_V1/___','').replace('TopPtRW/TotalRootForLimit_PreSelection_MuJet_JetPt_HighMT_HighDPhi_ttbarCRSingleLep_Iso.root','')
     Xname2= hist1.replace('MuJet/','')
         
         
@@ -116,7 +117,7 @@ def MakeCompare(r1,hist1,r2,hist2,name,RB_,XTit,name2):
 #    Xname1= r1.replace('OutFiles_Preselection_Approval_V1/TotalRootForLimit_PreSelection_MuJet','').replace('.root','')
 #    Xname2= hist1.replace('MuJet/','')
 
-    categ  = ROOT.TPaveText(0.65, 0.45+0.013, 0.83, 0.60+0.155, "NDC")
+    categ  = ROOT.TPaveText(0.5, 0.45+0.013, 0.83, 0.60+0.155, "NDC")
     categ.SetBorderSize(   0 )
     categ.SetFillStyle(    0 )
     categ.SetTextAlign(   12 )
@@ -148,7 +149,8 @@ def MakeCompare(r1,hist1,r2,hist2,name,RB_,XTit,name2):
     h1.SetMaximum(1.5)
     h1.SetMinimum(0.5)
     h1.SetMarkerStyle(20)
-    h1.SetMarkerColor(2)
+    h1.SetMarkerColor(1)
+    h1.SetLineColor(1)
     h1.GetXaxis().SetTitle('boson p_{T} (GeV)')
     
     
@@ -203,66 +205,36 @@ def MakeCompare(r1,hist1,r2,hist2,name,RB_,XTit,name2):
 
     
     
-    c.SaveAs('OUT_%s_%s.pdf'%(Xname1,Xname2))
-
-
-#F1='OutFiles_PreSelection/Data.root'
-#F2='OutFiles_PreSelection_SampleLQ1/Data.root'
-
-
-#F1='OutFiles_Excess_LQMore1100/Data.root'
-#F2='Data_LQ1100.root'
+    c.SaveAs('OUT_TopPtRW_%s_%s.pdf'%(Xname1,Xname2))
 
 
 
-#process=[
-#         ['Jet_LepEta_MT500_HighDPhi_Iso',10,'Lepton #eta'],
-#         ['Jet_JetEta_MT500_HighDPhi_Iso',10,'Jet #eta'],
-#         ['Jet_LQMass_MT500_HighDPhi_Iso',10,'M_{LQ} GeV'],
-#         ['Jet_MET_MT500_HighDPhi_Iso',10,'MET GeV'],
-#         ['Jet_JetPt_MT500_HighDPhi_Iso',50,'Jet pT GeV'],
-#         ['Jet_LepPt_MT500_HighDPhi_Iso',50,'lepton pT GeV'],
-#         ['Jet_dEta_Mu_Jet_MT500_HighDPhi_Iso',50,'#Delta#eta lep,jet']
-#         ]
-#
-#
-#for i in range(0,len(process)):
-##    MakeCompare(F1,'Mu'+process[i][0],F2,'Ele'+process[i][0].replace('_HighMT','_MT500'),process[i][0],process[i][1],process[i][2])
-#    MakeCompare(F1,'Mu'+process[i][0],F2,'Ele'+process[i][0],process[i][0],process[i][1],process[i][2],'_MTHigh')
-#    MakeCompare(F1,'Mu'+process[i][0].replace('_MT500','_HighMT'),F2,'Ele'+process[i][0].replace('_MT500','_HighMT'),process[i][0],process[i][1],process[i][2],'_MT500')
-#
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_HighMT_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_TopRW_HighMT_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 100 GeV, Signal Region')
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_MT500_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_TopRW_MT500_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV, Signal Region')
+
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_HighMT_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_TopRW_HighMT_HighDPhi_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 100 GeV, Signal Region')
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_MT500_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_TopRW_MT500_HighDPhi_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 500 GeV, Signal Region')
+
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_HighMT_HighDPhi_ttbarCRSingleLep_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_TopRW_HighMT_HighDPhi_ttbarCRSingleLep_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 100 GeV, TT CR')
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_MT500_HighDPhi_ttbarCRSingleLep_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_TopRW_MT500_HighDPhi_ttbarCRSingleLep_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 500 GeV, TT CR')
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_HighMT_HighDPhi_ttbarCRSingleLep_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_TopRW_HighMT_HighDPhi_ttbarCRSingleLep_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 100 GeV, TT CR')
+
+MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_MT500_HighDPhi_ttbarCRSingleLep_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_TopRW_MT500_HighDPhi_ttbarCRSingleLep_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV, TT CR')
 
 
 
-MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_HighMT_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_NoTopRW_HighMT_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 100 GeV')
-
-MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_MT500_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_LQMass_NoTopRW_MT500_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
-
-
-MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_HighMT_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_NoTopRW_HighMT_HighDPhi_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 100 GeV')
-
-MakeCompare('NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_MT500_HighDPhi_Iso','NewOutFiles_Preselection_Approval_V1/TTJets.root','MuJet_JetPt_NoTopRW_MT500_HighDPhi_Iso','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 500 GeV')
-
-
-
-
-#MakeCompare('test_W_oldkfactor_ChangeMutoL.root','MuJet_LQMass_MT500_HighDPhi_Iso','test_W_NewmassDep_Kfactor.root','MuJet_LQMass_MT500_HighDPhi_Iso','MT500MLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
-
-#MakeCompare('ScaleCorretion/Codex.root','MuJet_LQMassCorrMuScale_MT500_HighDPhi_Iso','ScaleCorretion/Codex.root','MuJet_LQMass_MT500_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
-#MakeCompare('ScaleCorretion/WJet.root','MuJet_LQMassCorrMuScale_MT500_HighDPhi_Iso','ScaleCorretion/WJet.root','MuJet_LQMass_MT500_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
-#MakeCompare('ScaleCorretion/Data.root','MuJet_LQMassCorrMuScale_MT500_HighDPhi_Iso','ScaleCorretion/Data.root','MuJet_LQMass_MT500_HighDPhi_Iso','HighMTMLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
-
-
-
-#MakeCompare('ScaleCorretion/Codex_EtaCheckMuCor.root','MuJet_LQMassDifference_Barrel_MT500_HighDPhi_Iso','ScaleCorretion/Codex_EtaCheckMuCor.root','MuJet_LQMassDifference_Barrel_MT500_HighDPhi_Iso','Barrel',10,'M_{LQ}_{cor} - M_{LQ}_{uncor} / M_{LQ}_{uncor}','M_{T} > 500 GeV, |#eta| < 1.5')
-#
-#MakeCompare('ScaleCorretion/Codex_EtaCheckMuCor.root','MuJet_LQMassDifference_EndCap_MT500_HighDPhi_Iso','ScaleCorretion/Codex_EtaCheckMuCor.root','MuJet_LQMassDifference_EndCap_MT500_HighDPhi_Iso','Endcap',10,'M_{LQ}_{cor} - M_{LQ}_{uncor} / M_{LQ}_{uncor}','M_{T} > 500 GeV, |#eta > 1.5|')
+#MakeCompare('NewOutFiles_Preselection_Approval_V1/___NoTopPtRW/TotalRootForLimit_PreSelection_MuJet_JetPt_HighMT_HighDPhi_ttbarCRSingleLep_Iso.root','MuJet/TT','NewOutFiles_Preselection_Approval_V1/___WithTopPtRW/TotalRootForLimit_PreSelection_MuJet_JetPt_HighMT_HighDPhi_ttbarCRSingleLep_Iso.root','MuJet/TT','HighMTMLQ',50,'jet p_{T} GeV','M_{T} > 100 GeV, TT CR')
 
 
 
 
 
-#MakeCompare('test_W_oldkfactor_ChangeMutoL.root','MuJet_LQMass_MT500_HighDPhi_Iso','test_W_NewmassDep_Kfactor.root','MuJet_LQMass_MT500_HighDPhi_Iso','MT500MLQ',10,'M_{LQ} GeV','M_{T} > 500 GeV')
 
 
 

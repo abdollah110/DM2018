@@ -231,8 +231,12 @@ def _FIT_Jet(x, p):
 
 
 def _FIT_Lepton( x,  p) :
-    Land=p[0]+p[1]*x[0]+p[2]*x[0]*x[0]+p[3]*x[0]*x[0]*x[0]+p[4]*x[0]*x[0]*x[0]*x[0]
-    #    Land = p[2] * TMath.Landau(x[0], p[3], p[4])
+    Land=p[0]+p[1]*pow(x[0],1)+p[2]*pow(x[0],2)+p[3]*pow(x[0],3)+p[4]*pow(x[0],4)
+#    Land=p[0]+p[1]*pow(x[0],1)+p[2]*pow(x[0],2)+p[3]*pow(x[0],3)+p[4]*pow(x[0],4)
+#    Land=p[0]+p[1]*pow(x[0],1)+p[2]*pow(x[0],2)+p[3]*pow(x[0],3)+p[4]*pow(x[0],4)
+#    Land=p[0]+p[1]*x[0]+p[2]*x[0]*x[0]+p[3]*x[0]*x[0]*x[0]+p[4]*x[0]*x[0]*x[0]*x[0]
+
+#    Land = p[2] * TMath.Landau(x[0], p[3], p[4])
     #    Pol0 = p[0]
     #    return Land + Pol0
     return Land
@@ -249,7 +253,7 @@ def ApplyTheFakeRate(x, p,parametrization):
         Pol0 = p[0]+p[1]*x
         return Land + Pol0
     elif parametrization=='Lepton':
-        if x > 225: x=225
+        if x > 230: x=230
         Land=p[0]+p[1]*pow(x,1)+p[2]*pow(x,2)+p[3]*pow(x,3)+p[4]*pow(x,4)
 #        if x > 250: x=250
 #        Land = p[2] * TMath.Landau(x, p[3], p[4])
@@ -270,7 +274,8 @@ def Make_Mu_FakeRate(channelName,Parametrization):
     if Parametrization=='Lepton':
         ObjectPT="_LepPt"
         FR_vs_LeptonPT=1
-        BinningFake = array.array("d",[0,60,70,80,90,100,110,120,130,150,200,250])
+#        BinningFake = array.array("d",[0,60,70,80,90,100,110,120,130,150,200,250])
+        BinningFake = array.array("d",[0,60,80,100,120,150,175,200,260])
     elif Parametrization=='Jet':
         ObjectPT="_CloseJetLepPt"
         FR_vs_LeptonPT=0
@@ -328,11 +333,11 @@ def Make_Mu_FakeRate(channelName,Parametrization):
 
     if FR_vs_LeptonPT:
         nPar = 5
-        theFit=TF1("theFit", _FIT_Lepton, 60, 225,nPar)
-        theFit.SetParameter(0, .55)
-        theFit.SetParLimits(0, 0.07, 0.234)
-        theFit.SetParameter(1, 5.9)
-        theFit.SetParameter(2, -1.70)
+        theFit=TF1("theFit", _FIT_Lepton, 60, 230,nPar)
+#        theFit.SetParameter(0, .55)
+        theFit.SetParLimits(0, 0.07, 0.434)
+#        theFit.SetParameter(1, 5.9)
+#        theFit.SetParameter(2, -1.70)
 
     else:
         nPar = 5

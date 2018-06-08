@@ -39,7 +39,9 @@ ROOT.gROOT.SetBatch(True)
 
 #SubRootDir = 'NewOutFiles_FinalSelection_First/'
 #SubRootDir = 'NewOutFiles_FinalSelection_FixBSF/'
-SubRootDir = 'NewOutFiles_FinalSelection_noBtagVeto/'
+#SubRootDir = 'NewOutFiles_FinalSelection_noBtagVeto/'
+#SubRootDir = 'NewOutFiles_FinalSelection_Approval_v1/'
+SubRootDir = 'NewOutFiles_FinalSelection_Approval_v3_relaxQCD/'
 
 
 verbos_ = True
@@ -49,6 +51,13 @@ JetResol = ["JetERDown", "", "JetERUp"]
 METScale = ["METUESDown", "", "METUESUp","METJESDown","METJESUp"]
 SystematicTopPtReWeight = ["TopPtRWUp","TopPtRWDown"]
 FinalName = ["_mj"]
+
+SystematicsystWk_factor= ["_ewkKfactor_WDown","_ewkKfactor_WUp"]
+SystematicsystZk_factor= ["_ewkKfactor_ZDown","_ewkKfactor_ZUp"]
+
+
+Systematicsyst_PDF_Alpha_W=["_W_PDF_AlphaS_Down","_W_PDF_AlphaS_Up"]
+
 
 ############################################################################################################
 def _FileReturn(Name, channel,cat,HistoName,PostFixJet,PostFixJetRes,PostFixMET):
@@ -288,15 +297,15 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
                     ################################################
                     print "--------------------------------------------------->     Processing W"
                     tDirectory.cd()
-
+        
                     Name="WJetsToLNu"
                     NameOut= "W"+str(JetScaleOut[jscale])+str(JetResolOut[jres])+str(METScaleOut[mscale])
-
+                
                     NormFileWNoCor= _FileReturn(Name, channel,NameCat, NormMC.replace("","") +"", JetScale[jscale] , JetResol[jres] , METScale[mscale] )
                     NormHistoWNoCor=NormFileWNoCor.Get("XXX")
                     WNoCorNormaliztaion=NormHistoWNoCor.Integral()
                     
-                
+                    
                     NormFile= _FileReturn(Name, channel,NameCat, NormMC, JetScale[jscale] , JetResol[jres] , METScale[mscale] )
                     NormHisto=NormFile.Get("XXX")
                     
@@ -307,21 +316,47 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
                     tDirectory.WriteObject(RebinedHist,NameOut)
                     
                     
-                    ###############  Systematics on Shape and Norm for  qcd Scale ####  FIXME
+                    #                    ###############  Systematics on Shape and Norm for  qcd Scale ####  NOT USED ANYMORE
+                    #                    if jscale==1 and mscale==1 and jres==1:
+                    #                        qcdScaleW=TFile('../interface/QCDScale_W.root','R')
+                    #                        wScaleUp=qcdScaleW.Get('qcdScaleUp')
+                    #                        wScaleDown=qcdScaleW.Get('qcdScaleDown')
+                    #
+                    #                        ScaleUpW=RebinedHist.Clone()
+                    #                        ScaleDownW=RebinedHist.Clone()
+                    #                        for ibin in range(RebinedHist.GetNbinsX()):
+                    #                            ScaleUpW.SetBinContent(ibin+1,RebinedHist.GetBinContent(ibin+1)*wScaleUp.GetBinContent(ibin+1))
+                    #                            ScaleDownW.SetBinContent(ibin+1,RebinedHist.GetBinContent(ibin+1)*wScaleDown.GetBinContent(ibin+1))
+                    #
+                    #                        tDirectory.WriteObject(ScaleUpW,'W_qcdScale_WUp')
+                    #                        tDirectory.WriteObject(ScaleDownW,'W_qcdScale_WDown')
+                    
+                    
+                    
+                    ###############  Systematics on W k-factor for ewk correction ####
                     if jscale==1 and mscale==1 and jres==1:
-                        qcdScaleW=TFile('../interface/QCDScale_W.root','R')
-                        wScaleUp=qcdScaleW.Get('qcdScaleUp')
-                        wScaleDown=qcdScaleW.Get('qcdScaleDown')
-                        
-                        ScaleUpW=RebinedHist.Clone()
-                        ScaleDownW=RebinedHist.Clone()
-                        for ibin in range(RebinedHist.GetNbinsX()):
-                            ScaleUpW.SetBinContent(ibin+1,RebinedHist.GetBinContent(ibin+1)*wScaleUp.GetBinContent(ibin+1))
-                            ScaleDownW.SetBinContent(ibin+1,RebinedHist.GetBinContent(ibin+1)*wScaleDown.GetBinContent(ibin+1))
-                        
-                        tDirectory.WriteObject(ScaleUpW,'W_qcdScale_WUp')
-                        tDirectory.WriteObject(ScaleDownW,'W_qcdScale_WDown')
-
+                        for wpdf in range(len(Systematicsyst_PDF_Alpha_W)):
+                            tDirectory.cd()
+                            
+                            HistogramNorm = NormMC+Systematicsyst_PDF_Alpha_W[wpdf]
+                            #                            HistogramNorm = NormMC.replace("_LQMass","_LQMass"+Systematicsyst_PDF_Alpha_W[wpdf])
+                            
+                            NameOut= "W"+str(Systematicsyst_PDF_Alpha_W[wpdf])
+                            
+                            NormFile= _FileReturn(Name, channel,NameCat, HistogramNorm, JetScale[jscale] , JetResol[jres] , METScale[mscale] )
+                            NormHisto=NormFile.Get("XXX")
+                            print "--------------->    NormHisto Systematicsyst_PDF_Alpha_W XXXXXX correction", NormHisto.Integral()
+                            
+                            NormFileShape= _FileReturn(Name, channel,NameCat, HistogramNorm, JetScale[jscale] , JetResol[jres] , METScale[mscale] )
+                            NormHistoShape=NormFileShape.Get("XXX")
+                            
+                            NormHistoShape.Scale(NormHisto.Integral()*1.0/NormHistoShape.Integral())
+                            NormHistoShape.Scale(SF_W_SingleLep())
+                            print "--------------->    NormHisto Systematicsyst_PDF_Alpha_W with correction", NormHistoShape.Integral()
+                            RebinedHist= NormHistoShape.Rebin(len(Binning)-1,"",Binning)
+                            tDirectory.WriteObject(RebinedHist,NameOut)
+                
+                
                 
                 
                     ###############  Systematics on W k-factor for ewk correction ####
@@ -330,23 +365,24 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
                             tDirectory.cd()
                             
                             HistogramNorm = NormMC+SystematicsystWk_factor[wkfactor]
+                            #                            HistogramNorm = NormMC.replace("_LQMass","_LQMass"+SystematicsystWk_factor[wkfactor])
                             
                             NameOut= "W"+str(SystematicsystWk_factor[wkfactor])
                             
                             NormFile= _FileReturn(Name, channel,NameCat, HistogramNorm, JetScale[jscale] , JetResol[jres] , METScale[mscale] )
                             NormHisto=NormFile.Get("XXX")
-                            print "--------------->    NormHisto XXXXXX correction", NormHisto.Integral()
+                            print "--------------->    NormHisto SystematicsystWk_factor XXXXXX correction", NormHisto.Integral()
                             
                             NormFileShape= _FileReturn(Name, channel,NameCat, HistogramNorm, JetScale[jscale] , JetResol[jres] , METScale[mscale] )
                             NormHistoShape=NormFileShape.Get("XXX")
                             
                             NormHistoShape.Scale(NormHisto.Integral()*1.0/NormHistoShape.Integral())
                             NormHistoShape.Scale(SF_W_SingleLep())
-                            print "--------------->    NormHisto with correction", NormHistoShape.Integral()
+                            print "--------------->    NormHisto  SystematicsystWk_factor with correction", NormHistoShape.Integral()
                             RebinedHist= NormHistoShape.Rebin(len(Binning)-1,"",Binning)
                             tDirectory.WriteObject(RebinedHist,NameOut)
-                    
-
+                                
+                                
 
                     ################################################
                     #  Filling QCD
@@ -489,7 +525,7 @@ if __name__ == "__main__":
             NormMC="_LQMass"+mt+met+"_Iso"
             NormQCD="_LepPt"+mt+met+"_AntiIso"
 #            NormQCD="_CloseJetLepPt"+mt+met+"_AntiIso"
-            ShapeQCD="_LQMass"+"_MT100"+met+"_AntiIso"
+            ShapeQCD="_LQMass"+"_MT400"+met+"_AntiIso_NoDPhi"
             NormMCTT="_LQMass_NoTopRW"+mt+met+"_Iso"
             
             MakeTheHistogram("MuJet",NormMC,NormQCD,ShapeQCD,NormMCTT,0,Binning)

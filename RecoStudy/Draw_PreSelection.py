@@ -25,8 +25,9 @@ from Step5_TT_W_ScaleFactor import *
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/___WithTopPtRW/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/___NoTopPtRW/'
 InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
-
 
 #................................................................................................................................
 #................................................................................................................................
@@ -253,6 +254,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     stack.Add(SingleT)
     stack.Add(TT)
     stack.Add(W)
+    
 
     errorBand = W.Clone()
     errorBand.Add(QCD)
@@ -356,8 +358,10 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,Info,RB_,channel,yMin,isLOG,ttbar
     pad2.cd()
     
     h1=errorBand.Clone()
-    h1.SetMaximum(2)
-    h1.SetMinimum(0)
+#    h1.SetMaximum(2)
+#    h1.SetMinimum(0)
+    h1.SetMaximum(1.5)
+    h1.SetMinimum(0.5)
     h1.SetMarkerStyle(20)
 
     h3=Data.Clone()
@@ -417,7 +421,7 @@ FileNamesInfo=[
 #               ["_nVtx","# of vertex","",2,10],
 #               ["_nVtx_NoPU","# of vertex before PU reweighting","",2,10],
 #               ["_MET","MET  (GeV)","",10,1],
-#               ["_LQMass","M_{LQ}   (GeV)","",10,1],
+               ["_LQMass","M_{LQ}   (GeV)","",10,1],
 #               ["_tmass_MuMet","M_{T}(#mu,MET) (GeV)","",10,1],
 #               ["_dPhi_Jet_Met","#Delta#phi (jet,MET)","",5,1],
 #               ["_dPhi_Mu_Jet","#Delta#phi (#mu,jet)","",5,1],

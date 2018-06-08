@@ -18,7 +18,7 @@ def MakeCompare(r1,hist1,r2,hist2,name,RB_,XTit,name2):
     Histo1=file1.Get(hist1)
     Histo1.SetLineColor(2)
     Histo1.SetLineWidth(2)
-    Histo1.SetMarkerColor(3)
+    Histo1.SetMarkerColor(2)
     Histo1.SetMarkerStyle(24)
     Histo1.Rebin(RB_)
     Histo1.SetMaximum(Histo1.GetMaximum()*2)
