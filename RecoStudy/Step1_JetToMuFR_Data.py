@@ -178,7 +178,7 @@ def MakeTheHistogram(channel,NormQCD,ShapeQCD,Binning,doBinning,HistoType):
             
             print "\n ----> Data before subtraction is = ", DataSampleQCDNormHist.Integral()
             QCDEstimation= (DataSampleQCDNormHist.Integral()- (TT_qcd+ZTT_qcd+W_qcd+SingleT_qcd+VV_qcd))
-            print "\n ---->  Data aftre ____ subtraction is = ", QCDEstimation , "  which should be =", DataSampleQCDShapeHist.Integral()
+            print "\n ---->  Data aftre ____ subtraction is = ", QCDEstimation , "    ############## purity= =", DataSampleQCDShapeHist.Integral()/DataSampleQCDNormHist.Integral()
             
             
             #            NameOut= "QCD"+str(TauScaleOut[tscale])

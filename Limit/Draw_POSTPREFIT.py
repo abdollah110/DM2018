@@ -186,10 +186,11 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
     Data.SetLineWidth(2)
 
     stack=ROOT.THStack("stack","stack")
-    stack.Add(QCD)
+    
 
     stack.Add(VV)
     stack.Add(DYS)
+    stack.Add(QCD)
     stack.Add(SingleT)
     stack.Add(TT)
     stack.Add(W)
@@ -245,16 +246,15 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
 #    Signal.Draw("histsame")
 
     legende=make_legend()
-    legende.AddEntry(Data,"Observed","elp")
+    legende.AddEntry(Data,"Data","elp")
 
     legende.AddEntry(Signal,sigLeg,"l")
     legende.AddEntry(W,"W+jets","f")
     legende.AddEntry(TT,"t#bar{t}+jets","f")
     legende.AddEntry(SingleT,"single Top","f")
+    legende.AddEntry(QCD,"QCD multijet","f")
     legende.AddEntry(DYS,"DY#rightarrowll+jets ","f")
     legende.AddEntry(VV,"VV","f")
-
-    legende.AddEntry(QCD,"QCD multijet","f")
     legende.AddEntry(errorBand,"Uncertainty","f")
 
     legende.Draw()
@@ -375,13 +375,13 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
 
 
 FileNamesInfo=[
-               ["postfit_shapes.root","Codex__mj_1_13TeV_prefit","M_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
-               ["postfit_shapes.root","Codex__mj_1_13TeV_postfit","M_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
+               ["postfit_shapes.root","Codex__mj_2017_1_13TeV_prefit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
+               ["postfit_shapes.root","Codex__mj_2017_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
                ]
 
 #FileNamesInfo=[
-#               ["postfit_shapes_NoBtagVeto.root","Codex__mj_1_13TeV_prefit","M_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
-#               ["postfit_shapes_NoBtagVeto.root","Codex__mj_1_13TeV_postfit","M_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
+#               ["postfit_shapes_NoBtagVeto.root","Codex__mj_1_13TeV_prefit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
+#               ["postfit_shapes_NoBtagVeto.root","Codex__mj_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1200GeV (DM 500 GeV)",10],
 #               ]
 
 
@@ -402,3 +402,7 @@ for i in range(0,len(FileNamesInfo)):
     MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],"Normal")
 #    MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],"Normal")
 
+
+
+#import os
+#os.system("cp _FinalplotCodex__mj_2017_1_13TeV_postfitLOG.pdf  /Users/abdollah1/Documents/SVNNew/myDir/papers/EXO-17-015/trunk/Figure_002-b.pdf")

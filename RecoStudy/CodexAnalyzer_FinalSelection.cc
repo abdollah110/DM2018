@@ -210,6 +210,8 @@ int main(int argc, char** argv) {
                 
             }
             
+            cout<<"Mass= "<< WBosonMass<< "\t down= "<<WBosonKFactor_ewkDown << "  nominal="<<WBosonKFactor<<"   up="<<WBosonKFactor_ewkUp<<"\n";
+            
             
 
             

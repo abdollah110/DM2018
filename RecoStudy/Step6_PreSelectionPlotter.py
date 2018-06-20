@@ -28,6 +28,10 @@ from Step1_JetToMuFR_Data import Make_Mu_FakeRate
 from Step1_JetToMuFR_Data import *
 ##### Get Jet to Tau FR
 
+##Be very careful
+#from Step5_TT_W_ScaleFactor import *
+
+
 gROOT.Reset()
 import os
 
@@ -51,6 +55,7 @@ ROOT.gROOT.SetBatch(True)
 #InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
 InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
 #InputFilesLocation = 'NewOutFiles_Preselection_Approval_V2_NoPUWeighting/'
+#InputFilesLocation = 'NewOutFiles_Preselection_forTTbarSF_DiLep/'
 
 verbos_ = False
 RB_=1
@@ -84,9 +89,9 @@ def _FileReturn(Name, channel,cat,HistoName):
 ####################################################
 ##   Start Making the Datacard Histograms
 ####################################################
-def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
+def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
     
-    OutFile = TFile(InputFilesLocation+'/'+"___NoTopPtRW/TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
+    OutFile = TFile(InputFilesLocation+'/'+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 #    OutFile = TFile("TotalRootForLimit_Jet50_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 
     for NameCat in category:
@@ -237,6 +242,9 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
 
             Name= "TTJets"
             TTSampleQCDNorm= _FileReturn(Name, channel,NameCat, NormQCD)
+            
+        
+            
             TTSampleQCDShape= _FileReturn(Name, channel,NameCat, ShapeQCD)
 
             Name= "DYJetsToLL"
@@ -245,6 +253,9 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
 
             Name= "WJetsToLNu"
             WSampleQCDNorm= _FileReturn(Name, channel,NameCat, NormQCD)
+#            if ttbarCR=="" :  WSampleQCDNorm.Scale(SF_W_SingleLep())
+#            if ttbarCR=="_ttbarCRSingleLep" :  WSampleQCDNorm.Scale(SF_W_SingleLep())
+#            if ttbarCR=="_ttbarCRDiLep" :  WSampleQCDNorm.Scale(SF_W_DiLep())
             WSampleQCDShape= _FileReturn(Name, channel,NameCat, ShapeQCD)
                         
             Name="Data"
@@ -273,9 +284,15 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar):
 
             SingleTSampleQCDNormHist=SingleTSampleQCDNorm.Get("HISTO")
             VVSampleQCDNormHist=VVSampleQCDNorm.Get("HISTO")
+
             TTSampleQCDNormHist=TTSampleQCDNorm.Get("HISTO")
+            if ttbarCR=="" :  TTSampleQCDNormHist.Scale(1.12)
+            if ttbarCR=="_ttbarCRSingleLep" :  TTSampleQCDNormHist.Scale(1.12)
+            if ttbarCR=="_ttbarCRDiLep" :  TTSampleQCDNormHist.Scale(0.95)
+
             ZTTSampleQCDNormHist=ZTTSampleQCDNorm.Get("HISTO")
             WSampleQCDNormHist=WSampleQCDNorm.Get("HISTO")
+            WSampleQCDNormHist.Scale(1.11)
             DataSampleQCDNormHist=DataSampleQCDNorm.Get("HISTO")
             dataBeforeSub=DataSampleQCDNormHist.Integral() #Here we get the data yeild before subtracting other background
             if SingleTSampleQCDNormHist:  DataSampleQCDNormHist.Add(SingleTSampleQCDNormHist, -1)
@@ -337,7 +354,7 @@ if __name__ == "__main__":
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet"]
 #    PlotName=["_nVtx","_nVtx_NoPU"]
 #    PlotName=["_recoHT"]
-    PlotName=["_JetPt","_LQMass"]
+    PlotName=["_LQMass"]
 
 
 #    Isolation=["_Iso", "_AntiIso","_Total"]
@@ -371,4 +388,4 @@ if __name__ == "__main__":
                         NormTTbar=Norm+"_NoTopRW"+mt+jpt+reg+iso
 #                        NormTTbar=NormMC
 
-                        MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar)
+                        MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,reg)

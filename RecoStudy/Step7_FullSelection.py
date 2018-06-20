@@ -437,8 +437,10 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
                         SingleTSampleQCDNormHist=SingleTSampleQCDNorm.Get("XXX")
                         VVSampleQCDNormHist=VVSampleQCDNorm.Get("XXX")
                         TTSampleQCDNormHist=TTSampleQCDNorm.Get("XXX")
+                        TTSampleQCDNormHist.Scale(1.12)
                         ZTTSampleQCDNormHist=ZTTSampleQCDNorm.Get("XXX")
                         WSampleQCDNormHist=WSampleQCDNorm.Get("XXX")
+                        WSampleQCDNormHist.Scale(1.11)
                         DataSampleQCDNormHist=DataSampleQCDNorm.Get("XXX")
                         
 

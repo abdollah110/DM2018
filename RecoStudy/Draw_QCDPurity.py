@@ -358,7 +358,7 @@ MakePlot("Extra/qcdPurity_Num_CloseJetLepPt.root","","Numerator","Jet p_{T} (GeV
 
 
 
-Binning = array.array("d",[0,60,70,80,90,100,110,120,130,150,175,200,230,260,300])
+Binning = array.array("d",[0,60,80,100,120,150,175,200,300])
 MakePlot("Extra/qcdPurity_DeNum_LepPt.root","","Denumerator"," #mu p_{T} (GeV)","",10,"",1,0,"","DenumLep",Binning)
 MakePlot("Extra/qcdPurity_Num_LepPt.root","","Numerator","#mu p_{T} (GeV)","",10,"",1,0,"","NumLep",Binning)
 

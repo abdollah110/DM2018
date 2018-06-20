@@ -171,7 +171,7 @@ int main(int argc, char** argv) {
             //................................................................................................................
             //................................................................................................................
             if (isWJets!= string::npos && WBosonMass > 100) continue;
-            if (isWJetsToLNu_Inc!= string::npos && (genHT > 100.0 && genHT < 2500.0)) continue; //FIXME until I have 2 missing 70 and Inf samples
+            if (isWJetsToLNu_Inc!= string::npos && (genHT > 100.0)) continue; //FIXME until I have 2 missing 70 and Inf samples
 //            if (isWJetsToLNu_Inc!= string::npos && genHT > 70.0) continue;
             //................................................................................................................
             //................................................................................................................
@@ -250,7 +250,7 @@ int main(int argc, char** argv) {
                 }
                 
                 ElectronCor=getCorrFactorMVA90WPElectron94X(isData,  elePt->at(jele),eleSCEta->at(jele),    HistoEleMVAIdIso90 );
-                ElectronCor=1;
+//                ElectronCor=1;
                 Ele4Momentum.SetPtEtaPhiM(elePt->at(jele),eleEta->at(jele),elePhi->at(jele),eleMass);
                 numElectron++;
                 
@@ -430,7 +430,7 @@ int main(int argc, char** argv) {
                                                     for (int itopRW = 0; itopRW < size_topPtRW; itopRW++) {
                                                         
                                                         ////////////////////////////////////   Naming the Histogram
-                                                        float FullWeight = TotalWeight[itopRW] * MuonCor * FinalBTagSF;
+                                                        float FullWeight = TotalWeight[itopRW] * MuonCor * FinalBTagSF * ElectronCor;
                                                         std::string FullStringName = topPtRW[itopRW] + MT_Cat[imt] + jetMetPhi_Cat[jpt] +  region_Cat[iCR] + iso_Cat[iso]  ;
                                                         
                                                         //##################
@@ -443,36 +443,37 @@ int main(int argc, char** argv) {
                                                                 
                                                                 
                                                                 
-                                                                
-                                                                
-                                                                plotFill(CHL+"_tmass_MuMet"+FullStringName,tmass_MuMet,200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_MET"+FullStringName,pfMET,200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_METPhi"+FullStringName,pfMETPhi,400,-4,4,FullWeight);
-                                                                plotFill(CHL+"_JetPt"+FullStringName,jetPt->at(ijet) ,2000,0,2000,FullWeight);
-                                                                plotFill(CHL+"_JetEta"+FullStringName,jetEta->at(ijet),120,-3,3,FullWeight);
-                                                                plotFill(CHL+"_LepPt"+FullStringName,muPt->at(imu),2000,0,2000,FullWeight);
-                                                                plotFill(CHL+"_LepEta"+FullStringName,muEta->at(imu),100,-2.5,2.5,FullWeight);
-                                                                plotFill(CHL+"_tmass_LQMet"+FullStringName,tmass_LQMet,200,0,2000,FullWeight);
                                                                 plotFill(CHL+"_LQMass"+FullStringName,LQ4Momentum.M(),200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_dPhi_Jet_Met"+FullStringName,deltaPhi(Jet4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
-                                                                plotFill(CHL+"_dPhi_Mu_Met"+FullStringName,deltaPhi(Mu4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
-                                                                plotFill(CHL+"_dPhi_Mu_Jet"+FullStringName,deltaPhi(Mu4Momentum.Phi(),Jet4Momentum.Phi()),160,0,3.2,FullWeight);
-//                                                                plotFill(CHL+"_BosonKFactor"+FullStringName,ZBosonKFactor*WBosonKFactor,200,0,2,FullWeight);
-//                                                                plotFill(CHL+"_WBosonPt"+FullStringName,WBosonPt,150,0,1500,FullWeight);
-//                                                                plotFill(CHL+"_ZBosonPt"+FullStringName,ZBosonPt,150,0,1500,FullWeight);
-                                                                plotFill(CHL+"_NumJet"+FullStringName,numJet,10,0,10,FullWeight);
-                                                                plotFill(CHL+"_NumBJet"+FullStringName,numBJet,10,0,10,FullWeight);
-                                                                plotFill(CHL+"_WBosonMass"+FullStringName,WBosonMass,200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_genHT"+FullStringName,genHT,200,0,2000,FullWeight);
-                                                                plotFill(CHL+"_recoHT"+FullStringName,recoHT,300,0,3000,FullWeight);
-                                                                plotFill(CHL+"_ST"+FullStringName,recoHT+muPt->at(imu),300,0,3000,FullWeight);
-                                                                plotFill(CHL+"_dR_Mu_Jet"+FullStringName,Jet4Momentum.DeltaR(Mu4Momentum),500,0,5,FullWeight);
-                                                                plotFill(CHL+"_LepPhi"+FullStringName,muPhi->at(imu),400,-4,4,FullWeight);
-                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
+                                                                plotFill(CHL+"_LepPt"+FullStringName,muPt->at(imu),2000,0,2000,FullWeight);
                                                                 
-                                                                plotFill(CHL+"_nVtx"+FullStringName,nVtx,100,0,100,FullWeight);
-                                                                if (PUWeight!=0)   plotFill(CHL+"_nVtx_NoPU"+FullStringName,nVtx,100,0,100,FullWeight/ PUWeight);
-                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
+//                                                                plotFill(CHL+"_tmass_MuMet"+FullStringName,tmass_MuMet,200,0,2000,FullWeight);
+//                                                                plotFill(CHL+"_MET"+FullStringName,pfMET,200,0,2000,FullWeight);
+//                                                                plotFill(CHL+"_METPhi"+FullStringName,pfMETPhi,400,-4,4,FullWeight);
+//                                                                plotFill(CHL+"_JetPt"+FullStringName,jetPt->at(ijet) ,2000,0,2000,FullWeight);
+//                                                                plotFill(CHL+"_JetEta"+FullStringName,jetEta->at(ijet),120,-3,3,FullWeight);
+//                                                                
+//                                                                plotFill(CHL+"_LepEta"+FullStringName,muEta->at(imu),100,-2.5,2.5,FullWeight);
+//                                                                plotFill(CHL+"_tmass_LQMet"+FullStringName,tmass_LQMet,200,0,2000,FullWeight);
+//                                                                
+//                                                                plotFill(CHL+"_dPhi_Jet_Met"+FullStringName,deltaPhi(Jet4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
+//                                                                plotFill(CHL+"_dPhi_Mu_Met"+FullStringName,deltaPhi(Mu4Momentum.Phi(),pfMETPhi),160,0,3.2,FullWeight);
+//                                                                plotFill(CHL+"_dPhi_Mu_Jet"+FullStringName,deltaPhi(Mu4Momentum.Phi(),Jet4Momentum.Phi()),160,0,3.2,FullWeight);
+////                                                                plotFill(CHL+"_BosonKFactor"+FullStringName,ZBosonKFactor*WBosonKFactor,200,0,2,FullWeight);
+////                                                                plotFill(CHL+"_WBosonPt"+FullStringName,WBosonPt,150,0,1500,FullWeight);
+////                                                                plotFill(CHL+"_ZBosonPt"+FullStringName,ZBosonPt,150,0,1500,FullWeight);
+//                                                                plotFill(CHL+"_NumJet"+FullStringName,numJet,10,0,10,FullWeight);
+//                                                                plotFill(CHL+"_NumBJet"+FullStringName,numBJet,10,0,10,FullWeight);
+//                                                                plotFill(CHL+"_WBosonMass"+FullStringName,WBosonMass,200,0,2000,FullWeight);
+//                                                                plotFill(CHL+"_genHT"+FullStringName,genHT,200,0,2000,FullWeight);
+//                                                                plotFill(CHL+"_recoHT"+FullStringName,recoHT,300,0,3000,FullWeight);
+//                                                                plotFill(CHL+"_ST"+FullStringName,recoHT+muPt->at(imu),300,0,3000,FullWeight);
+//                                                                plotFill(CHL+"_dR_Mu_Jet"+FullStringName,Jet4Momentum.DeltaR(Mu4Momentum),500,0,5,FullWeight);
+//                                                                plotFill(CHL+"_LepPhi"+FullStringName,muPhi->at(imu),400,-4,4,FullWeight);
+//                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
+//                                                                
+//                                                                plotFill(CHL+"_nVtx"+FullStringName,nVtx,100,0,100,FullWeight);
+//                                                                if (PUWeight!=0)   plotFill(CHL+"_nVtx_NoPU"+FullStringName,nVtx,100,0,100,FullWeight/ PUWeight);
+//                                                                plotFill("_FinalBTagSF"+FullStringName, FinalBTagSF,200,0,2);
                                                                 
                                                                 
                                                                 

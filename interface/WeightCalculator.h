@@ -209,31 +209,31 @@ float XSection(std::string OutName) {
     //    https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#W_jets
     
     else if (OutName.find("WJetsToLNu_FXFX") != string::npos) return  61526.7   ;
-    else if (OutName.find("WJetsToLNu_Pt-50To100_FXFX") != string::npos) return  8053   ;
-    else if (OutName.find("WJetsToLNu_Pt-100To250_FXFX") != string::npos) return  676.3   ;
-    else if (OutName.find("WJetsToLNu_Pt-250To400_FXFX") != string::npos) return  23.94   ;
-    else if (OutName.find("WJetsToLNu_Pt-400To600_FXFX") != string::npos) return  3.031   ;
-    else if (OutName.find("WJetsToLNu_Pt-600ToInf_FXFX") != string::npos) return  0.4524   ;
+    else if (OutName.find("WJetsToLNu_Pt-50to100_FXFX") != string::npos) return  8053   ;
+    else if (OutName.find("WJetsToLNu_Pt-100to250_FXFX") != string::npos) return  676.3   ;
+    else if (OutName.find("WJetsToLNu_Pt-250to400_FXFX") != string::npos) return  23.94   ;
+    else if (OutName.find("WJetsToLNu_Pt-400to600_FXFX") != string::npos) return  3.031   ;
+    else if (OutName.find("WJetsToLNu_Pt-600toInf_FXFX") != string::npos) return  0.4524   ;
     
     
     
     else if (OutName.find("DYJetsToLL_M-50_FXFX") != string::npos) return          5765.4 ;
-    else if (OutName.find("DYJetsToLL_Pt-100To250_FXFX") != string::npos) return   83.12 ;
-    else if (OutName.find("DYJetsToLL_Pt-250To400_FXFX") != string::npos) return   3.047 ;
-    else if (OutName.find("DYJetsToLL_Pt-400To650_FXFX") != string::npos) return   0.3921 ;
-    else if (OutName.find("DYJetsToLL_Pt-650ToInf_FXFX") != string::npos) return   0.03636 ;
+    else if (OutName.find("DYJetsToLL_Pt-100to250_FXFX") != string::npos) return   83.12 ;
+    else if (OutName.find("DYJetsToLL_Pt-250to400_FXFX") != string::npos) return   3.047 ;
+    else if (OutName.find("DYJetsToLL_Pt-400to650_FXFX") != string::npos) return   0.3921 ;
+    else if (OutName.find("DYJetsToLL_Pt-650toInf_FXFX") != string::npos) return   0.03636 ;
     
     else if (OutName.find("LQ") != string::npos ) return      1.0;
     
     
     
-    else if (OutName.find("ZJetsToNuNu_HT-100To200") != string::npos) return    280.35  * 1.23       ;
-    else if (OutName.find("ZJetsToNuNu_HT-200To400") != string::npos) return     77.67  * 1.23     ;
-    else if (OutName.find("ZJetsToNuNu_HT-400To600") != string::npos) return      10.73 * 1.23     ;
-    else if (OutName.find("ZJetsToNuNu_HT-600To800") != string::npos) return      2.559  * 1.23     ;
-    else if (OutName.find("ZJetsToNuNu_HT-800To1200") != string::npos) return     1.1796   * 1.23    ;
-    else if (OutName.find("ZJetsToNuNu_HT-1200To2500") != string::npos) return     0.28833   * 1.23    ;
-    else if (OutName.find("ZJetsToNuNu_HT-2500ToInf") != string::npos) return      0.006945    * 1.23     ;
+    else if (OutName.find("ZJetsToNuNu_HT-100to200") != string::npos) return    280.35  * 1.23       ;
+    else if (OutName.find("ZJetsToNuNu_HT-200to400") != string::npos) return     77.67  * 1.23     ;
+    else if (OutName.find("ZJetsToNuNu_HT-400to600") != string::npos) return      10.73 * 1.23     ;
+    else if (OutName.find("ZJetsToNuNu_HT-600to800") != string::npos) return      2.559  * 1.23     ;
+    else if (OutName.find("ZJetsToNuNu_HT-800to1200") != string::npos) return     1.1796   * 1.23    ;
+    else if (OutName.find("ZJetsToNuNu_HT-1200to2500") != string::npos) return     0.28833   * 1.23    ;
+    else if (OutName.find("ZJetsToNuNu_HT-2500toInf") != string::npos) return      0.006945    * 1.23     ;
     
     
     
@@ -256,9 +256,9 @@ float XSection(std::string OutName) {
 vector <float> W_HTBin(std::string FileLoc){
     
     const int WSize=9;
-    std::string W_ROOTFiles[WSize]={"WJetsToLNu_Inc.root","WJetsToLNu_Inc.root", "WJetsToLNu_HT-100To200.root","WJetsToLNu_HT-200To400.root","WJetsToLNu_HT-400To600.root", "WJetsToLNu_HT-600To800.root","WJetsToLNu_HT-800To1200.root","WJetsToLNu_HT-1200To2500.root","WJetsToLNu_Inc.root"};
+    std::string W_ROOTFiles[WSize]={"WJetsToLNu_Inc.root","WJetsToLNu_Inc.root", "WJetsToLNu_HT-100to200.root","WJetsToLNu_HT-200to400.root","WJetsToLNu_HT-400to600.root", "WJetsToLNu_HT-600to800.root","WJetsToLNu_HT-800to1200.root","WJetsToLNu_HT-1200to2500.root","WJetsToLNu_HT-2500toInf.root"};
     
-//    std::string W_ROOTFiles[WSize]={"WJetsToLNu_Inc.root","WJetsToLNu_HT-70to100.root", "WJetsToLNu_HT-100To200.root","WJetsToLNu_HT-200To400.root","WJetsToLNu_HT-400To600.root", "WJetsToLNu_HT-600To800.root","WJetsToLNu_HT-800To1200.root","WJetsToLNu_HT-1200To2500.root","WJetsToLNu_HT-2500ToInf.root"};
+//    std::string W_ROOTFiles[WSize]={"WJetsToLNu_Inc.root","WJetsToLNu_HT-70to100.root", "WJetsToLNu_HT-100to200.root","WJetsToLNu_HT-200to400.root","WJetsToLNu_HT-400to600.root", "WJetsToLNu_HT-600to800.root","WJetsToLNu_HT-800to1200.root","WJetsToLNu_HT-1200to2500.root","WJetsToLNu_HT-2500toInf.root"};
 
     
 //    const int WSize=1;
@@ -379,7 +379,7 @@ vector <float> WTauNu_MassBin(std::string FileLoc){
 vector <float> W_PTBinNLO(std::string FileLoc){
     
     const int WSizeNLO=5;
-    std::string W_ROOTFilesNLO[WSizeNLO]={"WJetsToLNu_FXFX.root",  "WJetsToLNu_Pt-100To250_FXFX.root","WJetsToLNu_Pt-250To400_FXFX.root","WJetsToLNu_Pt-400To600_FXFX.root", "WJetsToLNu_Pt-600ToInf_FXFX.root"};
+    std::string W_ROOTFilesNLO[WSizeNLO]={"WJetsToLNu_FXFX.root",  "WJetsToLNu_Pt-100to250_FXFX.root","WJetsToLNu_Pt-250to400_FXFX.root","WJetsToLNu_Pt-400to600_FXFX.root", "WJetsToLNu_Pt-600toInf_FXFX.root"};
     
     vector<float> W_eventsNLO;
     W_eventsNLO.clear();
@@ -406,7 +406,7 @@ vector <float> W_PTBinNLO(std::string FileLoc){
 vector <float> Z_PTBinNLO(std::string FileLoc){
     
     const int ZSizeNLO=5;
-    std::string Z_ROOTFilesNLO[ZSizeNLO]={"DYJetsToLL_M-50_FXFX.root", "DYJetsToLL_Pt-100To250_FXFX.root", "DYJetsToLL_Pt-250To400_FXFX.root","DYJetsToLL_Pt-400To650_FXFX.root","DYJetsToLL_Pt-650ToInf_FXFX.root"};
+    std::string Z_ROOTFilesNLO[ZSizeNLO]={"DYJetsToLL_M-50_FXFX.root", "DYJetsToLL_Pt-100to250_FXFX.root", "DYJetsToLL_Pt-250to400_FXFX.root","DYJetsToLL_Pt-400to650_FXFX.root","DYJetsToLL_Pt-650toInf_FXFX.root"};
     
     vector<float> Z_eventsNLO;
     Z_eventsNLO.clear();
@@ -491,7 +491,7 @@ float weightCalc(TH1F *Histo,std::string outputName, float genHT,vector<float> W
         else if (genHT > 600 && genHT <= 800)  return   luminosity * XSection("WJetsToLNu_HT-600to800") / W_HTbin[5];
         else if (genHT > 800 && genHT <= 1200)  return   luminosity * XSection("WJetsToLNu_HT-800to1200") / W_HTbin[6];
         else if (genHT > 1200 && genHT <= 2500)  return   luminosity * XSection("WJetsToLNu_HT-1200to2500") / W_HTbin[7];
-        else if (genHT > 2500 )  return   luminosity * XSection("WJetsToLNu_Inc") / W_HTbin[8];
+        else if (genHT > 2500 )  return   luminosity * XSection("WJetsToLNu_HT-2500toInf") / W_HTbin[8];
         else   {cout<<"**********   wooow  ********* There is a problem here\n";return 0;}
     }
     
@@ -618,10 +618,10 @@ float weightCalc(TH1F *Histo,std::string outputName, float genHT,vector<float> W
 //        
 //        if (WPt <= 100)                  return   luminosity / (W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
 //        
-//        else if (WPt > 100 && WPt <= 250)return   luminosity / (W_eventsNLO[1] / XSection("WJetsToLNu_Pt-100To250_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
-//        else if (WPt > 250 && WPt <=400) return   luminosity / (W_eventsNLO[2] / XSection("WJetsToLNu_Pt-250To400_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
-//        else if (WPt > 400 && WPt <=600) return   luminosity / (W_eventsNLO[3] / XSection("WJetsToLNu_Pt-400To600_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
-//        else if (WPt > 600 )               return   luminosity / (W_eventsNLO[4] / XSection("WJetsToLNu_Pt-600ToInf_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
+//        else if (WPt > 100 && WPt <= 250)return   luminosity / (W_eventsNLO[1] / XSection("WJetsToLNu_Pt-100to250_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
+//        else if (WPt > 250 && WPt <=400) return   luminosity / (W_eventsNLO[2] / XSection("WJetsToLNu_Pt-250to400_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
+//        else if (WPt > 400 && WPt <=600) return   luminosity / (W_eventsNLO[3] / XSection("WJetsToLNu_Pt-400to600_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
+//        else if (WPt > 600 )               return   luminosity / (W_eventsNLO[4] / XSection("WJetsToLNu_Pt-600toInf_FXFX") + W_eventsNLO[0] / XSection("WJetsToLNu_FXFX"));
 //        else   {cout<<"**********   wooow2  ********* There is a problem here\n";return 0;}
 //    }
 //    //##################################################################
@@ -630,10 +630,10 @@ float weightCalc(TH1F *Histo,std::string outputName, float genHT,vector<float> W
 //    else if (isDYJet != string::npos && isFXFX != string::npos) {
 //        
 //        if (ZPt <= 100)                  return   luminosity / (Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
-//        else if (ZPt > 100 && ZPt <= 250)return   luminosity / (Z_eventsNLO[1] / XSection("DYJetsToLL_Pt-100To250_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
-//        else if (ZPt > 250 && ZPt <=400) return   luminosity / (Z_eventsNLO[2] / XSection("DYJetsToLL_Pt-250To400_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
-//        else if (ZPt > 400 && ZPt <=600) return   luminosity / (Z_eventsNLO[3] / XSection("DYJetsToLL_Pt-400To650_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
-//        else if (ZPt > 600 )               return   luminosity / (Z_eventsNLO[4] / XSection("DYJetsToLL_Pt-650ToInf_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
+//        else if (ZPt > 100 && ZPt <= 250)return   luminosity / (Z_eventsNLO[1] / XSection("DYJetsToLL_Pt-100to250_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
+//        else if (ZPt > 250 && ZPt <=400) return   luminosity / (Z_eventsNLO[2] / XSection("DYJetsToLL_Pt-250to400_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
+//        else if (ZPt > 400 && ZPt <=600) return   luminosity / (Z_eventsNLO[3] / XSection("DYJetsToLL_Pt-400to650_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
+//        else if (ZPt > 600 )               return   luminosity / (Z_eventsNLO[4] / XSection("DYJetsToLL_Pt-650toInf_FXFX") + Z_eventsNLO[0] / XSection("DYJetsToLL_M-50_FXFX"));
 //        else   {cout<<"**********   wooow3  ********* There is a problem here\n";return 0;}
 //    }
 //    
