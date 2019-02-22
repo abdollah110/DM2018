@@ -98,6 +98,6 @@ for Inp in inputF:
 
 
 
-os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2016.cfg MonoLQ2016_")
-os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2017.cfg MonoLQ2017_")
+#os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2016.cfg MonoLQ2016_")
+#os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2017.cfg MonoLQ2017_")
 os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_cmb.cfg MonoLQcmb_")

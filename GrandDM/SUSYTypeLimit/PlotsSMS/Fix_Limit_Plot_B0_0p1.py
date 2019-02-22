@@ -9,12 +9,12 @@ from array import array
 
 
 TGR=[
-['T1ttttObservedLimit','graph_smoothed_Obs'],
-['T1ttttObservedLimitUp','graph_smoothed_ObsP'],
-['T1ttttObservedLimitDown','graph_smoothed_ObsM'],
-['T1ttttExpectedLimit','graph_smoothed_Exp'],
-['T1ttttExpectedLimitUp','graph_smoothed_ExpP'],
-['T1ttttExpectedLimitDown','graph_smoothed_ExpM']
+['T1ttttObservedLimit','graph_smoothed_Obs',300],
+['T1ttttObservedLimitUp','graph_smoothed_ObsP',300],
+['T1ttttObservedLimitDown','graph_smoothed_ObsM',300],
+['T1ttttExpectedLimit','graph_smoothed_Exp',180],
+['T1ttttExpectedLimitUp','graph_smoothed_ExpP',150],
+['T1ttttExpectedLimitDown','graph_smoothed_ExpM',225]
 ]
 
 
@@ -30,9 +30,12 @@ TGR=[
 
 
 inputF=[
-['config/SUS16037/MonoLQ_2016.root ','SMOOTH_B0_0p1/limit_scan_smooth10_2016.root'],
-['config/SUS16037/MonoLQ_2017.root ','SMOOTH_B0_0p1/limit_scan_smooth10_2017.root'],
-['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH_B0_0p1/limit_scan_smooth10_cmb.root']
+#['config/SUS16037/MonoLQ_2016.root ','SMOOTH_B0_0p1/limit_scan_smooth10_2016.root'],
+#['config/SUS16037/MonoLQ_2017.root ','SMOOTH_B0_0p1/limit_scan_smooth10_2017.root'],
+#['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH_B0_0p1/limit_scan_smooth10_cmb.root']
+#['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH/limit_scan_cmb_beta_1.000000_B0_0.100000.root']
+#['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_Xsection2/lmit_scan_postCWR_4_B0_0p1_smooth10_cmb.root']
+['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_PLB/limit_scan_postCWR_4_B0_0p1_smooth10_cmb_PLB.root']
 #['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH/limit_scan_smooth10_cmb_PreCWR.root']
         
 ]
@@ -56,8 +59,8 @@ for Inp in inputF:
     #    NewX.clear()
     #    NewY.clear()
         print Gr_exp.GetN()
-        for i in range(0,120):
-#        for i in range(0,300):
+#        for i in range(0,190):
+        for i in range(0,tgr[2]):
 
             print "i=", i, tgr,  x[i],y[i]
 #            if tgr[0]=='T1ttttExpectedLimitDown':
@@ -98,6 +101,6 @@ for Inp in inputF:
 
 
 
-os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2016.cfg MonoLQ2016_B0_0p1_")
-os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2017.cfg MonoLQ2017_B0_0p1_")
+#os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2016.cfg MonoLQ2016_B0_0p1_")
+#os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_2017.cfg MonoLQ2017_B0_0p1_")
 os.system("python python/makeSMSplots.py config/SUS16037/MonoLQ_cmb.cfg MonoLQcmb_B0_0p1_")

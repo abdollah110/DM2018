@@ -1,3 +1,7 @@
+#include <ostream>
+#include <vector>
+#include <array>
+
 void Final_XSEC_PostFR_Beta1_B0p5()
 {
     //=========Macro generated from canvas: cCONT_XSEC/cCONT_XSEC
@@ -6,7 +10,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     
     
     
-    TH2D *unnamed = new TH2D("unnamed","",70,800,1600,40,300,700);
+    TH2D *unnamed = new TH2D("unnamed","",70,800,1500,40,300,700);
     unnamed->SetBinContent(73,1.153632);
     unnamed->SetBinContent(74,1.091961);
     unnamed->SetBinContent(75,1.02193);
@@ -3162,7 +3166,9 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     unnamed->SetEntries(2800);
     unnamed->SetDirectory(0);
     unnamed->SetStats(0);
-    unnamed->SetContour(255);
+//    unnamed->SetContour(255);
+    unnamed->SetContour(187);
+    
     unnamed->SetContourLevel(0,0.1);
     unnamed->SetContourLevel(1,0.1013427);
     unnamed->SetContourLevel(2,0.1027035);
@@ -3350,76 +3356,80 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     unnamed->SetContourLevel(184,1.163709);
     unnamed->SetContourLevel(185,1.179334);
     unnamed->SetContourLevel(186,1.19517);
-    unnamed->SetContourLevel(187,1.211218);
-    unnamed->SetContourLevel(188,1.227481);
-    unnamed->SetContourLevel(189,1.243963);
-    unnamed->SetContourLevel(190,1.260666);
-    unnamed->SetContourLevel(191,1.277594);
-    unnamed->SetContourLevel(192,1.294748);
-    unnamed->SetContourLevel(193,1.312134);
-    unnamed->SetContourLevel(194,1.329752);
-    unnamed->SetContourLevel(195,1.347607);
-    unnamed->SetContourLevel(196,1.365702);
-    unnamed->SetContourLevel(197,1.38404);
-    unnamed->SetContourLevel(198,1.402624);
-    unnamed->SetContourLevel(199,1.421457);
-    unnamed->SetContourLevel(200,1.440544);
-    unnamed->SetContourLevel(201,1.459887);
-    unnamed->SetContourLevel(202,1.479489);
-    unnamed->SetContourLevel(203,1.499355);
-    unnamed->SetContourLevel(204,1.519487);
-    unnamed->SetContourLevel(205,1.53989);
-    unnamed->SetContourLevel(206,1.560566);
-    unnamed->SetContourLevel(207,1.581521);
-    unnamed->SetContourLevel(208,1.602756);
-    unnamed->SetContourLevel(209,1.624277);
-    unnamed->SetContourLevel(210,1.646087);
-    unnamed->SetContourLevel(211,1.66819);
-    unnamed->SetContourLevel(212,1.690589);
-    unnamed->SetContourLevel(213,1.713289);
-    unnamed->SetContourLevel(214,1.736294);
-    unnamed->SetContourLevel(215,1.759608);
-    unnamed->SetContourLevel(216,1.783235);
-    unnamed->SetContourLevel(217,1.807179);
-    unnamed->SetContourLevel(218,1.831445);
-    unnamed->SetContourLevel(219,1.856036);
-    unnamed->SetContourLevel(220,1.880958);
-    unnamed->SetContourLevel(221,1.906214);
-    unnamed->SetContourLevel(222,1.93181);
-    unnamed->SetContourLevel(223,1.957749);
-    unnamed->SetContourLevel(224,1.984036);
-    unnamed->SetContourLevel(225,2.010677);
-    unnamed->SetContourLevel(226,2.037675);
-    unnamed->SetContourLevel(227,2.065036);
-    unnamed->SetContourLevel(228,2.092764);
-    unnamed->SetContourLevel(229,2.120864);
-    unnamed->SetContourLevel(230,2.149342);
-    unnamed->SetContourLevel(231,2.178202);
-    unnamed->SetContourLevel(232,2.207449);
-    unnamed->SetContourLevel(233,2.237089);
-    unnamed->SetContourLevel(234,2.267128);
-    unnamed->SetContourLevel(235,2.297569);
-    unnamed->SetContourLevel(236,2.32842);
-    unnamed->SetContourLevel(237,2.359684);
-    unnamed->SetContourLevel(238,2.391369);
-    unnamed->SetContourLevel(239,2.423478);
-    unnamed->SetContourLevel(240,2.456019);
-    unnamed->SetContourLevel(241,2.488997);
-    unnamed->SetContourLevel(242,2.522418);
-    unnamed->SetContourLevel(243,2.556287);
-    unnamed->SetContourLevel(244,2.590612);
-    unnamed->SetContourLevel(245,2.625397);
-    unnamed->SetContourLevel(246,2.660649);
-    unnamed->SetContourLevel(247,2.696374);
-    unnamed->SetContourLevel(248,2.73258);
-    unnamed->SetContourLevel(249,2.769271);
-    unnamed->SetContourLevel(250,2.806455);
-    unnamed->SetContourLevel(251,2.844138);
-    unnamed->SetContourLevel(252,2.882328);
-    unnamed->SetContourLevel(253,2.92103);
-    unnamed->SetContourLevel(254,2.960252);
+//    unnamed->SetContourLevel(187,1.211218);
+//    unnamed->SetContourLevel(188,1.227481);
+//    unnamed->SetContourLevel(189,1.243963);
+//    unnamed->SetContourLevel(190,1.260666);
+//    unnamed->SetContourLevel(191,1.277594);
+//    unnamed->SetContourLevel(192,1.294748);
+//    unnamed->SetContourLevel(193,1.312134);
+//    unnamed->SetContourLevel(194,1.329752);
+//    unnamed->SetContourLevel(195,1.347607);
+//    unnamed->SetContourLevel(196,1.365702);
+//    unnamed->SetContourLevel(197,1.38404);
+//    unnamed->SetContourLevel(198,1.402624);
+//    unnamed->SetContourLevel(199,1.421457);
+//    unnamed->SetContourLevel(200,1.440544);
+//    unnamed->SetContourLevel(201,1.459887);
+//    unnamed->SetContourLevel(202,1.479489);
+//    unnamed->SetContourLevel(203,1.499355);
+//    unnamed->SetContourLevel(204,1.519487);
+//    unnamed->SetContourLevel(205,1.53989);
+//    unnamed->SetContourLevel(206,1.560566);
+//    unnamed->SetContourLevel(207,1.581521);
+//    unnamed->SetContourLevel(208,1.602756);
+//    unnamed->SetContourLevel(209,1.624277);
+//    unnamed->SetContourLevel(210,1.646087);
+//    unnamed->SetContourLevel(211,1.66819);
+//    unnamed->SetContourLevel(212,1.690589);
+//    unnamed->SetContourLevel(213,1.713289);
+//    unnamed->SetContourLevel(214,1.736294);
+//    unnamed->SetContourLevel(215,1.759608);
+//    unnamed->SetContourLevel(216,1.783235);
+//    unnamed->SetContourLevel(217,1.807179);
+//    unnamed->SetContourLevel(218,1.831445);
+//    unnamed->SetContourLevel(219,1.856036);
+//    unnamed->SetContourLevel(220,1.880958);
+//    unnamed->SetContourLevel(221,1.906214);
+//    unnamed->SetContourLevel(222,1.93181);
+//    unnamed->SetContourLevel(223,1.957749);
+//    unnamed->SetContourLevel(224,1.984036);
+//    unnamed->SetContourLevel(225,2.010677);
+//    unnamed->SetContourLevel(226,2.037675);
+//    unnamed->SetContourLevel(227,2.065036);
+//    unnamed->SetContourLevel(228,2.092764);
+//    unnamed->SetContourLevel(229,2.120864);
+//    unnamed->SetContourLevel(230,2.149342);
+//    unnamed->SetContourLevel(231,2.178202);
+//    unnamed->SetContourLevel(232,2.207449);
+//    unnamed->SetContourLevel(233,2.237089);
+//    unnamed->SetContourLevel(234,2.267128);
+//    unnamed->SetContourLevel(235,2.297569);
+//    unnamed->SetContourLevel(236,2.32842);
+//    unnamed->SetContourLevel(237,2.359684);
+//    unnamed->SetContourLevel(238,2.391369);
+//    unnamed->SetContourLevel(239,2.423478);
+//    unnamed->SetContourLevel(240,2.456019);
+//    unnamed->SetContourLevel(241,2.488997);
+//    unnamed->SetContourLevel(242,2.522418);
+//    unnamed->SetContourLevel(243,2.556287);
+//    unnamed->SetContourLevel(244,2.590612);
+//    unnamed->SetContourLevel(245,2.625397);
+//    unnamed->SetContourLevel(246,2.660649);
+//    unnamed->SetContourLevel(247,2.696374);
+//    unnamed->SetContourLevel(248,2.73258);
+//    unnamed->SetContourLevel(249,2.769271);
+//    unnamed->SetContourLevel(250,2.806455);
+//    unnamed->SetContourLevel(251,2.844138);
+//    unnamed->SetContourLevel(252,2.882328);
+//    unnamed->SetContourLevel(253,2.92103);
+//    unnamed->SetContourLevel(254,2.960252);
     
-    Double_t Graph0_fx1[111] = {
+    
+    
+    
+    
+    Double_t Graph0_fx1[130] = {
         1250.497,
         1250.317,
         1250.264,
@@ -3530,8 +3540,27 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         1036.224,
         1034.5,
         1028.961,
+        1027.5,
+        1026.132,
+        1020.5,
+        1019.201,
+        1013.5,
+        1007.728,
+        1006.5,
+        1000.78,
+        999.5,
+        997.961,
+        992.5,
+        990.359,
+        985.5,
+        981.6848,
+        978.5,
+        974.9629,
+        971.6073,
+        972.3507,
+        950,
         800};
-    Double_t Graph0_fy1[111] = {
+    Double_t Graph0_fy1[130] = {
         302,
         306,
         306.7064,
@@ -3642,9 +3671,30 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         410.9853,
         410.9097,
         410.8349,
-        340};
+        410.7975,
+        410.7818,
+        410.7411,
+        410.7422,
+        410.7163,
+        410.7015,
+        410.7196,
+        410.7317,
+        410.7777,
+        410.8794,
+        410.9663,
+        411.2234,
+        411.4574,
+        411.8199,
+        412.6682,
+        414,
+        417.9387,
+        421.5139,
+        420,
+        350};
     
-    Double_t Graph1_fx2[111] = {
+    
+    
+    Double_t Graph1_fx2[108] = {
         1171.655,
         1171.383,
         1171.157,
@@ -3750,13 +3800,10 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         936.5,
         932.1036,
         929.5,
-        929.164,
         929.2595,
-        928.9026,
-        929.5,
-        930.6748,
+        890,
         800};
-    Double_t Graph1_fy2[111] = {
+    Double_t Graph1_fy2[108] = {
         302,
         306,
         307.9103,
@@ -3862,16 +3909,13 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         390.6394,
         391.4878,
         393.5917,
-        394,
         394.1374,
-        398,
-        399.2668,
-        402,
-        340};
+        390,
+        350};
     
     
     
-    Double_t Graph2_fx3[111] = {
+    Double_t Graph2_fx3[156] = {
         1328,
         1327.822,
         1327.793,
@@ -3982,8 +4026,53 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         1143.419,
         1139.5,
         1136.626,
+        1132.5,
+        1129.84,
+        1125.5,
+        1123.143,
+        1118.5,
+        1116.606,
+        1111.5,
+        1110.28,
+        1104.5,
+        1104.19,
+        1102.67,
+        1098.525,
+        1097.5,
+        1093.134,
+        1090.5,
+        1087.913,
+        1083.5,
+        1082.867,
+        1081.424,
+        1076.5,
+        1070.942,
+        1069.5,
+        1069.047,
+        1068.238,
+        1064.661,
+        1062.5,
+        1056.106,
+        1055.723,
+        1055.5,
+        1050.947,
+        1048.5,
+        1045.887,
+        1041.5,
+        1040.553,
+        1036.251,
+        1034.773,
+        1034.5,
+        1034.143,
+        1027.5,
+        1026.94,
+        1023.53,
+        1020.982,
+        1020.5,
+        1013.828,
+        970,
         800};
-    Double_t Graph2_fy3[111] = {
+    Double_t Graph2_fy3[156] = {
         302,
         306,
         306.404,
@@ -4094,11 +4183,56 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         447.7607,
         447.7147,
         447.6425,
-        340};
+        447.5954,
+        447.5202,
+        447.4409,
+        447.347,
+        447.1936,
+        447.082,
+        446.799,
+        446.6972,
+        446.2112,
+        446.1771,
+        446,
+        445.4141,
+        445.2687,
+        444.4947,
+        444.011,
+        443.4784,
+        442.502,
+        442.3617,
+        442,
+        440.5516,
+        438.824,
+        438.3854,
+        438.259,
+        438,
+        436.7653,
+        436.0127,
+        434,
+        433.8728,
+        433.8037,
+        432.6016,
+        431.963,
+        431.4931,
+        430.6144,
+        430.541,
+        430,
+        429.8439,
+        429.8131,
+        429.7962,
+        429.6657,
+        429.6803,
+        430,
+        430.2752,
+        430.416,
+        437.8127,
+        430,
+        350};
     
     
     
-    Double_t Graph3_fx4[111] = {
+    Double_t Graph3_fx4[87] = {
         1167.425,
         1167.151,
         1167.123,
@@ -4183,34 +4317,10 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         993.2652,
         992.5,
         991.1126,
-        990.8896,
         991.0935,
-        990.7522,
-        991.2406,
-        992.2853,
-        992.3616,
-        992.5,
-        994.527,
-        995.0167,
-        996.6843,
-        998.4038,
-        998.8441,
-        999.5,
-        1001.417,
-        1002.196,
-        1005.582,
-        1006.127,
-        1006.276,
-        1006.5,
-        1008.887,
-        1009.982,
-        1011.314,
-        1013.5,
-        1013.77,
-        1013.882,
-        1016.279,
+        950,
         800};
-    Double_t Graph3_fy4[111] = {
+    Double_t Graph3_fy4[87] = {
         302,
         306,
         306.2153,
@@ -4295,36 +4405,12 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         422.4373,
         423.4931,
         425.2072,
-        426,
         426.8037,
-        430,
-        430.7196,
-        434,
-        434.0791,
-        434.2896,
-        436.8417,
-        438,
-        439.609,
-        442,
-        442.3748,
-        443.0685,
-        444.9048,
-        446,
-        449.4757,
-        450,
-        450.1279,
-        450.3438,
-        452.6359,
-        454,
-        455.2491,
-        457.5601,
-        457.8456,
-        458,
-        460.4119,
-        340};
+        420,
+        350};
     
     
-    Double_t Graph4_fx5[111] = {
+    Double_t Graph4_fx5[87] = {
         1167.425,
         1167.151,
         1167.123,
@@ -4409,34 +4495,10 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         993.2652,
         992.5,
         991.1126,
-        990.8896,
         991.0935,
-        990.7522,
-        991.2406,
-        992.2853,
-        992.3616,
-        992.5,
-        994.527,
-        995.0167,
-        996.6843,
-        998.4038,
-        998.8441,
-        999.5,
-        1001.417,
-        1002.196,
-        1005.582,
-        1006.127,
-        1006.276,
-        1006.5,
-        1008.887,
-        1009.982,
-        1011.314,
-        1013.5,
-        1013.77,
-        1013.882,
-        1016.279,
+        950,
         800};
-    Double_t Graph4_fy5[111] = {
+    Double_t Graph4_fy5[87] = {
         302,
         306,
         306.2153,
@@ -4521,36 +4583,12 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         422.4373,
         423.4931,
         425.2072,
-        426,
         426.8037,
-        430,
-        430.7196,
-        434,
-        434.0791,
-        434.2896,
-        436.8417,
-        438,
-        439.609,
-        442,
-        442.3748,
-        443.0685,
-        444.9048,
-        446,
-        449.4757,
-        450,
-        450.1279,
-        450.3438,
-        452.6359,
-        454,
-        455.2491,
-        457.5601,
-        457.8456,
-        458,
-        460.4119,
-        340};
+        420,
+        350};
     
     
-    Double_t Graph5_fx6[111] = {
+    Double_t Graph5_fx6[87] = {
         1167.425,
         1167.151,
         1167.123,
@@ -4635,34 +4673,10 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         993.2652,
         992.5,
         991.1126,
-        990.8896,
         991.0935,
-        990.7522,
-        991.2406,
-        992.2853,
-        992.3616,
-        992.5,
-        994.527,
-        995.0167,
-        996.6843,
-        998.4038,
-        998.8441,
-        999.5,
-        1001.417,
-        1002.196,
-        1005.582,
-        1006.127,
-        1006.276,
-        1006.5,
-        1008.887,
-        1009.982,
-        1011.314,
-        1013.5,
-        1013.77,
-        1013.882,
-        1016.279,
+        950,
         800};
-    Double_t Graph5_fy6[111] = {
+    Double_t Graph5_fy6[87] = {
         302,
         306,
         306.2153,
@@ -4747,36 +4761,11 @@ void Final_XSEC_PostFR_Beta1_B0p5()
         422.4373,
         423.4931,
         425.2072,
-        426,
         426.8037,
-        430,
-        430.7196,
-        434,
-        434.0791,
-        434.2896,
-        436.8417,
-        438,
-        439.609,
-        442,
-        442.3748,
-        443.0685,
-        444.9048,
-        446,
-        449.4757,
-        450,
-        450.1279,
-        450.3438,
-        452.6359,
-        454,
-        455.2491,
-        457.5601,
-        457.8456,
-        458,
-        460.4119,
-        340};
+        420,
+        350};
     
-    
-    
+
     
     
     TCanvas *cCONT_XSEC = new TCanvas("cCONT_XSEC", "cCONT_XSEC",0,0,600,600);
@@ -4808,14 +4797,16 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     emptyHistoXSEC__1->GetXaxis()->SetTitle("m_{LQ} [GeV]");
     emptyHistoXSEC__1->GetXaxis()->SetRange(1,1);
     emptyHistoXSEC__1->GetXaxis()->SetLabelFont(42);
-    emptyHistoXSEC__1->GetXaxis()->SetLabelSize(0.035);
+    emptyHistoXSEC__1->GetXaxis()->SetLabelSize(0.03);
     emptyHistoXSEC__1->GetXaxis()->SetTitleSize(0.05);
     emptyHistoXSEC__1->GetXaxis()->SetTitleOffset(1.2);
     emptyHistoXSEC__1->GetXaxis()->SetTitleFont(42);
+    emptyHistoXSEC__1->GetXaxis()->SetLabelOffset(.01);///
+    emptyHistoXSEC__1->GetYaxis()->SetLabelOffset(.01);///
     emptyHistoXSEC__1->GetYaxis()->SetTitle("m_{DM} [GeV]");
     emptyHistoXSEC__1->GetYaxis()->SetRange(1,1);
     emptyHistoXSEC__1->GetYaxis()->SetLabelFont(42);
-    emptyHistoXSEC__1->GetYaxis()->SetLabelSize(0.035);
+    emptyHistoXSEC__1->GetYaxis()->SetLabelSize(0.03);
     emptyHistoXSEC__1->GetYaxis()->SetTitleSize(0.05);
     emptyHistoXSEC__1->GetYaxis()->SetTitleOffset(1.3);
     emptyHistoXSEC__1->GetYaxis()->SetTitleFont(42);
@@ -4853,20 +4844,22 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     unnamed->GetYaxis()->SetTitleSize(0.045);
     unnamed->GetYaxis()->SetTitleOffset(1.7);
     unnamed->GetYaxis()->SetTitleFont(42);
-    unnamed->GetZaxis()->SetTitle("95% CL upper limit on cross section times branching fraction [fb]");
+    unnamed->GetZaxis()->SetTitle("Observed upper limit at 95% CL on #sigma.#bf{#it{#Beta}} [fb]");
     unnamed->GetZaxis()->SetNdivisions(506);
     unnamed->GetZaxis()->SetLabelFont(42);
     unnamed->GetZaxis()->SetLabelSize(0.035);
-    unnamed->GetZaxis()->SetTitleSize(0.03);
-    unnamed->GetZaxis()->SetTitleOffset(1.7);
+    unnamed->GetZaxis()->SetTitleSize(0.04);
+    unnamed->GetZaxis()->SetTitleOffset(1);
     unnamed->GetZaxis()->SetLabelOffset(0.003);
     unnamed->GetZaxis()->SetTitleFont(42);
+//    unnamed->GetZaxis()->SetRangeUser(.1,2);
+    unnamed->SetMinimum(.1);
+    unnamed->SetMaximum(1.2);
     gStyle->SetPalette(74);
     unnamed->Draw("COLZSAME");
     
-
     
-    TGraph *graph = new TGraph(111,Graph0_fx1,Graph0_fy1);
+    TGraph *graph = new TGraph(sizeof(Graph0_fx1)/sizeof(*Graph0_fx1),Graph0_fx1,Graph0_fy1);
     graph->SetName("Graph0");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -4901,7 +4894,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     graph->Draw("l");
    
     
-    graph = new TGraph(111,Graph1_fx2,Graph1_fy2);
+    graph = new TGraph(sizeof(Graph1_fx2)/sizeof(*Graph1_fx2),Graph1_fx2,Graph1_fy2);
     graph->SetName("Graph1");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -4936,7 +4929,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     graph->Draw("l");
     
 
-    graph = new TGraph(111,Graph2_fx3,Graph2_fy3);
+    graph = new TGraph(sizeof (Graph2_fx3)/sizeof (*Graph2_fx3),Graph2_fx3,Graph2_fy3);
     graph->SetName("Graph2");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -4971,7 +4964,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     graph->Draw("l");
     
  
-    graph = new TGraph(111,Graph3_fx4,Graph3_fy4);
+    graph = new TGraph(sizeof(Graph3_fx4)/sizeof(*Graph3_fx4),Graph3_fx4,Graph3_fy4);
     graph->SetName("Graph3");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -5002,7 +4995,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     graph->Draw("l");
     
 
-    graph = new TGraph(111,Graph4_fx5,Graph4_fy5);
+    graph = new TGraph(sizeof(Graph4_fx5)/sizeof(*Graph4_fx5),Graph4_fx5,Graph4_fy5);
     graph->SetName("Graph4");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -5033,7 +5026,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     graph->Draw("l");
     
  
-    graph = new TGraph(111,Graph5_fx6,Graph5_fy6);
+    graph = new TGraph(sizeof(Graph5_fx6)/sizeof(*Graph5_fx6),Graph5_fx6,Graph5_fy6);
     graph->SetName("Graph5");
     graph->SetTitle("Graph");
     graph->SetFillColor(1);
@@ -5554,14 +5547,14 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     
     
     
-    tex = new TLatex(1040,745,"(arXiv:1808.05082)");
+    tex = new TLatex(1110,745,"(arXiv:1808.05082)");
     tex->SetTextFont(42);
     tex->SetTextSize(0.025);
     tex->SetLineWidth(2);
     tex->Draw();
     
     
-    tex = new TLatex(825,655,"#beta=#frac{B(LQ#rightarrow lq)}{B(LQ#rightarrow lq)+B(LQ#rightarrow #nuq')}=1.0");
+    tex = new TLatex(825,655,"#beta=1.0");
     tex->SetTextFont(42);
     tex->SetTextSize(0.028);
     tex->SetLineWidth(2);
@@ -5569,7 +5562,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     
     
     
-    tex = new TLatex(825,615,"B(LQ#rightarrow lq)|_{m_{DM}=0}=0.5");
+    tex = new TLatex(825,625,"B(LQ#rightarrow lq)|_{m_{DM}=0}=0.5");
     tex->SetTextFont(42);
     tex->SetTextSize(0.028);
     tex->SetLineWidth(2);
@@ -5578,7 +5571,7 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     
     
    
-    tex = new TLatex(825,585,"#Delta_{#Chi,DM}=0.1");
+    tex = new TLatex(825,595,"#Delta_{#Chi,DM}=0.1");
     tex->SetTextFont(42);
     tex->SetTextSize(0.028);
     tex->SetLineWidth(2);
@@ -5625,6 +5618,15 @@ void Final_XSEC_PostFR_Beta1_B0p5()
 //    xx[7]= 1500; yy[7]= 650;
     
     
+//    xx[0]= 1340; yy[0]= 300;
+//    xx[1]= 1360; yy[1]= 350;
+//    xx[2]= 1380; yy[2]= 400;
+//    xx[3]= 1400; yy[3]= 450;
+//    xx[4]= 1440; yy[4]= 500;
+//    xx[5]= 1460; yy[5]= 550;
+//    xx[6]= 1480; yy[6]= 600;
+//    xx[7]= 1500; yy[7]= 650;
+    
     xx[0]= 1340; yy[0]= 300;
     xx[1]= 1360; yy[1]= 350;
     xx[2]= 1380; yy[2]= 400;
@@ -5644,8 +5646,9 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     
     
     TGraph* graa = new TGraph(size_,xx,yy);
-    graa->SetLineColor(30);
+    graa->SetLineColor(4);
     graa->SetLineWidth(4);
+    graa->SetLineStyle(2);
     graa->Draw("sameL");
     
     
@@ -5658,15 +5661,27 @@ void Final_XSEC_PostFR_Beta1_B0p5()
     legendr->AddEntry(graa, "Observed (LQLQ#rightarrow#muj#muj)", "l");
     
     legendr->SetFillStyle(0);
-    legendr->SetTextSize(.034);
+    legendr->SetTextSize(.04);
     
     legendr->SetTextFont(42);
     
-    legendr->SetLineColor(30);
+    legendr->SetLineColor(3);
     
     legendr->SetBorderSize(0);
     
     legendr->Draw();
+    
+    
+    
+    TLatex l(1100,540," m_{X} + m_{DM} > m_{LQ}");
+     l.SetTextAngle(40);
+    l.SetTextSize(.03);
+     l.SetTextFont(42);
+    l.SetTextColor(9);
+    l.Draw();
+    
+    
+  
     
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

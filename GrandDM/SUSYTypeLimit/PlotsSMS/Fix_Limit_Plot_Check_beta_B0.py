@@ -9,12 +9,12 @@ from array import array
 
 
 TGR=[
-['T1ttttObservedLimit','graph_smoothed_Obs'],
-['T1ttttObservedLimitUp','graph_smoothed_ObsP'],
-['T1ttttObservedLimitDown','graph_smoothed_ObsM'],
-['T1ttttExpectedLimit','graph_smoothed_Exp'],
-['T1ttttExpectedLimitUp','graph_smoothed_ExpP'],
-['T1ttttExpectedLimitDown','graph_smoothed_ExpM']
+['T1ttttObservedLimit','graph_smoothed_Obs', 480,420, 1090,490 ,950,420 ],
+['T1ttttObservedLimitUp','graph_smoothed_ObsP',480,420,1090, 490 ,950,420],
+['T1ttttObservedLimitDown','graph_smoothed_ObsM',480,420,1090, 490 ,950,420],
+['T1ttttExpectedLimit','graph_smoothed_Exp',520,410, 1170,530 ,950,420],
+['T1ttttExpectedLimitUp','graph_smoothed_ExpP',480,390,  1090, 490  , 890,390],
+['T1ttttExpectedLimitDown','graph_smoothed_ExpM',550,430,  1200, 550,970,430]
 ]
 
 
@@ -29,16 +29,12 @@ TGR=[
 
 
 template=[
-['limit_scan_cmb_beta_0.100000_B0_0.100000.root', 120 ],
-['limit_scan_cmb_beta_0.100000_B0_0.500000.root', 110 ],
-['limit_scan_cmb_beta_0.500000_B0_0.100000.root', 120 ],
-['limit_scan_cmb_beta_0.500000_B0_0.500000.root', 110 ],
-['limit_scan_cmb_beta_1.000000_B0_0.100000.root', 120 ],
-['limit_scan_cmb_beta_1.000000_B0_0.500000.root', 110 ],
+['limit_scan_cmb_beta_1.000000_B0_0.100000.root', 260],
+['limit_scan_cmb_beta_1.000000_B0_0.500000.root', 260]
           ]
 
 
-for temp in template:
+for count,temp in enumerate (template,0):
 
     inputF=[
     #['config/SUS16037/MonoLQ_2016.root ','SMOOTH/limit_scan_smooth10_2016.root'],
@@ -67,13 +63,15 @@ for temp in template:
         #    NewX.clear()
         #    NewY.clear()
             print Gr_exp.GetN()
-            for i in range(0,110):
+            for i in range(0,temp[1]):
     #        for i in range(0,300):
 
                 print "i=", i, tgr,  x[i],y[i]
     #            if tgr[0]=='T1ttttExpectedLimitDown':
-    #                if   x[i] < 1200 and  x[i+1] > x[i]:
-    #            
+#                if   x[i] < temp[2]: and  x[i+1] > x[i]:
+                if  count==0 and  y[i] > tgr[count+2]: continue
+                if  count==1 and  x[i+1] >= x[i]: continue
+    #
     #                    break
     #            else:
     #                if x[i+1] > x[i]:
@@ -83,9 +81,12 @@ for temp in template:
                 NewY.append(y[i])
 
 
+            NewX.append(tgr[4+2*count])
+            NewY.append(tgr[5+2*count])
+
 
             NewX.append(800)
-            NewY.append(340)
+            NewY.append(350)
 
             n=len(NewX)
 
