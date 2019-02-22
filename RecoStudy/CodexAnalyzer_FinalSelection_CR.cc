@@ -461,7 +461,7 @@ int main(int argc, char** argv) {
                                     //###############################################################################################
                                     // Apply all veto cuts
                                     //###############################################################################################
-                                    if ((numTau+numElectron +numZboson + numBJet) > 0) continue;
+//                                    if ((numTau+numElectron +numZboson + numBJet) > 0) continue;
                                     //###############################################################################################
                                     //  dPhi Jet_MET Categorization (To get a relaxed cut for QCD template)
                                     //###############################################################################################
@@ -497,20 +497,30 @@ int main(int argc, char** argv) {
                                     float tmass_MuMet= TMass_F(muPt->at(imu), muPt->at(imu)*cos(muPhi->at(imu)),muPt->at(imu)*sin(muPhi->at(imu)) , jetMET, jetMETPhi);
                                     const int size_mTCat = 3;
                                     bool MT100 = tmass_MuMet > 100;
-                                    bool MT500 = tmass_MuMet > 500;
+                                    bool MT50To150=(tmass_MuMet > 50 && tmass_MuMet <= 150);
                                     bool MT400 = tmass_MuMet > 400;
-                                    bool MT_category[size_mTCat] = {MT100,MT500,MT400};
-                                    std::string MT_Cat[size_mTCat] = {"_MT100","_MT500","_MT400"};
+                                    bool MT_category[size_mTCat] = {MT100,MT50To150,MT400};
+                                    std::string MT_Cat[size_mTCat] = {"_MT100","_MT50To150","_MT400"};
                                     
                                     
                                     //###############################################################################################
                                     //  MET Categorization
                                     //###############################################################################################
                                     
-                                    const int size_METcut = 1;
-                                    bool MET100 = jetMET > 100;
-                                    bool MetCut_category[size_METcut] = {MET100};
-                                    std::string MetCut_Cat[size_METcut] = {"_MET100"};
+                                    
+                                    
+                                    
+                                    
+                                    const int size_METcut = 2;
+                                    
+                                    bool signalRegion = numTau+numZboson + numElectron  + numBJet < 1;
+                                    
+                                    
+                                    bool TTcontrolRegion_SingleLep = (numTau+numZboson + numElectron  < 1  && numBJet >= 1);
+                                    
+                                    bool MetCut_category[size_METcut] = {signalRegion,TTcontrolRegion_SingleLep};
+                                    std::string MetCut_Cat[size_METcut] = {"", "_ttbarCRSingleLep"};
+                                    
                                     
                                     //###############################################################################################
                                     //  Top Pt Reweighting Cat: The SF is meant to correct only the shape of the pt(top) distribution- not the amount of generated events ( you have to consider that the average weight is not 1 ! ) So we define two category for ttbar events

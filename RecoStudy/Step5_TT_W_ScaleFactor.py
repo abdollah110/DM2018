@@ -69,7 +69,7 @@ def returnSF_W(FileName,TTSF):
     return WScale
 
 #MTRange=["_NoMT","_HighMT","_MT50To150","_MT150to200","_MT200to250","_MT250to300","_MT300to350","_MT200","_MT300","_MT400"]
-MTRange=["_NoMT","_HighMT","_MT50To150","_MT500"]
+MTRange=["_NoMT","_HighMT","_MT50To150","_MT300","_MT500"]
 
 #InputFilesLocation='FILESNEEDEDFORTT_W_SF/'
 #InputFilesLocation='NewOutFiles_CodexAnalyzer_Preselection_MuEta2p1/'
@@ -88,9 +88,12 @@ MTRange=["_NoMT","_HighMT","_MT50To150","_MT500"]
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
 #InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
-InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
+#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
 #InputFilesLocation = 'NewOutFiles_Preselection_Approval_V2_NoPUWeighting/'
 #InputFilesLocation = 'NewOutFiles_Preselection_forTTbarSF_DiLep/'
+
+InputFilesLocation = 'NewOutFiles_Preselection_CWR/'
+
 
 def SF_TT(Name):
     return returnSF_TT(Name)

@@ -45,7 +45,7 @@ def add_Preliminary():
     return lumi
 
 def make_legend():
-    output = ROOT.TLegend(0.45, 0.5, 0.9, 0.85, "", "brNDC")
+    output = ROOT.TLegend(0.4, 0.5, 0.93, 0.85, "", "brNDC")
     output.SetLineWidth(0)
     output.SetLineStyle(0)
     output.SetFillStyle(0)
@@ -56,7 +56,7 @@ def make_legend():
     return output
 
 #["postfit_shapes.root","Codex__mj_1_13TeV_prefit","#it{M}_{LQ} [GeV]","#mu j ",2000,"Codex_","RH W 3TeV",100],
-def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Status):
+def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,sigLeg2,XSection, Status):
     ROOT.gStyle.SetFrameLineWidth(3)
     ROOT.gStyle.SetLineWidth(3)
     ROOT.gStyle.SetOptStat(0)
@@ -103,6 +103,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
     Signal.SetLineWidth(3)
     Signal.SetLineColor(4)
     Signal.SetMarkerColor(4)
+    Signal.SetLineStyle(8)
 
 #    Signal.SetLineColor(ROOT.TColor.GetColor(108, 226, 354))
 #    Signal.SetMarkerColor(ROOT.TColor.GetColor(108, 226, 354))
@@ -248,11 +249,25 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
     Signal.Draw("histsame")
 #    Signal.Draw("histsame")
 
+
+
+########################################################
+#Adding Extra signal
+    Signal2=Signal.Clone()
+    Signal2.Scale(2.836/1.391)
+#    Signal2.SetLineStyle(11)
+    Signal2.SetLineWidth(3)
+    Signal2.SetLineStyle(2)
+    Signal2.SetLineColor(2)
+    Signal2.SetMarkerColor(2)
+    Signal2.Draw("histsame")
+    
     legende=make_legend()
     legende.AddEntry(Data,"Observed","elp")
 
     legende.AddEntry(Signal,sigLeg,"l")
     legende.AddEntry(W,"W+jets","f")
+    legende.AddEntry(Signal2,sigLeg2,"l")
     legende.AddEntry(TT,"t#bar{t}","f")
     legende.AddEntry(SingleT,"Single top","f")
     legende.AddEntry(QCD,"QCD multijet","f")
@@ -386,7 +401,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,XSection, Sta
 FileNamesInfo=[
 #               ["postfit_shapes_CMB_DM1000.root","Codex__mj_cmb_1_13TeV_prefit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1000GeV (DM 400 GeV)",10],
 #               ["postfit_shapes_CMB_DM1000.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1000GeV (DM 400 GeV)",10],
-               ["postfit_shapes.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1000GeV (DM 400 GeV)",10],
+               ["postfit_shapes.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1 TeV (DM 400 GeV, B0=0.5)","LQ 1 TeV (DM 400 GeV, B0=0.1)",10],
                ]
 
 
@@ -403,7 +418,7 @@ FileNamesInfo=[
 for i in range(0,len(FileNamesInfo)):
 
 #    FileName="ztt_"+ch+"_shapes.root"
-    MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],"LOG")
+    MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],FileNamesInfo[i][8],"LOG")
 #    MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],"Normal")
 #    MakePlot(FileNamesInfo[i][0],FileNamesInfo[i][1],FileNamesInfo[i][3],FileNamesInfo[i][2],FileNamesInfo[i][4],FileNamesInfo[i][5],FileNamesInfo[i][6],FileNamesInfo[i][7],"Normal")
 

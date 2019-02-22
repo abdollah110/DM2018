@@ -275,28 +275,23 @@ TH1F *  HistPUMC(bool isData,TFile *f_Double){
 //########################################
 
 TH2F**  FuncHistMuId(){
+
+
+        TFile * MuCorrId_BCDEF= TFile::Open(("../interface/pileup-hists/RunBCDEF_SF_ID.root"));
+        TH2F * HistoMuId_BCDEF= (TH2F *) MuCorrId_BCDEF->Get("NUM_TightID_DEN_genTracks_pt_abseta");
     
-    TFile * MuCorrId_BCDEF= TFile::Open(("../interface/pileup-hists/ID_EfficienciesAndSF_BCDEF.root"));
-    TH2F * HistoMuId_BCDEF= (TH2F *) MuCorrId_BCDEF->Get("MC_NUM_TightID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio");
+        static TH2F* HistoMuId[1]={HistoMuId_BCDEF};
     
-    TFile * MuCorrId_GH= TFile::Open(("../interface/pileup-hists/ID_EfficienciesAndSF_GH.root"));
-    TH2F * HistoMuId_GH= (TH2F *) MuCorrId_GH->Get("MC_NUM_TightID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio");
-    
-    static TH2F* HistoMuId[2]={HistoMuId_BCDEF, HistoMuId_GH};
-    
-    return  HistoMuId;
+        return  HistoMuId;
 }
 
 
 TH2F**  FuncHistMuIso(){
+
+    TFile * MuCorrIso_BCDEF= TFile::Open(("../interface/pileup-hists/RunBCDEF_SF_ISO.root"));
+    TH2F * HistoMuIso_BCDEF= (TH2F *) MuCorrIso_BCDEF->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta");
     
-    TFile * MuCorrIso_BCDEF= TFile::Open(("../interface/pileup-hists/Iso_EfficienciesAndSF_BCDEF.root"));
-    TH2F * HistoMuIso_BCDEF= (TH2F *) MuCorrIso_BCDEF->Get("TightISO_TightID_pt_eta/pt_abseta_ratio");
-    
-    TFile * MuCorrIso_GH= TFile::Open(("../interface/pileup-hists/Iso_EfficienciesAndSF_GH.root"));
-    TH2F * HistoMuIso_GH= (TH2F *) MuCorrIso_GH->Get("TightISO_TightID_pt_eta/pt_abseta_ratio");
-    
-    static  TH2F* HistoMuIso[2]={HistoMuIso_BCDEF,HistoMuIso_GH};
+    static  TH2F* HistoMuIso[1]={HistoMuIso_BCDEF};
     
     return HistoMuIso;
 }
@@ -304,20 +299,14 @@ TH2F**  FuncHistMuIso(){
 
 
 TH1F**  FuncHistMuTrigger(){
-    
-    
+
     TFile * MuCorrTrg_BCDEF= TFile::Open(("../interface/MuSF/EfficienciesAndSF_RunBtoF_Nov17Nov2017.root"));
-//    TFile * MuCorrTrg_BCDEF= TFile::Open(("../interface/pileup-hists/Trigger_EfficienciesAndSF_RunBtoF.root"));
-    //    TH2F * HistoMuTrg_BCDEF= (TH2F *) MuCorrTrg_BCDEF->Get("Mu50_OR_TkMu50_PtEtaBins/pt_abseta_ratio");
-    
+
     TH1F * HistoMuTrg_BCDEF= (TH1F *) MuCorrTrg_BCDEF->Get("Mu50_EtaBins/eta_ratio");
-//    TH1F * HistoMuTrg_BCDEF= (TH1F *) MuCorrTrg_BCDEF->Get("Mu50_OR_TkMu50_EtaBins/eta_ratio");
+
     
-    TFile * MuCorrTrg_GH= TFile::Open(("../interface/pileup-hists/Trigger_EfficienciesAndSF_Period4.root"));
-    //    TH2F * HistoMuTrg_GH= (TH2F *) MuCorrTrg_GH->Get("Mu50_OR_TkMu50_PtEtaBins/pt_abseta_ratio");
-    TH1F * HistoMuTrg_GH= (TH1F *) MuCorrTrg_GH->Get("Mu50_OR_TkMu50_EtaBins/eta_ratio");
-    
-    static TH1F* HistoMuTrg[2]={HistoMuTrg_BCDEF, HistoMuTrg_GH};
+    static TH1F* HistoMuTrg[2]={HistoMuTrg_BCDEF};
+
     
     return HistoMuTrg;
 }
@@ -467,6 +456,111 @@ int getNumTau(){
     }
     return numTau;
 }
+
+
+
+//###########       Electron Veto   ###########################################################
+
+
+//###########       electron  Veto   ###########################################################
+
+int getNumElectron(){
+    
+    
+    //            https://twiki.cern.ch/twiki/bin/view/CMS/MultivariateElectronIdentificationRun2#Recommended_MVA_recipes_for_2016
+    int numElectron=0;
+    float ElectronCor=1;
+    float ElectronEffVeto=1;
+    for  (int jele=0 ; jele < nEle; jele++){
+        
+        if ( elePt->at(jele) < 15 || fabs(eleEta->at(jele)) > 2.5) continue;
+        
+        bool eleMVAIdExtra= false;
+        if (fabs (eleSCEta->at(jele)) <= 0.8 && eleIDMVAIso->at(jele) >   -0.83  ) eleMVAIdExtra= true;
+        else if (fabs (eleSCEta->at(jele)) >  0.8 &&fabs (eleSCEta->at(jele)) <=  1.5 && eleIDMVAIso->at(jele) >   -0.77  ) eleMVAIdExtra= true;
+        else if ( fabs (eleSCEta->at(jele)) >=  1.5 && eleIDMVAIso->at(jele) >  -0.69  ) eleMVAIdExtra= true;
+        else eleMVAIdExtra= false;
+        
+        
+        if (eleMVAIdExtra)
+            numElectron++;
+    }
+    return numElectron;
+    
+}
+
+//###########       electron  correction factor   ###########################################################
+
+float getElectronCor(TH2F * HistoEleMVAIdIso90){
+    
+    float ElectronCor=1;
+    for  (int jele=0 ; jele < nEle; jele++){
+        
+        if ( elePt->at(jele) < 15 || fabs(eleEta->at(jele)) > 2.5) continue;
+        
+        bool eleMVAIdExtra= false;
+        if (fabs (eleSCEta->at(jele)) <= 0.8 && eleIDMVAIso->at(jele) >   -0.83  ) eleMVAIdExtra= true;
+        else if (fabs (eleSCEta->at(jele)) >  0.8 &&fabs (eleSCEta->at(jele)) <=  1.5 && eleIDMVAIso->at(jele) >   -0.77  ) eleMVAIdExtra= true;
+        else if ( fabs (eleSCEta->at(jele)) >=  1.5 && eleIDMVAIso->at(jele) >  -0.69  ) eleMVAIdExtra= true;
+        else eleMVAIdExtra= false;
+        
+        
+        
+        //        if (!(eleMVAIdExtra )) {
+        //            ElectronEffVeto= ElectronEffVeto * getEffVetoMVA90WPElectron80X(isData,  elePt->at(jele),eleSCEta->at(jele),    HistoEleMVAIdIso90 , HistoEleMVAIdIso90_EffMC,HistoEleMVAIdIso90_EffData);
+        //            continue;
+        //        }
+        
+        if (eleMVAIdExtra)
+            ElectronCor=getCorrFactorMVA90WPElectron94X(isData,  elePt->at(jele),eleSCEta->at(jele),    HistoEleMVAIdIso90 );
+        
+        break;
+    }
+    return ElectronCor;
+}
+
+
+
+
+
+
+
+//
+//
+//
+////            https://twiki.cern.ch/twiki/bin/view/CMS/MultivariateElectronIdentificationRun2#Recommended_MVA_recipes_for_2016
+//int numElectron=0;
+//float ElectronCor=1;
+//TLorentzVector Ele4Momentum;
+//float ElectronEffVeto=1;
+//Ele4Momentum.SetPtEtaPhiM(0,0,0,0);
+//for  (int jele=0 ; jele < nEle; jele++){  //FIXME
+//    
+//    if ( elePt->at(jele) < 15 || fabs(eleEta->at(jele)) > 2.5) continue;
+//    
+//    bool eleMVAIdExtra= false;
+//    if (fabs (eleSCEta->at(jele)) <= 0.8 && eleIDMVAIso->at(jele) >   -0.83  ) eleMVAIdExtra= true;
+//        else if (fabs (eleSCEta->at(jele)) >  0.8 &&fabs (eleSCEta->at(jele)) <=  1.5 && eleIDMVAIso->at(jele) >   -0.77  ) eleMVAIdExtra= true;
+//            else if ( fabs (eleSCEta->at(jele)) >=  1.5 && eleIDMVAIso->at(jele) >  -0.69  ) eleMVAIdExtra= true;
+//                else eleMVAIdExtra= false;
+//                    
+//                    
+//                    
+//                    if (!(eleMVAIdExtra )) {
+//                        ElectronEffVeto= ElectronEffVeto * getEffVetoMVA90WPElectron94X(isData,  elePt->at(jele),eleSCEta->at(jele),    HistoEleMVAIdIso90 , HistoEleMVAIdIso90_EffMC,HistoEleMVAIdIso90_EffData);
+//                        continue;
+//                    }
+//    
+//    ElectronCor=getCorrFactorMVA90WPElectron94X(isData,  elePt->at(jele),eleSCEta->at(jele),    HistoEleMVAIdIso90 );
+//    //                ElectronCor=1;
+//    Ele4Momentum.SetPtEtaPhiM(elePt->at(jele),eleEta->at(jele),elePhi->at(jele),eleMass);
+//    numElectron++;
+//    
+//    break;
+//}
+//
+//
+
 
 
 

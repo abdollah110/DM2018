@@ -106,7 +106,7 @@ float XSection(std::string OutName) {
 //    else if (OutName.find("WWTo1L1Nu2Q_amcatnloFXFX_madspin") != string::npos) return 49.997  ;
     
                            
-//    else if (OutName.find("WZTo1L3Nu_amcatnloFXFX") != string::npos) return 3.033e+00;  Not available
+    else if (OutName.find("WZTo1L3Nu_amcatnloFXFX") != string::npos) return 3.033e+00;  //Not available  Just added after CWR
        else if (OutName.find("WZTo2L2Q_amcNLO") != string::npos) return  5.595 ;
 //    else if (OutName.find("WZTo2Q2Nu_amcatnloFXFX") != string::npos) return 10.000; // NOTE THIS IS JUST MY ESTIMATION small effect Not available
        else if (OutName.find("WZTo3LNu_amcNLO") != string::npos) return  4.42965 ;

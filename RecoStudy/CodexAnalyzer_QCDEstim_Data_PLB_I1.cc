@@ -307,7 +307,7 @@ int main(int argc, char** argv) {
                 bool MuIdIso=( (muIDbit->at(imu) >> 2 & 1)  && fabs(muD0->at(imu)) < 0.045 && fabs(muDz->at(imu)) < 0.2); //Tight Muon Id
                 
                 
-                if (! MuPtCut || !MuIdIso ) continue;
+                if (! MuPtCut || !MuIdIso || IsoMu > 1.0) continue;
                 
                 
                 float MuonCor=getCorrFactorMuon94X(isData,  muPt->at(imu), muEta->at(imu) , HistoMuId,HistoMuIso,HistoMuTrg,HistoMuTrack);

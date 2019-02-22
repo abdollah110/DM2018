@@ -29,7 +29,7 @@ from Step1_JetToMuFR_Data import *
 ##### Get Jet to Tau FR
 
 ##Be very careful
-#from Step5_TT_W_ScaleFactor import *
+from Step5_TT_W_ScaleFactor import *
 
 
 gROOT.Reset()
@@ -39,25 +39,9 @@ import os
 ROOT.gROOT.SetBatch(True)
 #ROOT.gROOT.ProcessLine('.x rootlogon.C')
 
-#InputFilesLocation = 'NewOutFiles_Preselection_FirstCheck/'
-#InputFilesLocation = 'NewOutFiles_Preselection_Check3/'
-#InputFilesLocation = 'NewOutFiles_Preselection__Check4_vertex/'
-#InputFilesLocation = 'NewOutFiles_Preselection_RemoveBTag/'
-#InputFilesLocation = 'NewOutFiles_Preselection_addMetPhiRemoveBug/'
-#InputFilesLocation = 'NewOutFiles_Preselection_noPUReweighting/'
-#InputFilesLocation = 'NewOutFiles_Preselection__NewJEC/'
-#InputFilesLocation = 'NewOutFiles_Preselection_NewJECRemoveBTag/'
-#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTag/'
-#InputFilesLocation = 'NewOutFiles_Preselection_NewJECNewBTagRemoveBTag/'
-#InputFilesLocation = 'NewOutFiles_Preselection_newJECMC/'
-#InputFilesLocation = 'NewOutFiles_Preselection_FixLumi/'
-#InputFilesLocation = 'NewOutFiles_Preselection_FixLumiNoBtagVeto/'
-#InputFilesLocation = 'NewOutFiles_Preselection_FixBSF/'
-#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
-#InputFilesLocation = 'NewOutFiles_Preselection_Approval_V2_NoPUWeighting/'
-#InputFilesLocation = 'NewOutFiles_Preselection_forTTbarSF_DiLep/'
 
-InputFilesLocation = 'NewOutFiles_Preselection_CWR/'
+InputFilesLocation = 'NewOutFiles_Preselection_Approval_V1/'
+OutputFilesLocation_CMB = 'NewOutFiles_Preselection_Approval_V1_CMB/'
 
 verbos_ = False
 RB_=1
@@ -75,8 +59,8 @@ category = [""]
 ############################################################################################################
 def _FileReturn(Name, channel,cat,HistoName):
 
-    if not os.path.exists(InputFilesLocation):
-        os.makedirs(InputFilesLocation)
+    if not os.path.exists(OutputFilesLocation_CMB):
+        os.makedirs(OutputFilesLocation_CMB)
     myfile = TFile(InputFilesLocation +'/'+ Name + '.root')
     if verbos_: print "##### --->>>>>>> File name is ", InputFilesLocation + Name + '.root'  "   and histo is -->  ", channel+HistoName + cat
     Histo =  myfile.Get(channel+HistoName + cat)
@@ -93,7 +77,7 @@ def _FileReturn(Name, channel,cat,HistoName):
 ####################################################
 def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
     
-    OutFile = TFile(InputFilesLocation+'/'+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
+    OutFile = TFile(OutputFilesLocation_CMB+'/'+"TotalRootForLimit_PreSelection_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 #    OutFile = TFile("TotalRootForLimit_Jet50_"+channel + NormMC+".root" , 'RECREATE') # Name Of the output file
 
     for NameCat in category:
@@ -182,6 +166,10 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
             else:
                 print '######  TTbar norm with TopPtRW %d without TopPtRW %d and the ratio is %d #####'%(NormHistoShape.Integral(),NormHisto.Integral(),NormHistoShape.Integral()/NormHisto.Integral()*1.0)
             NormHistoShape.Scale(NormHisto.Integral()*1.0/NormHistoShape.Integral())
+            if ttbarCR=="" :  NormHistoShape.Scale(SF_TT_SingleLep())
+            if ttbarCR=="_ttbarCRSingleLep" :  NormHistoShape.Scale(SF_TT_SingleLep())
+            if ttbarCR=="_ttbarCRDiLep" :  NormHistoShape.Scale(SF_TT_DiLep())
+
             RebinedHist= NormHistoShape.Rebin(RB_)
             tDirectory.WriteObject(NormHistoShape,NameOut)
 
@@ -223,6 +211,10 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
             raise Exception('Not valid %s'%NameOut)
         else:
             RebinedHist= NormHisto.Rebin(RB_)
+            if ttbarCR=="" :  RebinedHist.Scale(SF_W_SingleLep())
+            if ttbarCR=="_ttbarCRSingleLep" :  RebinedHist.Scale(SF_W_SingleLep())
+            if ttbarCR=="_ttbarCRDiLep" :  RebinedHist.Scale(SF_W_DiLep())
+
             tDirectory.WriteObject(RebinedHist,NameOut)
         
 
@@ -290,7 +282,7 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
             TTSampleQCDNormHist=TTSampleQCDNorm.Get("HISTO")
             if ttbarCR=="" :  TTSampleQCDNormHist.Scale(1.12)
             if ttbarCR=="_ttbarCRSingleLep" :  TTSampleQCDNormHist.Scale(1.12)
-            if ttbarCR=="_ttbarCRDiLep" :  TTSampleQCDNormHist.Scale(1.00)
+            if ttbarCR=="_ttbarCRDiLep" :  TTSampleQCDNormHist.Scale(0.95)
 
             ZTTSampleQCDNormHist=ZTTSampleQCDNorm.Get("HISTO")
             WSampleQCDNormHist=WSampleQCDNorm.Get("HISTO")
@@ -351,12 +343,12 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,ttbarCR):
 
 if __name__ == "__main__":
     
-    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_METPhi","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_LepPhi","_nVtx","_nVtx_NoPU"]
+#    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_METPhi","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_recoHT","_ST","_dR_Mu_Jet","_LepPhi","_nVtx","_nVtx_NoPU"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet","_dR_Mu_Jet","_dEta_Mu_Jet"]
 #    PlotName=["_tmass_MuMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Jet","_dPhi_Mu_Met","_NumJet","_NumBJet"]
 #    PlotName=["_nVtx","_nVtx_NoPU"]
 #    PlotName=["_recoHT"]
-#    PlotName=["_LQMass"]
+    PlotName=["_LQMass"]
 
 
 #    Isolation=["_Iso", "_AntiIso","_Total"]
@@ -388,5 +380,6 @@ if __name__ == "__main__":
                         NormQCD="_LepPt"+mt+jpt+reg+"_AntiIso"
                         ShapeQCD=Norm+mt+jpt+reg+"_AntiIso"
                         NormTTbar=Norm+"_NoTopRW"+mt+jpt+reg+iso
+#                        NormTTbar=NormMC
 
                         MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormTTbar,reg)

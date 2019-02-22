@@ -48,7 +48,8 @@ if args.sample=='SingleMu':
 #if args.sample=='Mu50':
 #    SampleLoc='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/lqsamples2_jetPt50_MT200/'
 
-CodexSignal='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/Signal/'
+#CodexSignal='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/Signal/'
+CodexSignal='/Users/abdollah1/GIT_abdollah110/DM2018/ROOT94X/2017/NEWSIG2018/'
 
 if not os.path.exists(dirName):
     os.makedirs(dirName)
@@ -84,7 +85,7 @@ FullSignal=[
             ['Codex_12.root' , 'Codex_1200_DM_400_X_440.root'],
             ['Codex_13.root' , 'Codex_1200_DM_450_X_495.root'],
             ['Codex_14.root' , 'Codex_1200_DM_500_X_550.root'],
-            ['Codex_15.root' , 'Codex_1200_DM_550_X_595.root'],
+            ['Codex_15.root' , 'Codex_1200_DM_550_X_605.root'],
             ['Codex_16.root' , 'Codex_1300_DM_300_X_330.root'],
             ['Codex_17.root' , 'Codex_1300_DM_350_X_385.root'],
             ['Codex_18.root' , 'Codex_1300_DM_400_X_440.root'],
@@ -116,6 +117,8 @@ FullSignal=[
             ['Codex_44.root' , 'Codex_900_DM_400_X_440.root'],
 ]
 
+
+#['Codex_15.root' , 'Codex_1200_DM_550_X_595.root'],
 
 
 outF=open('out%s.txt'%dirName,'w')

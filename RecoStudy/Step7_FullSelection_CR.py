@@ -43,8 +43,8 @@ ROOT.gROOT.SetBatch(True)
 #SubRootDir = 'NewOutFiles_FinalSelection_Approval_v1/'
 #SubRootDir = 'NewOutFiles_FinalSelection_Approval_v3_relaxQCD/'
 #SubRootDir = 'NewOutFiles_FinalSelection_CWR/'
-SubRootDir = 'NewOutFiles_FinalSelection_postCWR/'
-
+#SubRootDir = 'NewOutFiles_FinalSelection_CR_CR_2018/'
+SubRootDir = 'NewOutFiles_FinalSelection_CR_CR_2018_PostCWR/'
 
 verbos_ = True
 JetScale = ["JetESDown", "", "JetESUp"]
@@ -112,8 +112,8 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
     Signal_Unc_TopPTRW = ["_CMS_top_pt_Reweighting"+"Up","_CMS_top_pt_Reweighting"+"Down"]
 
 #    myOut = TFile(FinalName[chl]+NormMC+".root" , 'RECREATE') # Name Of the output file
-    myOut = TFile("_mj_LQMass_Final_2017.root" , 'RECREATE') # Name Of the output file
-
+    myOut = TFile("_mj_LQMass_Final_2017_W_CR.root" , 'RECREATE') # Name Of the output file
+#    myOut = TFile("_mj_LQMass_Final_2017_TT_CR.root" , 'RECREATE') # Name Of the output file
 
     for NameCat in category:
         print "starting NameCat=%s and channel=%s and HistoName=%s "%(NameCat, channel, NormMC)
@@ -144,7 +144,7 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,NormMCTT,chl,Binning):
                             NormFile= _FileReturn(Name, channel,NameCat, NormMC, JetScale[jscale] , JetResol[jres] , METScale[mscale])
                             NormHisto=NormFile.Get("XXX")
                     
-#                            NormHisto.Scale(0.00115) This is for using 2016 samples
+#                            NormHisto.Scale(0.00115)  THis is for using 2016 samples
                             NormHisto.Scale(0.001)
                             RebinedHist= NormHisto.Rebin(len(Binning)-1,"",Binning)
                             tDirectory.WriteObject(RebinedHist,NameOut)
@@ -522,9 +522,19 @@ if __name__ == "__main__":
 #    Met_Cat= ["_MET100", "_MET150","_MET200", "_MET250","_MET300", "_MET350","_MET400", "_MET450","_MET500"]
 #    MT_Cat = ["_MT100", "_MT150","_MT200", "_MT250","_MT300", "_MT350","_MT400", "_MT450","_MT500"]
 
-    Met_Cat= [ "_MET100"]
-    MT_Cat = ["_MT500"]
+
+
+### This is for TT CR
+#    Met_Cat= [ "_ttbarCRSingleLep"]
 #    MT_Cat = ["_MT100"]
+
+## This is for W CR
+    Met_Cat= [ ""]
+    MT_Cat = ["_MT50To150"]
+
+
+
+########    MT_Cat = ["_MT100"]
 
     for met in Met_Cat:
         for mt in MT_Cat:
@@ -533,7 +543,7 @@ if __name__ == "__main__":
             NormMC="_LQMass"+mt+met+"_Iso"
             NormQCD="_LepPt"+mt+met+"_AntiIso"
 #            NormQCD="_CloseJetLepPt"+mt+met+"_AntiIso"
-            ShapeQCD="_LQMass"+"_MT400"+met+"_AntiIso_NoDPhi"
+            ShapeQCD="_LQMass"+mt+met+"_AntiIso_NoDPhi"
             NormMCTT="_LQMass_NoTopRW"+mt+met+"_Iso"
             
             MakeTheHistogram("MuJet",NormMC,NormQCD,ShapeQCD,NormMCTT,0,Binning)
