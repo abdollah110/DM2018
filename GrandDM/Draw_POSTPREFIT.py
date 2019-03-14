@@ -45,7 +45,7 @@ def add_Preliminary():
     return lumi
 
 def make_legend():
-    output = ROOT.TLegend(0.4, 0.5, 0.93, 0.85, "", "brNDC")
+    output = ROOT.TLegend(0.38, 0.5, 0.92, 0.85, "", "brNDC")
     output.SetLineWidth(0)
     output.SetLineStyle(0)
     output.SetFillStyle(0)
@@ -96,7 +96,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,sigLeg2,XSect
     DYS.Rebin(RB_)
 
     Signal=file.Get(categoriy.replace('postfit','prefit')).Get(sig)
-    Signal.Scale( 1.391115 )  # CS x BR  1000_400_440
+    Signal.Scale( 1.391115 * 2)  # CS x BR  1000_400_440  // factor of 2 is added as we consider the full doublet 
     Signal.Rebin(RB_)
     #    Signal.SetFillStyle(0.)
     Signal.SetLineStyle(11)
@@ -401,7 +401,7 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,sigLeg2,XSect
 FileNamesInfo=[
 #               ["postfit_shapes_CMB_DM1000.root","Codex__mj_cmb_1_13TeV_prefit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1000GeV (DM 400 GeV)",10],
 #               ["postfit_shapes_CMB_DM1000.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1000GeV (DM 400 GeV)",10],
-               ["postfit_shapes.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1 TeV (DM 400 GeV, B0=0.5)","LQ 1 TeV (DM 400 GeV, B0=0.1)",10],
+               ["postfit_shapes.root","Codex__mj_cmb_1_13TeV_postfit","m_{#muj} [GeV]","#mu j ",2000,"Codex_","LQ 1 TeV (DM 400 GeV, #it{B}=0.5)","LQ 1 TeV (DM 400 GeV, #it{B}=0.1)",10],
                ]
 
 

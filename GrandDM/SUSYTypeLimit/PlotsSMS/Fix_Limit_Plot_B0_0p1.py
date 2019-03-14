@@ -9,12 +9,12 @@ from array import array
 
 
 TGR=[
-['T1ttttObservedLimit','graph_smoothed_Obs',300],
-['T1ttttObservedLimitUp','graph_smoothed_ObsP',300],
-['T1ttttObservedLimitDown','graph_smoothed_ObsM',300],
-['T1ttttExpectedLimit','graph_smoothed_Exp',180],
+['T1ttttObservedLimit','graph_smoothed_Obs',292],
+['T1ttttObservedLimitUp','graph_smoothed_ObsP',292],
+['T1ttttObservedLimitDown','graph_smoothed_ObsM',292],
+['T1ttttExpectedLimit','graph_smoothed_Exp',175],
 ['T1ttttExpectedLimitUp','graph_smoothed_ExpP',150],
-['T1ttttExpectedLimitDown','graph_smoothed_ExpM',225]
+['T1ttttExpectedLimitDown','graph_smoothed_ExpM',205]
 ]
 
 
@@ -35,9 +35,9 @@ inputF=[
 #['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH_B0_0p1/limit_scan_smooth10_cmb.root']
 #['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH/limit_scan_cmb_beta_1.000000_B0_0.100000.root']
 #['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_Xsection2/lmit_scan_postCWR_4_B0_0p1_smooth10_cmb.root']
-['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_PLB/limit_scan_postCWR_4_B0_0p1_smooth10_cmb_PLB.root']
+#['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_PLB/limit_scan_postCWR_4_B0_0p1_smooth10_cmb_PLB.root']
 #['config/SUS16037/MonoLQ_cmb.root ', 'SMOOTH/limit_scan_smooth10_cmb_PreCWR.root']
-        
+['config/SUS16037/MonoLQ_cmb.root ', 'NewSMOOTH_PLB/limit_scan_postCWR_4_B0_0p1_smooth_cmb_PLB.root']
 ]
 
 for Inp in inputF:
@@ -77,7 +77,7 @@ for Inp in inputF:
 
 
         NewX.append(800)
-        NewY.append(340)
+        NewY.append(350)
 
         n=len(NewX)
 
