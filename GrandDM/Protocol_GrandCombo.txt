@@ -1,0 +1,68 @@
+Calculation of the limit is performed in the following location in cmslpc machine:
+
+/uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_1_0/src/CombineHarvester/CombineTools/bin
+
+Once the limit is calculated, cp ‘limits_LIMITS.json’   here.
+(The latest directory is /uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_1_0/src/CombineHarvester/CombineTools/bin/outputCodex_cmb_PostCWR_v4)
+
+Note that you need to replace the .0"    at the end of the numbers to "
+
+- Run the JSONReadPy_SUSY.py with the input as ‘limits_LIMITS_cmb.json’. The output will be ‘limit_scan_cmb.txt’
+
+-Note: use the two following instead. The input will be limits_LIMITS_postCWR_4.json. This is just for the combined. I do not have 2017 updated ANYMORE!!!:
+
+JSONReadPy_SUSY_postFR_beta1p0_B0_0p1.py
+JSONReadPy_SUSY_postFR_beta1p0_B0_0p5.py
+
+
+scp limit_scan_* cmslpc27.fnal.gov:/uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_2_0/src/SUSY/ra4_stats/ 
+
+
+Now loging to cmslpc:
+
+/uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_2_0/src/SUSY/ra4_stats
+
+issue the following command:
+
+./run/initial_setup.sh
+
+sh   _do_run.sh
+
+Then Scopy the NewSMOOTH directory file to the following location:
+
+
+cd /Users/abdollah1/GIT_abdollah110/DM2018/GrandDM/SUSYTypeLimit/PlotsSMS
+[abdollah:GrandDM/SUSYTypeLimit/PlotsSMS] abdollah% rsync -av cmslpc27.fnal.gov:/uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_2_0/src/SUSY/ra4_stats/NewSMOOTH_feb21 .
+
+
+
+
+Finally:   python Fix_Limit_Plot.py
+
+
+
+
+
+################################################################################################
+To study the question by Ivan (check exactly the region of exlusion), one needs to factorize the cross section from the observed and expected limit and then run the check_Ivan.py file:
+
+
+
+
+
+#################################################
+Notes abut making the limit.
+To be done at 5 stages:
+
+1)  Making the root file data card: /Users/abdollah1/GIT_abdollah110/DM2018/RecoStudy/Draw_PreSelection_paper_CMB.py. The output will be something similar to _mj_LQMass_Final_2017.root
+
+2) Running the limit. The output will be .json file
+
+3) Making the .txt file (input is .json file, using JSONReadPy_SUSY_postFR_beta1p0_B0_0p1.py and JSONReadPy_SUSY_postFR_beta1p0_B0_0p5.py  and out put is limit_scan_postCWR_4_B0_0p1.txt and limit_scan_postCWR_4_B0_0p5.txt)
+
+4) making the contour limit plots using _do_run.sh in SUSY/ra4_stats. The output will be limit_scan_postCWR_4_B0_0p1_smooth10_cmb_PLB.root and limit_scan_postCWR_4_B0_0p5_smooth10_cmb_PLB.root and 
+
+5) running the Fix_Limit_Plot_B0_0p1.py and Fix_Limit_Plot_B0_0p5.py. The input is limit_scan_postCWR_4_B0_0p*_smooth10_cmb_PLB.root and the output is MonoLQcmb_B0_0p*_XSEC.C
+
+The one has to copy the limit values from MonoLQcmb_B0_0p*_XSEC.C  to Final_XSEC_PostFR_Beta1_B0p*_PLBReferee_Final.C
+

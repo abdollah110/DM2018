@@ -77,6 +77,22 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,sigLeg2,XSect
 
     Data=file.Get(categoriy).Get("data_obs")
     Data.Rebin(RB_)
+    
+    ## print Data table for HEPDATA EXO-17-015
+    for bin in range(Data.GetNbinsX()):
+
+        xbin= bin+1
+        LowEdge=int(Data.GetBinLowEdge(xbin))
+        endEdge=int(Data.GetBinLowEdge(xbin)+Data.GetBinWidth(xbin))
+        data_val= int(round(file.Get(categoriy).Get("data_obs").GetBinContent(xbin)))
+        bkg_val=file.Get(categoriy).Get("TotalBkg").GetBinContent(xbin)
+        bkg_val_err=file.Get(categoriy).Get("TotalBkg").GetBinError(xbin)
+        Signal_val=file.Get(categoriy.replace('postfit','prefit')).Get(sig)
+#        Signal_val.Scale( 1.391115 * 2)  # CS x BR  1000_400_440  // factor of 2 is added as we consider the full doublet
+        Signal_val_=Signal_val.GetBinContent(xbin)*1.391115 * 2
+        print "[(%d, %d), %d, (%0.1f,    %0.1f),%0.1f],"%(LowEdge,endEdge,data_val,bkg_val,bkg_val_err,Signal_val_)
+    
+    
     QCD=file.Get(categoriy).Get("QCD")
     QCD.Rebin(RB_)
 
@@ -385,6 +401,9 @@ def MakePlot(FileName,categoriy,HistName,Xaxis,MaxRange,sig,sigLeg,sigLeg2,XSect
     #       c.SaveAs("mvis"+categoriy+".png")
 
 
+    print "Data.Integral()", file.Get(categoriy).Get("data_obs").Integral()
+
+
 #channelDirectory = ["et"]
 #channelDirectory = ["EleTau"]
 #Category=["lq_et_1_13TeV_prefit","lq_et_1_13TeV_postfit"]
@@ -428,4 +447,7 @@ for i in range(0,len(FileNamesInfo)):
 #os.system("cp _FinalplotCodex__mj_2017_1_13TeV_postfitLOG.pdf  /Users/abdollah1/Documents/SVNNew/myDir/papers/EXO-17-015/trunk/Figure_002-b.pdf")
 
 
+
+
+#Table for HEP DATA
 
