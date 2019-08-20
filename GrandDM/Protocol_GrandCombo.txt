@@ -41,9 +41,13 @@ Now loging to cmslpc:
 
 /uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_2_0/src/SUSY/ra4_stats
 
+check it out from here:
+https://github.com/ald77/ra4_stats
+
+
 issue the following command:
 
-./run/initial_setup.sh
+./run/initial_setup.sh (There is a version of this file in my github repository)
 
 sh   _do_run.sh
 
@@ -51,6 +55,9 @@ Then Scopy the NewSMOOTH directory file to the following location:
 
 
 cd /Users/abdollah1/GIT_abdollah110/DM2018/GrandDM/SUSYTypeLimit/PlotsSMS
+
+[Here is the git hub for plotsSMS   https://github.com/CMS-SUS-XPAG/PlotsSMS]
+
 [abdollah:GrandDM/SUSYTypeLimit/PlotsSMS] abdollah% rsync -av cmslpc27.fnal.gov:/uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_2_0/src/SUSY/ra4_stats/NewSMOOTH_feb21 .
 
 
