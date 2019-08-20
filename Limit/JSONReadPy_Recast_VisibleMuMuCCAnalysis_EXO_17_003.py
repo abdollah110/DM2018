@@ -4,7 +4,7 @@ from pprint import pprint
 from array import array
 
 
-# This comes from PlotDigitizer
+# This comes from PlotDigitizer (I have digitized the fiqure 9 of EXO-17-003)
 List=[
       
       [	1542.575	,	0.997578	],
@@ -496,14 +496,6 @@ MassXS=[
 
 #BR=0.5*0.5*2  # 50% Branching ratio for visible and invisible
 #BR=1  # 50% Branching ratio for visible and invisible
-
-
-#FinalSampleDirectory='limits_LIMITS.json'
-FinalSampleDirectory='limits_LIMITS_2017.json'
-
-
-lqmass=[800,900,1000,1100,1200,1300,1400,1500]
-dmmass=[300,350,400,450,500,550,600,650,700]
 
 
 delta=0.1
