@@ -5822,6 +5822,7 @@ void Final_XSEC_PostFR_Beta1_B0p5_PLBReferee_Final()
     
     //    cCONT_XSEC->SaveAs("finalLimit_PostCWR.pdf");
     cCONT_XSEC->SaveAs("finalLimit_Post_FR_Beta_1_B0p5_PLB.pdf");
+    cCONT_XSEC->SaveAs("finalLimit_Post_FR_Beta_1_B0p5_PLB.root");
     
     
 }
