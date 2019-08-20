@@ -2,8 +2,27 @@ Calculation of the limit is performed in the following location in cmslpc machin
 
 /uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_1_0/src/CombineHarvester/CombineTools/bin
 
+
+One need  the following code:
+
+Codex_2016.cpp
+Codex_2017.cpp
+
+You also have to update the BuildFile.xml file and add the following line in it:
+
+<bin file="Codex_2016.cpp" name="Codex_2016"></bin>
+<bin file="Codex_2017.cpp" name="Codex_2017"></bin>
+
+[make sure to do scram b before running the limit]. 
+
+The way the limit is calculated is described in _DoALlLimit.sh file 
+
+
+
+
+
 Once the limit is calculated, cp ‘limits_LIMITS.json’   here.
-(The latest directory is /uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_1_0/src/CombineHarvester/CombineTools/bin/outputCodex_cmb_PostCWR_v4)
+(The latest directory is /uscms_data/d3/abdollah/Analysis/Limit/CMSSW_8_1_0/src/CombineHarvester/CombineTools/bin/outputCodex_Approval_Combine_v1)
 
 Note that you need to replace the .0"    at the end of the numbers to "
 
